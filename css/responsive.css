@@ -598,14 +598,7 @@
     margin-bottom: 12px;
 
 }
-.floating-icon,
-    .grid-animation,
-    .bg-shape {
 
-        animation: none !important;
-        display: none;
-
-    }
     *,
     *::before,
     *::after {
