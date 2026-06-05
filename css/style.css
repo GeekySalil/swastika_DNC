@@ -456,7 +456,7 @@ p {
     animation: scrollMove 2s infinite;
 }
 
-@keyframes scrollMove {
+/* @keyframes scrollMove {
     0% {
         opacity: 1;
         transform: translateY(0);
@@ -466,7 +466,7 @@ p {
         opacity: 0;
         transform: translateY(15px);
     }
-}
+} */
 
 
 
@@ -566,7 +566,7 @@ p {
 }
 
 
-@keyframes glowFloat {
+/* @keyframes glowFloat {
 
     0%,100% {
 
@@ -582,7 +582,7 @@ p {
 
     }
 
-}
+} */
 
 .stats-grid {
 
@@ -847,7 +847,7 @@ p {
     right: 8%;
 
 }
-@keyframes iconFloat {
+/* @keyframes iconFloat {
 
     0% {
 
@@ -1156,7 +1156,7 @@ p {
 .bg-icon:nth-child(9) { animation-delay: 2s; }
 .bg-icon:nth-child(10) { animation-delay: 3.5s; }
 .bg-icon:nth-child(11) { animation-delay: 1.2s; }
-.bg-icon:nth-child(12) { animation-delay: 4.5s; }
+.bg-icon:nth-child(12) { animation-delay: 4.5s; } */
 .offer-section::before {
 
     content: "";
@@ -3021,7 +3021,7 @@ p {
 
 /* =========================
    PRELOADER
-========================= */
+========================= 
 
 .preloader {
 
@@ -3110,4 +3110,4 @@ p {
 
     transform: translateY(15px);
 
-}
+}*/
