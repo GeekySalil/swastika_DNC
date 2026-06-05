@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Admin Dashboard
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/admin.css">
+
+</head>
+
+<body>
+
+    <div class="admin-container">
+
+        <!-- HEADER -->
+
+        <div class="admin-header">
+
+            <h1>
+                Admin Dashboard
+            </h1>
+
+            <p>
+                Manage offers, portfolio projects and website content.
+            </p>
+
+        </div>
+        <section
+    class="admin-stats">
+
+    <div class="stat-card">
+
+        <h3 id="totalProjects">
+
+            0
+
+        </h3>
+
+        <p>
+
+            Total Projects
+
+        </p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h3 id="totalImages">
+
+            0
+
+        </h3>
+
+        <p>
+
+            Total Images
+
+        </p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h3 id="completedProjects">
+
+            0
+
+        </h3>
+
+        <p>
+
+            Completed Projects
+
+        </p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h3 id="ongoingProjects">
+
+            0
+
+        </h3>
+
+        <p>
+
+            Ongoing Projects
+
+        </p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h3 id="offerStatus">
+
+            OFF
+
+        </h3>
+
+        <p>
+
+            Offer Status
+
+        </p>
+
+    </div>
+
+</section>
+        <!-- OFFER MANAGEMENT -->
+
+        <div class="admin-card">
+
+            <div class="admin-card-header">
+
+                <h2>
+                    Offer Management
+                </h2>
+
+                <div class="admin-toggle">
+
+                    <input
+                        type="checkbox"
+                        id="offerEnabled">
+
+                    <label for="offerEnabled">
+
+                        Enable Offer Section
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="admin-grid">
+
+                <div class="admin-field full-width">
+
+                    <label>
+                        Offer Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="offerTitle">
+
+                </div>
+
+                <div class="admin-field full-width">
+
+                    <label>
+                        Offer Description
+                    </label>
+
+                    <textarea
+                        id="offerDescription">
+                    </textarea>
+
+                </div>
+
+                <div class="admin-field">
+
+                    <label>
+                        Expiry Date
+                    </label>
+
+                    <input
+                        type="text"
+                        id="offerExpiry">
+
+                </div>
+
+                <div class="admin-field">
+
+                    <label>
+                        Button Text
+                    </label>
+
+                    <input
+                        type="text"
+                        id="offerButton">
+
+                </div>
+
+            </div>
+
+            <button
+                class="admin-btn"
+                id="saveOffer">
+
+                Save Offer
+
+            </button>
+
+        </div>
+
+        <!-- PORTFOLIO MANAGEMENT -->
+
+        <!-- PORTFOLIO MANAGEMENT -->
+
+<div class="admin-card" id="projectManagement">
+
+    <div class="admin-card-header">
+
+        <h2>
+            Portfolio Management
+        </h2>
+
+    </div>
+
+    <div class="admin-grid">
+
+        <div class="admin-field full-width">
+
+            <label>
+                Project Title
+            </label>
+
+            <input
+                type="text"
+                id="projectTitle">
+
+        </div>
+
+        <div class="admin-field full-width">
+
+            <label>
+                Project Description
+            </label>
+
+            <textarea
+                id="projectDescription">
+            </textarea>
+
+        </div>
+
+        <div class="admin-field">
+
+            <label>
+                Location
+            </label>
+
+            <input
+                type="text"
+                id="projectLocation">
+
+        </div>
+
+        <div class="admin-field">
+
+            <label>
+                Area (sqft)
+            </label>
+
+            <input
+                type="number"
+                id="projectArea">
+
+        </div>
+
+        <div class="admin-field">
+
+            <label>
+                Year
+            </label>
+
+            <input
+                type="number"
+                id="projectYear">
+
+        </div>
+
+        <div class="admin-field">
+
+            <label>
+                Status
+            </label>
+
+            <select id="projectStatus">
+
+                <option>
+                    Completed
+                </option>
+
+                <option>
+                    Ongoing
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- IMAGES -->
+
+    <div class="image-upload-section">
+
+        <h3>
+            Project Visuals
+        </h3>
+        <div
+    id="existingImages"
+    class="existing-images">
+
+</div>
+        <div class="image-grid">
+
+            <!-- View 1 -->
+
+            <div class="image-upload-card">
+
+                <label>
+                    View 1
+                </label>
+
+                <input
+                    type="file"
+                    id="view1"
+                    accept="image/*">
+
+                <select id="category1">
+
+    <option value="">
+        Select Category
+    </option>
+
+    <option value="Elevation">
+        Elevation
+    </option>
+
+    <option value="Interiors">
+        Interiors
+    </option>
+
+    <option value="Ceiling Design">
+        Ceiling Design
+    </option>
+
+    <option value="Construction">
+        Construction
+    </option>
+
+    <option value="3D Renders">
+        3D Renders
+    </option>
+
+</select>
+            </div>
+
+            <!-- View 2 -->
+
+            <div class="image-upload-card">
+
+                <label>
+                    View 2
+                </label>
+
+                <input
+                    type="file"
+                    id="view2"
+                    accept="image/*">
+
+                <select id="category2">
+
+    <option value="">
+        Select Category
+    </option>
+
+    <option value="Elevation">
+        Elevation
+    </option>
+
+    <option value="Interiors">
+        Interiors
+    </option>
+
+    <option value="Ceiling Design">
+        Ceiling Design
+    </option>
+
+    <option value="Construction">
+        Construction
+    </option>
+
+    <option value="3D Renders">
+        3D Renders
+    </option>
+
+</select>
+
+            </div>
+
+            <!-- View 3 -->
+
+            <div class="image-upload-card">
+
+                <label>
+                    View 3
+                </label>
+
+                <input
+                    type="file"
+                    id="view3"
+                    accept="image/*">
+
+                <select id="category3">
+
+    <option value="">
+        Select Category
+    </option>
+
+    <option value="Elevation">
+        Elevation
+    </option>
+
+    <option value="Interiors">
+        Interiors
+    </option>
+
+    <option value="Ceiling Design">
+        Ceiling Design
+    </option>
+
+    <option value="Construction">
+        Construction
+    </option>
+
+    <option value="3D Renders">
+        3D Renders
+    </option>
+
+</select>
+
+            </div>
+
+            <!-- View 4 -->
+
+            <div class="image-upload-card">
+
+                <label>
+                    View 4
+                </label>
+
+                <input
+                    type="file"
+                    id="view4"
+                    accept="image/*">
+
+                <select id="category4">
+
+    <option value="">
+        Select Category
+    </option>
+
+    <option value="Elevation">
+        Elevation
+    </option>
+
+    <option value="Interiors">
+        Interiors
+    </option>
+
+    <option value="Ceiling Design">
+        Ceiling Design
+    </option>
+
+    <option value="Construction">
+        Construction
+    </option>
+
+    <option value="3D Renders">
+        3D Renders
+    </option>
+
+</select>
+
+            </div>
+
+            <!-- View 5 -->
+
+            <div class="image-upload-card">
+
+                <label>
+                    View 5
+                </label>
+
+                <input
+                    type="file"
+                    id="view5"
+                    accept="image/*">
+
+                <select id="category5">
+
+    <option value="">
+        Select Category
+    </option>
+
+    <option value="Elevation">
+        Elevation
+    </option>
+
+    <option value="Interiors">
+        Interiors
+    </option>
+
+    <option value="Ceiling Design">
+        Ceiling Design
+    </option>
+
+    <option value="Construction">
+        Construction
+    </option>
+
+    <option value="3D Renders">
+        3D Renders
+    </option>
+
+</select>
+
+            </div>
+
+            <!-- View 6 -->
+
+            <div class="image-upload-card">
+
+                <label>
+                    View 6
+                </label>
+
+                <input
+                    type="file"
+                    id="view6"
+                    accept="image/*">
+
+                <select id="category6">
+
+    <option value="">
+        Select Category
+    </option>
+
+    <option value="Elevation">
+        Elevation
+    </option>
+
+    <option value="Interiors">
+        Interiors
+    </option>
+
+    <option value="Ceiling Design">
+        Ceiling Design
+    </option>
+
+    <option value="Construction">
+        Construction
+    </option>
+
+    <option value="3D Renders">
+        3D Renders
+    </option>
+
+</select>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="project-previews">
+
+    <h3>
+        Image Preview
+    </h3>
+
+    <div
+        class="preview-grid"
+        id="previewGrid">
+
+    </div>
+
+</div>
+    <div
+    class="upload-progress"
+    id="uploadProgress">
+
+    <div class="progress-info">
+
+        <span id="progressText">
+
+            Ready
+
+        </span>
+
+        <span id="progressPercent">
+
+            0%
+
+        </span>
+
+    </div>
+
+    <div class="progress-track">
+
+        <div
+            class="progress-fill"
+            id="progressFill">
+        </div>
+
+    </div>
+
+</div>
+    <button
+        class="admin-btn"
+        id="saveProject">
+
+        Save Project
+
+    </button>
+
+</div>
+<!-- EXISTING PROJECTS -->
+
+<div class="admin-card">
+
+    <div class="admin-card-header">
+
+        <h2>
+            Existing Projects
+        </h2>
+
+    </div>
+
+    <div
+        id="projectsList"
+        class="projects-list">
+
+        Loading Projects...
+
+    </div>
+
+</div>
+    </div>
+
+    <script
+        type="module"
+        src="js/admin.js">
+    </script>
+<input
+    type="file"
+    id="replaceImageInput"
+    accept="image/*"
+    hidden>
+</body>
+
+</html>
