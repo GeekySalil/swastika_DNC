@@ -3113,11 +3113,11 @@ p {
 body.loading {
     overflow: hidden;
 }
-
+/* 
 body.loading #site-content {
-    opacity: 0;
-    visibility: hidden;
-}
+    /* opacity: 0; */
+    /* visibility: hidden; 
+} */
 
 #site-content {
     opacity: 1;

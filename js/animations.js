@@ -545,7 +545,7 @@ window.addEventListener("load", () => {
             opacity: 1,
             y: 0,
             stagger: 0.25,
-            duration: 0.5
+            duration: 0.4
         }
     )
 
@@ -554,7 +554,7 @@ window.addEventListener("load", () => {
         {
             opacity: 0,
             duration: 0.8,
-            delay: 0.5
+            delay: 0.4
         }
     )
 
@@ -571,19 +571,7 @@ window.addEventListener("load", () => {
         "loading"
     );
 
-    gsap.from(
-        "#site-content",
-        {
-
-            opacity: 0,
-
-            duration: 0.6,
-
-            ease: "power2.out"
-
-        }
-    );
-
 });
+
 
 });
