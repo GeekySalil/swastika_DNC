@@ -200,12 +200,12 @@ p {
 }
 
 .logo-text h2 {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .logo-text span {
     color: var(--muted);
-    font-size: 9px;
+    font-size: 12px;
 }
 
 .nav-links {
@@ -249,7 +249,6 @@ p {
     background: var(--accent);
     color: #111 !important;
 }
-
 .hamburger {
 
     display: none;
@@ -259,7 +258,6 @@ p {
     z-index: 1001;
 
 }
-
 .hamburger span {
 
     display: block;
@@ -280,28 +278,26 @@ p {
 ========================= */
 
 .hero {
-    position: relative;
-    min-height: 100vh;
-    overflow: hidden;
+    
     padding: 0 !important;
 }
 
 /* Background Slider */
 
-.heroSwiper {
+/* .heroSwiper {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     z-index: 1;
-}
+} */
 
-.heroSwiper img {
+/* .heroSwiper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* animation: heroZoom 12s linear infinite; */
-}
+     animation: heroZoom 12s linear infinite;
+} */
 
 /* @keyframes heroZoom {
     from {
@@ -314,7 +310,7 @@ p {
 
 /* Overlay */
 
-.hero-overlay {
+/* .hero-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -323,7 +319,7 @@ p {
         rgba(0,0,0,0.80)
     );
     z-index: 2;
-}
+} */
 
 /* Main Container */
 
@@ -345,12 +341,12 @@ p {
 
 /* Left Content */
 
-.hero-content {
+/* .hero-content {
     display: flex;
     flex-direction: column;
     gap: 0;
     max-width: 700px;
-}
+} */
 
 /* Small Title */
 
@@ -365,12 +361,12 @@ p {
 
 /* Main Heading */
 
-.hero-content h1 {
+/* .hero-content h1 {
     font-size: clamp(2.6rem, 4.2vw, 4.2rem);
     line-height: 0.88;
     margin-bottom: 0;
     max-width: 600px;
-}
+} */
 
 /* Founder Line */
 
@@ -403,21 +399,21 @@ p {
 
 /* Right Stats */
 
-.hero-stats {
+/* .hero-stats {
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
     align-self: center;
-}
+} */
 
-.stat-card {
+/* .stat-card {
     background: rgba(255,255,255,0.06);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 18px;
     padding: 12px;
-    /* transition: 0.4s ease; */
-}
+ transition: 0.4s ease;
+} */
 
 .stat-card:hover {
     transform: translateY(-4px);
@@ -438,13 +434,13 @@ p {
 
 /* Scroll Indicator */
 
-.scroll-indicator {
+/* .scroll-indicator {
     position: absolute;
     left: 50%;
     bottom: 20px;
     transform: translateX(-50%);
     z-index: 10;
-}
+} */
 
 /* .scroll-indicator::before {
     content: "";
@@ -487,7 +483,7 @@ p {
             rgba(0,0,0,0.75),
             rgba(0,0,0,0.85)
         ),
-        url("../assets/images/Reception-2.jpg");
+        url("");
 
     background-size: cover;
 
@@ -648,7 +644,7 @@ p {
     transform:
         translateX(-100%);
 
-    transition: 0.8s ease;
+    /* transition: 0.8s ease; */
 
 }
 
@@ -1183,7 +1179,7 @@ p {
     pointer-events: none;
 
 }
-.bg-icon {
+/* .bg-icon {
 
     position: absolute;
 
@@ -1197,8 +1193,8 @@ p {
         0 0 8px rgba(196,155,93,0.15)
     );
 
-}
-.bg-icon:nth-child(3n) {
+} */
+/* .bg-icon:nth-child(3n) {
 
     font-size: 38px;
 
@@ -1208,7 +1204,7 @@ p {
 
     font-size: 32px;
 
-}
+} */
 /* @keyframes iconGlow {
 
     0%,100% {
@@ -1543,7 +1539,7 @@ p {
 
 .services-section {
 
-    position: relative;
+    /* position: relative; */
 
     background:
         linear-gradient(
@@ -1796,7 +1792,7 @@ p {
    PORTFOLIO
 ========================= */
 
-.portfolio-section {
+/* .portfolio-section {
 
     position: relative;
 
@@ -1825,9 +1821,9 @@ p {
     flex-wrap: wrap;
     gap: 18px;
     margin-bottom: 60px;
-}
+} */
 
-.portfolio-filters button {
+/* .portfolio-filters button {
     background: transparent;
     color: var(--muted);
     padding: 12px 22px;
@@ -1856,9 +1852,9 @@ p {
 
 .portfolio-card.large {
     grid-column: span 2;
-}
+} */
 
-.portfolio-card img {
+/* .portfolio-card img {
     height: 500px;
     object-fit: cover;
     transition: var(--transition);
@@ -1880,13 +1876,13 @@ p {
         rgba(0,0,0,0.85),
         transparent
     );
-}
+} */
 
 .portfolio-overlay span {
 
-    color: var(--accent);
+    /* color: var(--accent);
 
-    margin-bottom: 10px;
+    margin-bottom: 10px; */
 
     font-size: 14px;
 
@@ -1896,7 +1892,7 @@ p {
 
 .portfolio-overlay h3 {
 
-    font-size: 30px;
+    /* font-size: 1000px; */
 
     margin-bottom: 10px;
 
@@ -1978,13 +1974,13 @@ p {
     pointer-events: none;
 
 }
-.testimonial-slider {
+/* .testimonial-slider {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
-}
+} */
 
-.testimonial-card {
+/* .testimonial-card {
     background: rgba(255,255,255,0.03);
     padding: 40px;
     border-radius: 30px;
@@ -1999,9 +1995,9 @@ p {
 
 .testimonial-card p {
     margin-bottom: 25px;
-}
+} */
 
-.reviews-hero {
+/* .reviews-hero {
 
     text-align: center;
 
@@ -2009,9 +2005,9 @@ p {
 
     margin: 0 auto 80px;
 
-}
+} */
 
-.reviews-quote {
+/* .reviews-quote {
 
     font-size: clamp(2.4rem,5vw,4.8rem);
 
@@ -2037,8 +2033,8 @@ p {
 
     flex-wrap: wrap;
 
-}
-
+} */
+/* 
 .rating-separator {
 
     color: var(--accent);
@@ -2065,9 +2061,9 @@ p {
 
     color: var(--muted);
 
-}
+} */
 
-.reviews-divider {
+/* .reviews-divider {
 
     display: flex;
 
@@ -2079,7 +2075,7 @@ p {
 
     margin-bottom: 50px;
 
-}
+} */
 
 .reviews-divider::before,
 .reviews-divider::after {
@@ -2087,7 +2083,7 @@ p {
     content: "";
 
     flex: 1;
-
+    width: 120px;
     max-width: 120px;
 
     height: 1px;
@@ -2097,7 +2093,7 @@ p {
 
 }
 
-.reviews-divider span {
+/* .reviews-divider span {
 
     color: var(--accent);
 
@@ -2105,7 +2101,7 @@ p {
 
     font-size: .9rem;
 
-}
+} */
 .google-badge i {
 
     color: #4285F4;
@@ -2165,19 +2161,7 @@ p {
 
 }
 
-.reviews-divider::before,
-.reviews-divider::after {
 
-    content: "";
-
-    width: 120px;
-
-    height: 1px;
-
-    background:
-        rgba(212,175,55,.4);
-
-}
 
 .reviews-divider span {
 
@@ -2270,7 +2254,7 @@ p {
 
 }
 
-.secondary-btn:hover,
+/* .secondary-btn:hover,
 .secondary-btn:hover *,
 .review-buttons .secondary-btn:hover,
 .review-buttons .secondary-btn:hover * {
@@ -2281,7 +2265,7 @@ p {
 
     color: #111 !important;
 
-}
+} */
 
 .reviews-widget-wrapper {
 
@@ -2476,7 +2460,7 @@ p {
    CONTACT
 ========================= */
 
-.contact-section {
+/* .contact-section {
 
     position: relative;
 
@@ -2565,11 +2549,11 @@ p {
     min-height: 650px;
     border: none;
     border-radius: 30px;
-}
+} */
 
 /* =========================
    FOOTER
-========================= */
+========================= 
 
 .footer {
     padding-top: 100px;
@@ -2613,25 +2597,25 @@ p {
     text-align: center;
 }
 
-/* =========================
+ =========================
    FLOATING BUTTONS
 ========================= */
 
 .whatsapp-float,
 .chatbot-button {
 
-    position: fixed;
+    
 
     width: clamp(52px, 6vw, 72px);
     height: clamp(52px, 6vw, 72px);
 
-    border-radius: 50%;
+    
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    z-index: 9999;
+    
 
     transition: 0.4s ease;
 
@@ -2640,7 +2624,7 @@ p {
 
 }
 
-.whatsapp-float {
+/* .whatsapp-float {
 
     right: clamp(12px, 2vw, 25px);
     bottom: clamp(12px, 2vw, 25px);
@@ -2648,9 +2632,9 @@ p {
     background: #25D366;
     color: white;
 
-}
+} */
 
-.chatbot-button {
+/* .chatbot-button {
 
     left: clamp(12px, 2vw, 25px);
     bottom: clamp(12px, 2vw, 25px);
@@ -2660,7 +2644,7 @@ p {
 
     cursor: pointer;
 
-}
+} */
 
 .whatsapp-float i,
 .chatbot-button i {
@@ -2684,7 +2668,7 @@ p {
    SCROLLBAR
 ========================= */
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 10px;
 }
 
@@ -2695,7 +2679,7 @@ p {
 ::-webkit-scrollbar-thumb {
     background: var(--accent);
     border-radius: 10px;
-}
+} */
 
 /* =========================
    PROJECT MODAL
@@ -3110,9 +3094,9 @@ p {
 
 }
 
-body.loading {
+/* body.loading {
     overflow: hidden;
-}
+} */
 /* 
 body.loading #site-content {
     /* opacity: 0; */

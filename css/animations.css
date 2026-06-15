@@ -3,7 +3,7 @@
    RESET
 ========================= */
 
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -19,11 +19,11 @@ body {
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
     line-height: 1.7;
-}
+} */
 
 /* =========================
    VARIABLES
-========================= */
+========================= 
 
 :root {
 
@@ -42,14 +42,14 @@ body {
     --shadow:
         0 10px 40px rgba(0, 0, 0, 0.4);
 
-    /* --transition: all 0.4s ease; */
-}
+    --transition: all 0.4s ease; 
+}*/
 
 /* =========================
    GLOBAL STYLES
 ========================= */
 
-.container {
+/* .container {
     width: 90%;
     max-width: 1350px;
     margin: auto;
@@ -97,11 +97,11 @@ button {
     line-height: 1.2;
     font-family: 'Playfair Display', serif;
     font-weight: 600;
-}
+} */
 
 /* =========================
    TYPOGRAPHY
-========================= */
+========================= 
 
 h1,
 h2,
@@ -116,11 +116,11 @@ p {
     font-size: 16px;
 }
 
-/* =========================
+=========================
    BUTTONS
 ========================= */
 
-.primary-btn,
+/* .primary-btn,
 .secondary-btn {
     padding: 15px 34px;
     border-radius: 60px;
@@ -140,7 +140,7 @@ p {
 .primary-btn:hover {
     background: var(--accent-light);
     transform: translateY(-3px);
-}
+} */
 
 .secondary-btn {
     border: 1px solid var(--border);
@@ -179,7 +179,7 @@ p {
 /* =========================
    NAVBAR
 ========================= */
-
+/* 
 .navbar {
     width: 100%;
     position: fixed;
@@ -261,7 +261,7 @@ p {
 
 .hamburger {
     display: none;
-}
+} */
 
 /* =========================
    HERO SECTION
@@ -275,10 +275,11 @@ p {
 
 .heroSwiper {
     position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
+    z-index: 1;
 }
-
 .heroSwiper img {
     width: 100%;
     height: 100%;
@@ -286,7 +287,7 @@ p {
     animation: heroZoom 12s linear infinite;
 }
 
-/* @keyframes heroZoom {
+@keyframes heroZoom {
     0% {
         transform: scale(1);
     }
@@ -294,7 +295,7 @@ p {
     100% {
         transform: scale(1.08);
     }
-} */
+}
 
 .hero-overlay {
     position: absolute;
@@ -302,7 +303,7 @@ p {
     background:
         linear-gradient(
             to bottom,
-            rgba(0,0,0,0.6),
+            rgba(0,0,0,0.5),
             rgba(0,0,0,0.8)
         );
     z-index: 2;
@@ -351,19 +352,19 @@ p {
     margin-bottom: 80px;
 }
 
-.hero-stats {
+/* .hero-stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 25px;
-}
+} */
 
-.stat-card {
+/* .stat-card {
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.05);
     padding: 35px;
     backdrop-filter: blur(14px);
     border-radius: 24px;
-}
+} */
 
 .stat-card h2 {
     color: var(--accent);
@@ -391,14 +392,14 @@ p {
 
 
 
-.about-container {
+/* .about-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
-}
+} */
 
-.gallery-grid {
+/* .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
@@ -437,7 +438,7 @@ p {
 
 .founder-box span {
     color: var(--accent);
-}
+} */
 
 /* =========================
    SERVICES
@@ -448,7 +449,7 @@ p {
     overflow: hidden;
 }
 
-.services-watermark {
+/* .services-watermark {
     position: absolute;
     inset: 0;
     display: flex;
@@ -460,9 +461,9 @@ p {
 
 .services-watermark img {
     width: 500px;
-}
+} */
 
-.services-grid {
+/* .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
@@ -484,8 +485,8 @@ p {
 .service-card img {
     height: 260px;
     object-fit: cover;
-}
-
+} */
+/* 
 .service-content {
     padding: 30px;
 }
@@ -493,7 +494,7 @@ p {
 .service-content h3 {
     font-size: 28px;
     margin-bottom: 15px;
-}
+} */
 
 /* =========================
    PORTFOLIO
@@ -598,28 +599,28 @@ p {
    TESTIMONIALS
 ========================= */
 
-.testimonial-slider {
+/* .testimonial-slider {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
-}
+} */
 
-.testimonial-card {
+/* .testimonial-card {
     background: rgba(255,255,255,0.03);
     padding: 40px;
     border-radius: 30px;
     border: 1px solid rgba(255,255,255,0.05);
-}
+} */
 
-.stars {
+/* .stars {
     color: var(--accent);
     margin-bottom: 20px;
     font-size: 20px;
-}
+} */
 
-.testimonial-card p {
+/* .testimonial-card p {
     margin-bottom: 25px;
-}
+} */
 
 /* =========================
    CONTACT

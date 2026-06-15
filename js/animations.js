@@ -3,51 +3,51 @@
 // GSAP + SCROLLTRIGGER
 // =========================
 
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 const isDesktop = window.innerWidth > 768;
 
 // =========================
 // HERO CINEMATIC INTRO
 // =========================
 
-gsap.from(".hero-mini-title", {
+// gsap.from(".hero-mini-title", {
 
-    y: 40,
-    opacity: 0,
+//     y: 40,
+//     opacity: 0,
 
-    duration: 1,
+//     duration: 1,
 
-    ease: "power4.out"
+//     ease: "power4.out"
 
-});
+// });
 
-gsap.from(".hero-content h1", {
+// gsap.from(".hero-content h1", {
 
-    y: 80,
-    opacity: 0,
+//     y: 80,
+//     opacity: 0,
 
-    duration: 1.4,
+//     duration: 1.4,
 
-    delay: 0.2,
+//     delay: 0.2,
 
-    ease: "power4.out"
+//     ease: "power4.out"
 
-});
+// });
 
-gsap.from(".founder-line span", {
+// gsap.from(".founder-line span", {
 
-    y: 30,
-    opacity: 0,
+//     y: 30,
+//     opacity: 0,
 
-    stagger: 0.15,
+//     stagger: 0.15,
 
-    duration: 1,
+//     duration: 1,
 
-    delay: 0.5,
+//     delay: 0.5,
 
-    ease: "power3.out"
+//     ease: "power3.out"
 
-});
+// });
 /*
 gsap.from(".hero-buttons a", {
 
@@ -130,29 +130,29 @@ if (heroButtons.length > 0) {
 
 // HERO PARALLAX
 
-if (isDesktop) {
+// if (isDesktop) {
 
-    gsap.to(".heroSwiper img", {
+//     gsap.to(".heroSwiper img", {
 
-        yPercent: 8,
+//         yPercent: 8,
 
-        ease: "none",
+//         ease: "none",
 
-        scrollTrigger: {
+//         scrollTrigger: {
 
-            trigger: ".hero",
+//             trigger: ".hero",
 
-            start: "top top",
+//             start: "top top",
 
-            end: "bottom top",
+//             end: "bottom top",
 
-            scrub: true
+//             scrub: true
 
-        }
+//         }
 
-    });
+//     });
 
-}
+// }
 
 // =========================
 // SECTION REVEALS
@@ -194,134 +194,134 @@ if (isDesktop) {
 // SERVICE CARD FLOAT
 // =========================
 
-if (isDesktop) {
+// if (isDesktop) {
 
-    gsap.utils.toArray(".service-card").forEach((card, index) => {
+//     gsap.utils.toArray(".service-card").forEach((card, index) => {
 
-        gsap.from(card, {
+//         gsap.from(card, {
 
-            y: 80,
+//             y: 80,
 
-            opacity: 0,
+//             opacity: 0,
 
-            duration: 1,
+//             duration: 1,
 
-            delay: index * 0.08,
+//             delay: index * 0.08,
 
-            ease: "power3.out",
+//             ease: "power3.out",
 
-            scrollTrigger: {
+//             scrollTrigger: {
 
-                trigger: card,
+//                 trigger: card,
 
-                start: "top 88%"
+//                 start: "top 88%"
 
-            }
+//             }
 
-        });
+//         });
 
-    });
+//     });
 
-}
+// }
 
 
 // =========================
 // PORTFOLIO CINEMATIC SCALE
 // =========================
 
-if (isDesktop) {
+// if (isDesktop) {
 
-    gsap.utils.toArray(".portfolio-card").forEach((card) => {
+//     gsap.utils.toArray(".portfolio-card").forEach((card) => {
 
-        gsap.from(card, {
+//         gsap.from(card, {
 
-            scale: 0.92,
+//             scale: 0.92,
 
-            opacity: 0,
+//             opacity: 0,
 
-            duration: 1.2,
+//             duration: 1.2,
 
-            ease: "power4.out",
+//             ease: "power4.out",
 
-            scrollTrigger: {
+//             scrollTrigger: {
 
-                trigger: card,
+//                 trigger: card,
 
-                start: "top 85%"
+//                 start: "top 85%"
 
-            }
+//             }
 
-        });
+//         });
 
-    });
+//     });
 
-}
+// }
 
 
 // =========================
 // PARALLAX IMAGES
 // =========================
 
-if (isDesktop) {
+// if (isDesktop) {
 
-    gsap.utils.toArray(
-        ".portfolio-card img, .gallery-grid img"
-    ).forEach((image) => {
+//     gsap.utils.toArray(
+//         ".portfolio-card img, .gallery-grid img"
+//     ).forEach((image) => {
 
-        gsap.to(image, {
+//         gsap.to(image, {
 
-            yPercent: 10,
+//             yPercent: 10,
 
-            ease: "none",
+//             ease: "none",
 
-            scrollTrigger: {
+//             scrollTrigger: {
 
-                trigger: image,
+//                 trigger: image,
 
-                start: "top bottom",
+//                 start: "top bottom",
 
-                end: "bottom top",
+//                 end: "bottom top",
 
-                scrub: true
+//                 scrub: true
 
-            }
+//             }
 
-        });
+//         });
 
-    });
+//     });
 
-}
+// }
 
 
 // =========================
 // TESTIMONIAL CARDS
 // =========================
 
-if (isDesktop) {
+// if (isDesktop) {
 
-    gsap.from(".testimonial-card", {
+//     gsap.from(".testimonial-card", {
 
-        y: 80,
+//         y: 80,
 
-        opacity: 0,
+//         opacity: 0,
 
-        stagger: 0.2,
+//         stagger: 0.2,
 
-        duration: 1.2,
+//         duration: 1.2,
 
-        ease: "power4.out",
+//         ease: "power4.out",
 
-        scrollTrigger: {
+//         scrollTrigger: {
 
-            trigger: ".testimonials-section",
+//             trigger: ".testimonials-section",
 
-            start: "top 75%"
+//             start: "top 75%"
 
-        }
+//         }
 
-    });
+//     });
 
-}
+// }
 
 
 
@@ -375,152 +375,152 @@ if (isDesktop) {
 // FOOTER REVEAL
 // =========================
 
-if (isDesktop) {
+// if (isDesktop) {
 
-    gsap.from(".footer-container", {
+//     gsap.from(".footer-container", {
 
-        y: 80,
+//         y: 80,
 
-        opacity: 0,
+//         opacity: 0,
 
-        duration: 1.2,
+//         duration: 1.2,
 
-        ease: "power4.out",
+//         ease: "power4.out",
 
-        scrollTrigger: {
+//         scrollTrigger: {
 
-            trigger: ".footer",
+//             trigger: ".footer",
 
-            start: "top 90%"
+//             start: "top 90%"
 
-        }
+//         }
 
-    });
+//     });
 
-}
+// }
 
 
 // =========================
 // FLOATING BUTTONS ANIMATION
 // =========================
 
-if (isDesktop) {
+// if (isDesktop) {
 
-    gsap.to(".whatsapp-float", {
+//     gsap.to(".whatsapp-float", {
 
-        y: -10,
+//         y: -10,
 
-        duration: 1.5,
+//         duration: 1.5,
 
-        repeat: -1,
+//         repeat: -1,
 
-        yoyo: true,
+//         yoyo: true,
 
-        ease: "power1.inOut"
+//         ease: "power1.inOut"
 
-    });
+//     });
 
-}
+// }
 
-if (isDesktop) {
+// if (isDesktop) {
 
-    gsap.to(".chatbot-button", {
+//     gsap.to(".chatbot-button", {
 
-        y: -10,
+//         y: -10,
 
-        duration: 1.5,
+//         duration: 1.5,
 
-        repeat: -1,
+//         repeat: -1,
 
-        yoyo: true,
+//         yoyo: true,
 
-        ease: "power1.inOut",
+//         ease: "power1.inOut",
 
-        delay: 0.4
+//         delay: 0.4
 
-    });
+//     });
 
-}
+// }
 
 
 // =========================
 // SMOOTH NAVBAR FADE
 // =========================
 
-gsap.from(".navbar", {
+// gsap.from(".navbar", {
 
-    y: -100,
+//     y: -100,
 
-    opacity: 0,
+//     opacity: 0,
 
-    duration: 1.2,
+//     duration: 1.2,
 
-    ease: "power4.out"
+//     ease: "power4.out"
 
-});
+// });
 
-if (isDesktop) {
+// if (isDesktop) {
 
-    gsap.from(".offer-card", {
+//     gsap.from(".offer-card", {
 
-        scrollTrigger: {
+//         scrollTrigger: {
 
-            trigger: ".offer-section",
+//             trigger: ".offer-section",
 
-            start: "top 75%"
+//             start: "top 75%"
 
-        },
+//         },
 
-        opacity: 0,
+//         opacity: 0,
 
-        scale: 0.9,
+//         scale: 0.9,
 
-        duration: 1.2,
+//         duration: 1.2,
 
-        ease: "power3.out"
+//         ease: "power3.out"
 
-    });
+//     });
 
-}
-gsap.from(".reviews-quote-icon", {
+// }
+// gsap.from(".reviews-quote-icon", {
 
-    scale: 0,
+//     scale: 0,
 
-    rotation: 180,
+//     rotation: 180,
 
-    duration: 1.2,
+//     duration: 1.2,
 
-    ease: "back.out(1.7)",
+//     ease: "back.out(1.7)",
 
-    scrollTrigger: {
+//     scrollTrigger: {
 
-        trigger: ".reviews-hero",
+//         trigger: ".reviews-hero",
 
-        start: "top 80%"
+//         start: "top 80%"
 
-    }
+//     }
 
-});
+// });
 
-gsap.from(".google-trust-badge", {
+// gsap.from(".google-trust-badge", {
 
-    opacity: 0,
+//     opacity: 0,
 
-    y: 40,
+//     y: 40,
 
-    duration: 1,
+//     duration: 1,
 
-    delay: 0.2,
+//     delay: 0.2,
 
-    scrollTrigger: {
+//     scrollTrigger: {
 
-        trigger: ".reviews-hero",
+//         trigger: ".reviews-hero",
 
-        start: "top 80%"
+//         start: "top 80%"
 
-    }
+//     }
 
-});
+// });
 window.addEventListener("load", () => {
 
     const tl = gsap.timeline();
