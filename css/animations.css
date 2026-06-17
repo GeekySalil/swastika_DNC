@@ -511,7 +511,7 @@ p {
             rgba(0,0,0,0.85),
             rgba(0,0,0,0.92)
         ),
-        url("../assets/images/interior-tv-unit.jpg");
+        url("../assets/images/interior-tv-unit.webp");
 
     background-size: cover;
 
@@ -636,7 +636,7 @@ p {
             rgba(0,0,0,0.88),
             rgba(0,0,0,0.92)
         ),
-        url("../assets/images/mn.jpg");
+        url("../assets/images/mn.webp");
 
     background-size: cover;
 
