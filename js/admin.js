@@ -36,6 +36,8 @@ import {
     Timestamp,
 
     getDocs,
+    query,
+    orderBy,
 
     deleteDoc
 
@@ -47,8 +49,453 @@ from
 import { db }
 from "./firebase.js";
 
+async function loadLeads() {
 
+    const tbody =
+    document.getElementById(
+        "leadsTableBody"
+    );
+//     const leadDate =
+// lead.createdAt
+// ? new Date(
+//     lead.createdAt.seconds * 1000
+// ).toLocaleString()
+// : "-";
+    tbody.innerHTML = "";
 
+    const q = query(
+
+        collection(
+            db,
+            "leads"
+        ),
+
+        orderBy(
+            "createdAt",
+            "desc"
+        )
+
+    );
+
+    const snapshot =
+    await getDocs(q);
+
+    snapshot.forEach(docItem => {
+
+    const lead =
+    docItem.data();
+
+    const leadDate =
+    lead.createdAt
+    ? lead.createdAt
+        .toDate()
+        .toLocaleString()
+    : "-";
+
+        tbody.innerHTML += `
+
+<tr>
+
+    <td>${lead.name || ""}</td>
+
+    <td>
+
+    <a
+        class="whatsapp-link"
+        href="https://wa.me/91${lead.phone}"
+        target="_blank">
+
+        ${lead.phone}
+
+        <i class="fab fa-whatsapp"></i>
+
+    </a>
+
+</td>
+
+    <td>${lead.email || ""}</td>
+
+    <td>${lead.city || ""}</td>
+
+    <td>${lead.service || ""}</td>
+
+    <td>${lead.projectBrief || ""}</td>
+
+    <td>
+
+        <select
+            class="status-select"
+            onchange="updateLeadStatus(
+    '${docItem.id}',
+    this.value
+)">
+
+            <option
+                value="New"
+                ${lead.status === "New" ? "selected" : ""}>
+
+                New
+
+            </option>
+
+            <option
+                value="Contacted"
+                ${lead.status === "Contacted" ? "selected" : ""}>
+
+                Contacted
+
+            </option>
+
+            <option
+                value="Meeting Scheduled"
+                ${lead.status === "Meeting Scheduled" ? "selected" : ""}>
+
+                Meeting Scheduled
+
+            </option>
+
+            <option
+                value="Quotation Sent"
+                ${lead.status === "Quotation Sent" ? "selected" : ""}>
+
+                Quotation Sent
+
+            </option>
+
+            <option
+                value="Converted"
+                ${lead.status === "Converted" ? "selected" : ""}>
+
+                Converted
+
+            </option>
+
+            <option
+                value="Lost"
+                ${lead.status === "Lost" ? "selected" : ""}>
+
+                Lost
+
+            </option>
+
+        </select>
+
+    </td>
+
+    <td>${leadDate}</td>
+    <td>
+
+    <button
+        class="notes-btn"
+        onclick="openNotesModal('${docItem.id}')">
+
+        Notes
+
+    </button>
+
+</td>
+
+    <td>${lead.source || ""}</td>
+    <td>
+
+    <button
+        class="lead-delete-btn"
+        onclick="deleteLead('${docItem.id}')">
+
+        Delete
+
+    </button>
+
+</td>
+    
+
+</tr>
+
+`;
+
+    });
+
+}
+async function loadLeadAnalytics() {
+
+    const snapshot =
+    await getDocs(
+
+        collection(
+            db,
+            "leads"
+        )
+
+    );
+    let totalLeads = 0;
+    let newLeads = 0;
+
+    let contacted = 0;
+    let meetingScheduled = 0;
+
+    let quotation = 0;
+
+    let converted = 0;
+
+    let lost = 0;
+
+    snapshot.forEach(doc => {
+        totalLeads++;
+        const lead =
+        doc.data();
+
+        switch(
+            lead.status
+        ) {
+
+            case "New":
+
+                newLeads++;
+
+                break;
+
+            case "Contacted":
+
+                contacted++;
+
+                break;
+            case "Meeting Scheduled":
+
+                meetingScheduled++;
+
+                break;
+
+            case "Quotation Sent":
+
+                quotation++;
+
+                break;
+
+            case "Converted":
+
+                converted++;
+
+                break;
+
+            case "Lost":
+
+                lost++;
+
+                break;
+
+        }
+
+    });
+    document.getElementById(
+    "totalLeadsCount"
+).textContent =
+totalLeads;
+    document.getElementById(
+        "newLeadsCount"
+    ).textContent =
+    newLeads;
+
+    document.getElementById(
+        "contactedLeadsCount"
+    ).textContent =
+    contacted;
+
+    document.getElementById(
+        "meetingScheduledLeadsCount"
+    ).textContent =
+    meetingScheduled;
+
+    document.getElementById(
+        "quotationLeadsCount"
+    ).textContent =
+    quotation;
+
+    document.getElementById(
+        "convertedLeadsCount"
+    ).textContent =
+    converted;
+
+    document.getElementById(
+        "lostLeadsCount"
+    ).textContent =
+    lost;
+
+}
+window.deleteLead =
+async function(leadId) {
+
+    const confirmed =
+    confirm(
+        "Delete this lead permanently?"
+    );
+
+    if (!confirmed)
+        return;
+
+    try {
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "leads",
+                leadId
+            )
+
+        );
+
+        alert(
+            "Lead deleted successfully"
+        );
+
+        loadLeads();
+
+        loadDashboardStats();
+        loadLeadAnalytics();
+
+    }
+
+    catch(error) {
+
+        console.error(
+            error
+        );
+
+        alert(
+            error.message
+        );
+
+    }
+
+};
+window.openNotesModal =
+async function(leadId) {
+
+    currentLeadId =
+    leadId;
+
+    const snapshot =
+    await getDoc(
+
+        doc(
+            db,
+            "leads",
+            leadId
+        )
+
+    );
+
+    const lead =
+    snapshot.data();
+
+    document.getElementById(
+        "leadNotesInput"
+    ).value =
+    lead.notes || "";
+
+    document.getElementById(
+        "notesModal"
+    ).classList.add(
+        "show"
+    );
+
+};
+document
+.getElementById(
+    "closeNotesBtn"
+)
+?.addEventListener(
+    "click",
+    () => {
+
+        document
+        .getElementById(
+            "notesModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+    }
+);
+document
+.getElementById(
+    "saveNotesBtn"
+)
+?.addEventListener(
+    "click",
+    async () => {
+
+        const notes =
+        document.getElementById(
+            "leadNotesInput"
+        ).value;
+
+        await updateDoc(
+
+            doc(
+                db,
+                "leads",
+                currentLeadId
+            ),
+
+            {
+                notes
+            }
+
+        );
+
+        document
+        .getElementById(
+            "notesModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+        alert(
+            "Notes Saved"
+        );
+
+    }
+);
+window.updateLeadStatus =
+async function(
+    leadId,
+    status
+) {
+
+    
+
+    try {
+
+        await updateDoc(
+
+            doc(
+                db,
+                "leads",
+                leadId
+            ),
+
+            {
+                status
+            }
+
+        );
+
+        loadLeadAnalytics();
+
+    }
+
+    catch(error) {
+
+        console.error(
+            error
+        );
+
+    }
+
+};
 const progressFill =
 document.getElementById(
     "progressFill"
@@ -227,6 +674,7 @@ saveProjectBtn?.addEventListener(
     "click",
     saveProject
 );
+let currentLeadId = null;
 let editingProjectId = null;
 async function saveProject() {
 
@@ -1317,7 +1765,20 @@ async function loadDashboardStats() {
             )
 
         );
+        const leadsSnapshot =
+await getDocs(
 
+    collection(
+        db,
+        "leads"
+    )
+
+);
+
+document.getElementById(
+    "totalLeads"
+).textContent =
+leadsSnapshot.size;
         let totalProjects = 0;
 
         let totalImages = 0;
@@ -1356,7 +1817,7 @@ async function loadDashboardStats() {
 
             }
         );
-
+        
         document.getElementById(
             "totalProjects"
         ).textContent =
@@ -1410,7 +1871,156 @@ async function loadDashboardStats() {
     }
 
 }
+document
+.getElementById(
+    "leadSearch"
+)
+?.addEventListener(
+    "keyup",
+    function() {
+
+        const value =
+        this.value.toLowerCase();
+
+        const rows =
+        document.querySelectorAll(
+            "#leadsTableBody tr"
+        );
+
+        rows.forEach(row => {
+
+            row.style.display =
+
+            row.innerText
+                .toLowerCase()
+                .includes(value)
+
+            ? ""
+
+            : "none";
+
+        });
+
+    }
+);
+async function exportLeadsCSV() {
+
+    const snapshot =
+    await getDocs(
+
+        collection(
+            db,
+            "leads"
+        )
+
+    );
+
+    let csv =
+
+`Name,Phone,Email,City,Service,Project Brief,Status,Notes,Source,Date\n`;
+
+    snapshot.forEach(docItem => {
+
+        const lead =
+        docItem.data();
+
+        const date =
+
+        lead.createdAt
+
+        ? lead.createdAt
+            .toDate()
+            .toLocaleString()
+
+        : "";
+
+        const clean = (value) =>
+
+String(value || "")
+
+.replace(/\n/g, " ")
+
+.replace(/\r/g, " ")
+
+.replace(/"/g, '""');
+
+csv +=
+
+`"${clean(lead.name)}",` +
+
+`"${clean(lead.phone)}",` +
+
+`"${clean(lead.email)}",` +
+
+`"${clean(lead.city)}",` +
+
+`"${clean(lead.service)}",` +
+
+`"${clean(lead.projectBrief)}",` +
+
+`"${clean(lead.status)}",` +
+
+`"${clean(lead.notes)}",` +
+
+`"${clean(lead.source)}",` +
+
+`"${clean(date)}"\n`;
+
+    });
+
+    const blob =
+    new Blob(
+
+        [csv],
+
+        {
+            type:
+            "text/csv;charset=utf-8;"
+        }
+
+    );
+
+    const link =
+    document.createElement(
+        "a"
+    );
+
+    const url =
+    URL.createObjectURL(
+        blob
+    );
+
+    link.href =
+    url;
+
+    link.download =
+
+`leads-${new Date()
+.toISOString()
+.slice(0,10)}.csv`;
+
+    document.body.appendChild(
+        link
+    );
+
+    link.click();
+
+    document.body.removeChild(
+        link
+    );
+
+}
+document
+.getElementById(
+    "exportLeadsBtn"
+)
+?.addEventListener(
+    "click",
+    exportLeadsCSV
+);
+loadLeads();
 
 loadProjects();
 
 loadDashboardStats();
+loadLeadAnalytics();

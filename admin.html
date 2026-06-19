@@ -9,10 +9,13 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
+
     <title>
         Admin Dashboard
     </title>
-
+    <link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link
         rel="stylesheet"
         href="css/admin.css">
@@ -36,9 +39,139 @@
             </p>
 
         </div>
+        
+        <div id="leadsSection">
+
+            <h2>Leads</h2>
+            <div class="leads-toolbar">
+
+    <input
+        type="text"
+        id="leadSearch"
+        placeholder="Search by name, phone, e-mail, city or service">
+        <button
+    id="syncSheetsBtn"
+    class="admin-btn">
+
+    Sync GoogleSheets
+
+</button>
+        <button
+        id="exportLeadsBtn"
+        class="admin-btn">
+
+        Export CSV
+
+    </button>
+
+</div>
+
+<div class="lead-analytics">
+    <div class="lead-stat-card">
+
+    <h3 id="totalLeadsCount">0</h3>
+
+    <p>Total Leads</p>
+
+</div>
+
+    <div class="lead-stat-card">
+
+        <h3 id="newLeadsCount">0</h3>
+
+        <p>New Leads</p>
+
+    </div>
+
+    <div class="lead-stat-card">
+
+        <h3 id="contactedLeadsCount">0</h3>
+
+        <p>Contacted</p>
+
+    </div>
+    <div class="lead-stat-card">
+
+        <h3 id="meetingScheduledLeadsCount">0</h3>
+
+        <p>Meeting</p>
+
+    </div>
+
+    <div class="lead-stat-card">
+
+        <h3 id="quotationLeadsCount">0</h3>
+
+        <p>Quotation Sent</p>
+
+    </div>
+
+    <div class="lead-stat-card">
+
+        <h3 id="convertedLeadsCount">0</h3>
+
+        <p>Converted</p>
+
+    </div>
+
+    <div class="lead-stat-card">
+
+        <h3 id="lostLeadsCount">0</h3>
+
+        <p>Lost</p>
+
+    </div>
+
+</div>
+<div class="table-wrapper">
+    <table class="leads-table">
+
+       <tr>
+
+    <th>Name</th>
+
+    <th>Phone</th>
+    
+
+    <th>Email</th>
+
+    <th>City</th>
+
+    <th>Service</th>
+
+    <th>Project Brief</th>
+    <th>Status</th>
+    <th>Date</th>
+        <th>Notes</th>
+    <th>Source</th>
+    <th>Delete</th>
+    
+    
+
+</tr>
+
+        <tbody id="leadsTableBody">
+
+        </tbody>
+
+    </table></div>
+    
+
+</div>
         <section
     class="admin-stats">
+    <div class="stat-card">
 
+    <h3 id="totalLeads">
+        0
+    </h3>
+
+    <p>
+        Total Leads
+    </p>
+
+</div>
+        
     <div class="stat-card">
 
         <h3 id="totalProjects">
@@ -654,7 +787,46 @@
 
 </div>
     </div>
+<div
+    class="notes-modal"
+    id="notesModal">
 
+    <div
+        class="notes-modal-content">
+
+        <h3>
+            Lead Notes
+        </h3>
+
+        <textarea
+            id="leadNotesInput"
+            placeholder="Write notes here...">
+        </textarea>
+
+        <div
+            class="notes-actions">
+
+            <button
+                id="saveNotesBtn"
+                class="admin-btn">
+
+                Save Notes
+
+            </button>
+
+            <button
+                id="closeNotesBtn"
+                class="delete-btn">
+
+                Close
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
     <script
         type="module"
         src="js/admin.js">
