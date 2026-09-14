@@ -1,0 +1,1459 @@
+/* =========================================================
+   CAMPAIGN LANDING PAGE
+   SWASTIKA DESIGN & CONSTRUCTIONS
+========================================================= */
+
+:root {
+    --campaign-bg: #f6f5f2;
+    --campaign-white: #ffffff;
+    --campaign-dark: #121212;
+    --campaign-dark-2: #1a1a1a;
+
+    --campaign-gold: #b08a4d;
+    --campaign-gold-light: #d8b878;
+
+    --campaign-text: #202020;
+    --campaign-muted: #747474;
+
+    --campaign-border: rgba(176, 138, 77, 0.18);
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+.campaign-hero,
+.campaign-offer,
+.campaign-trust,
+.campaign-form-section,
+.campaign-terms {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.campaign-hero *,
+.campaign-offer *,
+.campaign-trust *,
+.campaign-form-section *,
+.campaign-terms * {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.campaign-hero {
+    position: relative;
+
+    min-height: 92vh;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    background: #171717;
+
+    color: #ffffff;
+}
+
+
+/* Background image */
+
+.campaign-hero-background {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10, 10, 10, 0.92) 0%,
+            rgba(10, 10, 10, 0.78) 38%,
+            rgba(10, 10, 10, 0.42) 72%,
+            rgba(10, 10, 10, 0.30) 100%
+        ),
+        url("../assets/images/hero3.webp");
+
+    background-size: cover;
+    background-position: center;
+
+    transform: scale(1.01);
+}
+
+
+.campaign-hero-container {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.95fr)
+        minmax(420px, 0.85fr);
+
+    align-items: center;
+
+    gap: 70px;
+
+    padding-top: 130px;
+    padding-bottom: 80px;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.campaign-hero-content {
+    max-width: 720px;
+}
+
+
+.campaign-eyebrow {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 22px;
+
+    color: var(--campaign-gold-light);
+
+    font-size: 12.65px;
+    font-weight: 600;
+
+    letter-spacing: 2.5px;
+}
+
+
+.campaign-eyebrow::before {
+    content: "";
+
+    width: 28px;
+    height: 1px;
+
+    background: var(--campaign-gold);
+}
+
+
+.campaign-hero h1 {
+    margin: 0;
+
+    max-width: 760px;
+
+    color: #ffffff;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(48px, 5.5vw, 78px);
+
+    line-height: 1.02;
+
+    font-weight: 400;
+
+    letter-spacing: -1.5px;
+}
+
+
+.campaign-hero h1 span {
+    display: block;
+
+    color: var(--campaign-gold-light);
+}
+
+
+.campaign-subheadline {
+    max-width: 650px;
+
+    margin: 28px 0 0;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    font-size: 17.71px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   HERO META
+========================================================= */
+
+.campaign-meta {
+    display: flex;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 25px;
+
+    margin-top: 30px;
+}
+
+
+.campaign-meta span {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: rgba(255, 255, 255, 0.70);
+
+    font-size: 12.65px;
+}
+
+
+.campaign-meta i {
+    color: var(--campaign-gold-light);
+}
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+.campaign-hero-actions {
+    display: flex;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 35px;
+}
+
+
+.campaign-primary-btn,
+.campaign-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    min-height: 48px;
+
+    padding: 0 21px;
+
+    border-radius: 50px;
+
+    text-decoration: none;
+
+    font-size: 12.65px;
+    font-weight: 600;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+
+.campaign-primary-btn {
+    background: var(--campaign-gold);
+
+    color: #111111;
+}
+
+
+.campaign-primary-btn:hover {
+    transform: translateY(-2px);
+
+    background: var(--campaign-gold-light);
+}
+
+
+.campaign-secondary-btn {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    background: rgba(255, 255, 255, 0.06);
+
+    color: #ffffff;
+}
+
+
+.campaign-secondary-btn:hover {
+    transform: translateY(-2px);
+
+    background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================================
+   HERO VISUAL
+========================================================= */
+
+.campaign-hero-visual {
+    position: relative;
+
+    justify-self: end;
+
+    width: min(100%, 560px);
+}
+
+
+.campaign-image-frame {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 5;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.40);
+}
+
+
+.campaign-image-frame::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 55%,
+            rgba(0, 0, 0, 0.25)
+        );
+}
+
+
+.campaign-image-frame img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* Floating card */
+
+.campaign-floating-card {
+    position: absolute;
+
+    left: -35px;
+    bottom: 35px;
+
+    width: 235px;
+
+    padding: 18px 20px;
+
+    border-radius: 14px;
+
+    background: rgba(18, 18, 18, 0.90);
+
+    border: 1px solid rgba(216, 184, 120, 0.22);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+
+.campaign-floating-card span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--campaign-gold-light);
+
+    font-size: 8.8px;
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+}
+
+
+.campaign-floating-card strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 12px;
+    line-height: 1.55;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.campaign-scroll-indicator {
+    position: absolute;
+
+    bottom: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 3;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: rgba(255, 255, 255, 0.45);
+
+    font-size: 8px;
+
+    letter-spacing: 1.8px;
+}
+
+
+.campaign-scroll-indicator i {
+    color: var(--campaign-gold);
+}
+
+
+/* =========================================================
+   OFFER SECTION
+========================================================= */
+
+.campaign-offer {
+    padding: 100px 0;
+
+    background: var(--campaign-bg);
+}
+
+
+.campaign-section-heading {
+    max-width: 750px;
+
+    margin-bottom: 48px;
+}
+
+
+.campaign-section-tag {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--campaign-gold);
+
+    font-size: 11.385px;
+    font-weight: 600;
+
+    letter-spacing: 2px;
+}
+
+
+.campaign-section-heading h2 {
+    margin: 0;
+
+    color: var(--campaign-dark);
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(38px, 4vw, 56px);
+
+    line-height: 1.08;
+
+    font-weight: 400;
+}
+
+
+.campaign-section-heading h2 span {
+    color: var(--campaign-gold);
+}
+
+
+.campaign-section-heading p {
+    max-width: 620px;
+
+    margin: 20px 0 0;
+
+    color: var(--campaign-muted);
+
+    font-size: 13.915px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   BENEFITS
+========================================================= */
+
+.campaign-benefits {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+.campaign-benefit-card {
+    padding: 28px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.045);
+}
+
+
+.campaign-benefit-icon {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border-radius: 12px;
+
+    background: rgba(176, 138, 77, 0.10);
+
+    color: var(--campaign-gold);
+
+    font-size: 17px;
+}
+
+
+.campaign-benefit-card h3 {
+    margin: 0 0 9px;
+
+    color: #191919;
+
+    font-size: 17.25px;
+
+    line-height: 1.35;
+
+    font-weight: 600;
+}
+
+
+.campaign-benefit-card p {
+    margin: 0;
+
+    color: #777777;
+
+    font-size: 12.65px;
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   TRUST SECTION
+========================================================= */
+
+.campaign-trust {
+    padding: 100px 0;
+
+    background: #ffffff;
+}
+
+
+.campaign-trust-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.9fr)
+        minmax(0, 1.1fr);
+
+    gap: 70px;
+
+    align-items: center;
+}
+
+
+.campaign-trust-content h2 {
+    margin: 0;
+
+    color: #171717;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(38px, 4vw, 56px);
+
+    line-height: 1.08;
+
+    font-weight: 400;
+}
+
+
+.campaign-trust-content h2 span {
+    display: block;
+
+    color: var(--campaign-gold);
+}
+
+
+.campaign-trust-content > p {
+    max-width: 570px;
+
+    margin: 22px 0 0;
+
+    color: #737373;
+
+    font-size: 13.915px;
+
+    line-height: 1.8;
+}
+
+
+.campaign-trust-points {
+    display: grid;
+
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+
+.campaign-trust-points div {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    color: #454545;
+
+    font-size: 12.65px;
+}
+
+
+.campaign-trust-points i {
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(176, 138, 77, 0.12);
+
+    color: var(--campaign-gold);
+
+    font-size: 9px;
+}
+
+
+/* Trust image */
+
+.campaign-trust-visual {
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+}
+
+
+.campaign-trust-visual img {
+    width: 100%;
+    height: 520px;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+.campaign-image-caption {
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+
+    padding: 16px 18px;
+
+    border-radius: 12px;
+
+    background: rgba(15, 15, 15, 0.82);
+
+    color: #ffffff;
+}
+
+
+.campaign-image-caption span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--campaign-gold-light);
+
+    font-size: 8px;
+
+    letter-spacing: 1.6px;
+}
+
+
+.campaign-image-caption strong {
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   FORM SECTION
+========================================================= */
+
+.campaign-form-section {
+    padding: 100px 0;
+
+    background: #f6f5f2;
+}
+
+
+.campaign-form-wrapper {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.75fr)
+        minmax(0, 1.25fr);
+
+    gap: 55px;
+
+    padding: 50px;
+
+    border-radius: 24px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 15px 55px rgba(0, 0, 0, 0.07);
+}
+
+
+/* Form intro */
+
+.campaign-form-intro {
+    padding: 10px 0;
+}
+
+
+.campaign-form-intro h2 {
+    margin: 0;
+
+    color: #171717;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(38px, 4vw, 55px);
+
+    line-height: 1.08;
+
+    font-weight: 400;
+}
+
+
+.campaign-form-intro h2 span {
+    display: block;
+
+    color: var(--campaign-gold);
+}
+
+
+.campaign-form-intro > p {
+    max-width: 420px;
+
+    margin: 20px 0 0;
+
+    color: #777777;
+
+    font-size: 12.65px;
+
+    line-height: 1.8;
+}
+
+
+/* Validity */
+
+.campaign-validity {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin-top: 30px;
+
+    padding: 15px 16px;
+
+    border-radius: 12px;
+
+    background: #f7f5f0;
+}
+
+
+.campaign-validity > i {
+    color: var(--campaign-gold);
+
+    font-size: 18px;
+}
+
+
+.campaign-validity span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #999999;
+
+    font-size: 8.5px;
+
+    letter-spacing: 1.2px;
+}
+
+
+.campaign-validity strong {
+    color: #292929;
+
+    font-size: 11.5px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.campaign-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 17px;
+}
+
+
+.campaign-form-row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+.campaign-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.campaign-field label {
+    color: #3b3b3b;
+
+    font-size: 10.93px;
+
+    font-weight: 600;
+}
+
+
+.campaign-field input,
+.campaign-field select,
+.campaign-field textarea {
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border: 1px solid #e4e2dd;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #fafaf9;
+
+    color: #222222;
+
+    font-family: inherit;
+
+    font-size: 11.5px;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.campaign-field textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+
+.campaign-field input:focus,
+.campaign-field select:focus,
+.campaign-field textarea:focus {
+    border-color: var(--campaign-gold);
+
+    background: #ffffff;
+}
+
+
+.campaign-field input::placeholder,
+.campaign-field textarea::placeholder {
+    color: #aaa8a3;
+}
+
+
+/* Submit */
+
+.campaign-submit-btn {
+    width: 100%;
+
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 3px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    background: var(--campaign-gold);
+
+    color: #111111;
+
+    font-family: inherit;
+
+    font-size: 12.65px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.campaign-submit-btn:hover {
+    background: var(--campaign-gold-light);
+
+    transform: translateY(-2px);
+}
+
+
+.campaign-form-note {
+    margin: 0;
+
+    color: #a0a0a0;
+
+    font-size: 8.8px;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+
+.campaign-form-status {
+    min-height: 18px;
+
+    color: var(--campaign-gold);
+
+    font-size: 10.5px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TERMS
+========================================================= */
+
+.campaign-terms {
+    padding: 45px 0;
+
+    background: #151515;
+
+    color: #ffffff;
+}
+
+
+.campaign-terms-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 40px;
+}
+
+
+.campaign-terms h3 {
+    margin: 0;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 25px;
+
+    font-weight: 400;
+}
+
+
+.campaign-terms p {
+    max-width: 620px;
+
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.58);
+
+    font-size: 10.93px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CAMPAIGN FOOTER ENHANCEMENTS
+========================================================= */
+
+.footer-description {
+    max-width: 270px;
+
+    margin-top: 10px !important;
+
+    color: rgba(255, 255, 255, 0.45) !important;
+
+    font-size: 10px !important;
+
+    line-height: 1.65 !important;
+}
+
+
+.footer-contact a,
+.footer-contact span {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+}
+
+
+.footer-contact i {
+    flex-shrink: 0;
+
+    margin-top: 3px;
+
+    color: #b08a4d;
+}
+
+
+.footer-socials {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 12px;
+}
+
+
+.footer-socials a {
+    width: 31px;
+    height: 31px;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 !important;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    color: #ffffff;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.footer-socials a:hover {
+    background: #b08a4d;
+
+    color: #111111;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .campaign-hero-container {
+        grid-template-columns: 1fr 0.85fr;
+
+        gap: 35px;
+    }
+
+
+    .campaign-hero h1 {
+        font-size: clamp(44px, 6vw, 65px);
+    }
+
+
+    .campaign-benefits {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .campaign-trust-grid {
+        gap: 40px;
+    }
+
+
+    .campaign-form-wrapper {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+
+    .campaign-hero {
+        min-height: auto;
+    }
+
+
+    .campaign-hero-background {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(10, 10, 10, 0.72),
+                rgba(10, 10, 10, 0.88)
+            ),
+            url("../assets/images/hero3.webp");
+
+        background-position: center;
+    }
+
+
+    .campaign-hero-container {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+
+        padding-top: 115px;
+        padding-bottom: 70px;
+    }
+
+
+    .campaign-eyebrow {
+        font-size: 10.12px;
+    }
+
+
+    .campaign-hero h1 {
+        font-size: 42px;
+
+        letter-spacing: -0.8px;
+    }
+
+
+    .campaign-subheadline {
+        margin-top: 20px;
+
+        font-size: 13.915px;
+    }
+
+
+    .campaign-meta {
+        gap: 10px;
+
+        margin-top: 23px;
+    }
+
+
+    .campaign-meta span {
+        font-size: 10.758px;
+    }
+
+
+    .campaign-hero-actions {
+        align-items: stretch;
+
+        flex-direction: column;
+
+        margin-top: 28px;
+    }
+
+
+    .campaign-primary-btn,
+    .campaign-secondary-btn {
+        width: 100%;
+
+        min-height: 46px;
+
+        font-size: 11.5px;
+    }
+
+
+    .campaign-hero-visual {
+        width: 100%;
+    }
+
+
+    .campaign-image-frame {
+        aspect-ratio: 4 / 4.7;
+
+        border-radius: 18px;
+    }
+
+
+    .campaign-floating-card {
+        left: 12px;
+        bottom: 12px;
+
+        width: 210px;
+
+        padding: 14px 16px;
+    }
+
+
+    .campaign-scroll-indicator {
+        display: none;
+    }
+
+
+    /* =====================================================
+       SECTIONS
+    ====================================================== */
+
+    .campaign-offer,
+    .campaign-trust,
+    .campaign-form-section {
+        padding: 70px 0;
+    }
+
+
+    .campaign-section-heading {
+        margin-bottom: 30px;
+    }
+
+
+    .campaign-section-tag {
+        font-size: 10.12px;
+    }
+
+
+    .campaign-section-heading h2,
+    .campaign-trust-content h2,
+    .campaign-form-intro h2 {
+        font-size: 35.42px;
+    }
+
+
+    .campaign-section-heading p,
+    .campaign-trust-content > p {
+        font-size: 12.65px;
+    }
+
+
+    /* =====================================================
+       BENEFITS
+    ====================================================== */
+
+    .campaign-benefits {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    .campaign-benefit-card {
+        padding: 21px;
+    }
+
+
+    .campaign-benefit-card h3 {
+        font-size: 15.525px;
+    }
+
+
+    .campaign-benefit-card p {
+        font-size: 11.5px;
+    }
+
+
+    /* =====================================================
+       TRUST
+    ====================================================== */
+
+    .campaign-trust-grid {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+
+    .campaign-trust-content h2 span {
+        display: block;
+    }
+
+
+    .campaign-trust-points div {
+        font-size: 11.5px;
+    }
+
+
+    .campaign-trust-visual img {
+        height: 390px;
+    }
+
+
+    /* =====================================================
+       FORM
+    ====================================================== */
+
+    .campaign-form-wrapper {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+        padding: 25px 20px;
+
+        border-radius: 18px;
+    }
+
+
+    .campaign-form-row {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+
+    .campaign-field label {
+        font-size: 10.12px;
+    }
+
+
+    .campaign-field input,
+    .campaign-field select,
+    .campaign-field textarea {
+        font-size: 11.5px;
+    }
+
+
+    /* =====================================================
+       TERMS
+    ====================================================== */
+
+    .campaign-terms {
+        padding: 35px 0;
+    }
+
+
+    .campaign-terms-inner {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+
+    .campaign-terms p {
+        font-size: 10.12px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .campaign-hero-container {
+        padding-top: 105px;
+    }
+
+
+    .campaign-hero h1 {
+        font-size: 36px;
+    }
+
+
+    .campaign-hero-content p {
+        font-size: 12.65px;
+    }
+
+
+    .campaign-floating-card {
+        width: 190px;
+    }
+
+
+    .campaign-section-heading h2,
+    .campaign-trust-content h2,
+    .campaign-form-intro h2 {
+        font-size: 31.625px;
+    }
+
+
+    .campaign-trust-visual img {
+        height: 340px;
+    }
+
+
+    .campaign-form-wrapper {
+        padding: 22px 16px;
+    }
+
+}

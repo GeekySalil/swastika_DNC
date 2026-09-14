@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Render vs Reality | Swastika Design & Constructions</title>
+    <meta name="description"
+        content="Explore our architectural 3D visualizations compared side-by-side with actual on-site project execution in Varanasi." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.ico" />
+
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Render vs Reality | Swastika Design & Constructions" />
+    <meta property="og:description"
+        content="See how our architectural concepts translate into real, completed spaces with precision craftsmanship." />
+    <meta property="og:url" content="https://swastikadnc.com/render.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/logos/round-og.webp" />
+
+    <!-- Core Stylesheets -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+
+    <!-- Dedicated Render vs Reality Page Stylesheet -->
+    <link rel="stylesheet" href="css/render.css" />
+</head>
+
+<body>
+
+    <!-- =========================================================
+         HEADER / NAVBAR
+    ========================================================== -->
+    <header class="navbar" id="siteNavbar">
+        <div class="container nav-container">
+                 <a href="index.html" class="logo-wrapper">
+
+    <img
+        src="assets/logos/logo-round.webp"
+        alt="Swastika Design & Constructions"
+        class="logo-round"
+    >
+
+    <img
+        src="assets/logos/swastika-wordmark.png"
+        alt="Swastika Design & Constructions"
+        class="logo-wordmark"
+    >
+
+</a>
+
+            <nav class="nav-links" id="navLinks">
+                <div class="mobile-menu-logo">
+                    <img src="assets/logos/logo-round.webp" alt="Swastika Design & Constructions" />
+                    <div>
+                        <strong>SWASTIKA</strong>
+                        <span>Design & Constructions</span>
+                    </div>
+                </div>
+
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="render.html" class="active-nav">Render vs Reality</a>
+                <a href="blog.html">Blog</a>
+                <a href="socials.html">Follow Us</a>
+                <a href="#mapFrame">Contact</a>
+            </nav>
+
+            <div class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <div id="site-content">
+
+        <!-- =========================================================
+             HERO BANNER (Strict 100vh / 100dvh — Zero Fold Overflow)
+        ========================================================== -->
+        <section class="render-hero" id="home">
+            <canvas id="heroParticles" class="hero-particles-canvas"></canvas>
+
+            <div class="container render-hero-container">
+                <div class="render-hero-content">
+                    <span class="section-tag">FIDELITY & CRAFTSMANSHIP</span>
+                    <h1>Render vs Reality</h1>
+                    <p class="render-hero-lead">
+                        Every curve, finish, light temperature, and structural joint executed exactly as conceptualized.
+                        Explore our side-by-side journey from initial 3D visualization to handover.
+                    </p>
+<br>
+                    <!-- Trust Stats Row -->
+                    <div class="render-stats-row">
+                        <div class="render-stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-text">DESIGN FIDELITY</span>
+                        </div>
+                        <div class="render-stat-divider"></div>
+                        <div class="render-stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-text">PROJECT DELIVERIES</span>
+                        </div>
+                        <div class="render-stat-divider"></div>
+                        <div class="render-stat-item">
+                            <span class="stat-number">0</span>
+                            <span class="stat-text">MATERIAL COMPROMISE</span>
+                        </div>
+                    </div>
+<br>
+                    <!-- 3 Vertical Pillars: One Below the Other -->
+                    <div class="hero-vertical-pillars">
+                        <div class="pillar-card">
+                            <div class="pillar-icon">
+                                <i class="fa-solid fa-drafting-compass"></i>
+                            </div>
+                            <div class="pillar-info">
+                                <span class="pillar-title">Zero Deviations</span>
+                                <span class="pillar-sub">Pixel-accurate translation from 3D blueprints to finished site</span>
+                            </div>
+                        </div>
+
+                        <div class="pillar-card">
+                            <div class="pillar-icon">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <div class="pillar-info">
+                                <span class="pillar-title">Certified Precision Execution</span>
+                                <span class="pillar-sub">Rigorous material auditing, rebar inspections & joint tolerances</span>
+                            </div>
+                        </div>
+
+                        <div class="pillar-card">
+                            <div class="pillar-icon">
+                                <i class="fa-solid fa-key"></i>
+                            </div>
+                            <div class="pillar-info">
+                                <span class="pillar-title">Turnkey Handover</span>
+                                <span class="pillar-sub">Single-window architectural responsibility from foundation to keys</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             GALLERY & FILTER TABS (4 In a Row | 9:16 | 1 Caption Only)
+        ========================================================== -->
+        <section class="render-gallery-section" id="gallery">
+            <div class="container">
+
+                <div class="section-heading center">
+                    <span class="section-tag">Project Visuals</span>
+                    <h2>From Blueprint to Built Reality</h2>
+                    <p class="section-subtext">Filter through distinct zones of our turnkey residential and commercial projects.</p>
+                </div>
+
+                <!-- Category Filter Tabs -->
+                <div class="filter-tabs-wrapper">
+                    <div class="filter-tabs" id="filterTabs">
+                        <button class="tab-btn active" data-filter="all">
+                            <i class="fa-solid fa-shapes"></i> View All
+                        </button>
+                        <button class="tab-btn" data-filter="elevation">
+                            <i class="fa-solid fa-building"></i> Elevation
+                        </button>
+                        <button class="tab-btn" data-filter="rooms">
+                            <i class="fa-solid fa-couch"></i> Rooms
+                        </button>
+                        <button class="tab-btn" data-filter="ceiling">
+                            <i class="fa-solid fa-cloud"></i> Ceiling
+                        </button>
+                        <button class="tab-btn" data-filter="bathroom">
+                            <i class="fa-solid fa-bath"></i> Bathroom
+                        </button>
+                        <button class="tab-btn" data-filter="kitchen">
+                            <i class="fa-solid fa-utensils"></i> Kitchen
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4 Columns 9:16 Grid -->
+                <div class="rr-gallery-grid" id="galleryGrid">
+
+                    <!-- ITEM 1: Elevation -->
+                    <div class="rr-card" data-category="elevation">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_commercial_building_9x16.webp"
+                                alt="Commercial Building Facade" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Commercial Facade</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 2: Elevation -->
+                    <div class="rr-card" data-category="elevation">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_house_9x16.webp"
+                                alt="Contemporary Villa Exterior" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Contemporary Villa</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 3: Elevation -->
+                    <div class="rr-card" data-category="elevation">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_exterior_2_9x16.webp"
+                                alt="Residential Residence Elevation" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Residential Residence</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 4: Rooms -->
+                    <div class="rr-card" data-category="rooms">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_living_room_9x16.webp"
+                                alt="Formal Living Lounge" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Formal Living Lounge</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 5: Rooms -->
+                    <div class="rr-card" data-category="bathroom">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_dressing_area_9x16.webp"
+                                alt="Walk-in Wardrobe Dressing" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Walk-in Wardrobe</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 6: Rooms -->
+                    <div class="rr-card" data-category="rooms">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_bedroom_tv_unit_9x16.webp"
+                                alt="Master Suite TV Wall" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Master Suite TV Wall</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 7: Rooms -->
+                    <div class="rr-card" data-category="rooms">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_bedroom_2_9x16.webp"
+                                alt="Guest Bedroom Headboard" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Guest Bedroom</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 8: Ceiling -->
+                    <div class="rr-card" data-category="ceiling">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_ceiling_2_9x16.webp"
+                                alt="Curved Beam False Ceiling" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Curved Beam Ceiling</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 9: Ceiling -->
+                    <div class="rr-card" data-category="rooms">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_bedroom_9x16.webp"
+                                alt="Perimeter Recessed Ceiling" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Perimeter Recessed Cove</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 10: Bathroom -->
+                    <div class="rr-card" data-category="elevation">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_exterior_house_9x16.webp"
+                                alt="Master Bath & Vanity" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Master Bath & Vanity</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 11: Kitchen -->
+                    <div class="rr-card" data-category="elevation">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_exterior_3_9x16.webp"
+                                alt="Modular Island Kitchen" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Modular Island Kitchen</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ITEM 12: Kitchen -->
+                    <div class="rr-card" data-category="ceiling">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_ceiling_9x16.webp"
+                                alt="Parallel Pantry Kitchen" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Parallel Pantry Kitchen</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rr-card" data-category="elevation">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_house_4_9x16.webp"
+                                alt="Parallel Pantry Kitchen" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Parallel Pantry Kitchen</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rr-card" data-category="ceiling">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_ceiling_4_9x16.webp"
+                                alt="Parallel Pantry Kitchen" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Parallel Pantry Kitchen</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rr-card" data-category="rooms">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_living_room_9x16.webp"
+                                alt="Parallel Pantry Kitchen" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Parallel Pantry Kitchen</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rr-card" data-category="rooms">
+                        <div class="rr-image-container">
+                            <img src="assets/images/RR/render_vs_reality_bedroom_tv_unit_9x16.webp"
+                                alt="Parallel Pantry Kitchen" loading="lazy" decoding="async">
+                            <div class="rr-card-overlay">
+                                <!-- <h4>Parallel Pantry Kitchen</h4> -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =========================================================
+             IMAGE LIGHTBOX MODAL
+        ========================================================== -->
+        <div class="rr-lightbox" id="imageLightbox">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close Preview">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="lightbox-content">
+                <img id="lightboxImg" src="" alt="Full Preview" />
+                <div class="lightbox-meta">
+                    <h3 id="lightboxTitle"></h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             LOCATION MAP
+        ========================================================== -->
+        <div class="contact-map">
+            <div class="map-header">
+                <div>
+                    <span class="map-eyebrow">FIND US</span>
+                    <h3>Visit Our Office</h3>
+                </div>
+                <div class="map-location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Samne Ghat, Lanka, Varanasi</span>
+                </div>
+            </div>
+            <div id="mapFrame" class="map-frame">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3452.9642703231657!2d83.0131893!3d25.2707429!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e316faf0ace29%3A0xda290089b181b40d!2sSwastika%20Design%20%26%20Constructions!5e1!3m2!1sen!2sin!4v1780648198815!5m2!1sen!2sin"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-cta">
+                <div>
+                    <span class="footer-cta-label">LET'S BUILD SOMETHING TIMELESS</span>
+                    <h3>Have a project in mind?</h3>
+                    <p>Tell us about your vision and let's turn it into a space that feels distinctly yours.</p>
+                </div>
+                <a href="https://wa.me/917007070068" target="_blank" rel="noopener noreferrer" class="footer-cta-btn">
+                    Start a Conversation <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <br><br>
+
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-brand-top">
+                        <img src="assets/logos/logo-round.webp" alt="Swastika Design & Constructions" />
+                        <div>
+                            <h3>Swastika Design & Constructions</h3>
+                            <span>Architecture • Interiors • Construction</span>
+                        </div>
+                    </div>
+                    <br>
+                    <p class="footer-description">
+                        Thoughtfully designed spaces, intelligently planned structures, and quality construction — from
+                        concept to completion in Varanasi and beyond.
+                    </p>
+                    <div class="footer-tagline">
+                        <span>Space.</span>
+                        <span>Structure.</span>
+                        <span>Silence.</span>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="portfolio.html">Portfolio</a>
+                    <a href="socials.html">Follow Us</a>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Our Services</h4>
+                    <a href="services.html#planning">Architectural Planning</a>
+                    <a href="services.html#visualization">3D Visualization</a>
+                    <a href="services.html#interiors">Interior Design</a>
+                    <a href="services.html#construction">Complete Construction</a>
+                    <a href="services.html#supervision">Site Supervision</a>
+                </div>
+
+                <div class="footer-column footer-contact">
+                    <h4>Get In Touch</h4>
+                    <a href="https://wa.me/917007070068" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
+                        <span class="footer-contact-icon"><i class="fa-brands fa-whatsapp"></i></span>
+                        <span><small>WhatsApp</small>+91 70070 70068</span>
+                    </a>
+                    <a href="mailto:info@swastikadnc.com" class="footer-contact-item">
+                        <span class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></span>
+                        <span><small>Email</small>info@swastikadnc.com</span>
+                    </a>
+                    <a href="#mapFrame" class="footer-contact-item">
+                        <span class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></span>
+                        <span><small>Office</small>Samne Ghat, Lanka, Varanasi</span>
+                    </a>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/swastika.dnc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/SwastikDnC" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.youtube.com/@swastikDnC" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p></p>
+                <div class="footer-bottom-links">
+                    <a href="#">Back to Top <i class="fa-solid fa-arrow-up"></i></a>
+                </div>
+                <p class="footer-credit">© 2026 Swastika Design & Constructions. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Actions -->
+    <a href="https://wa.me/917007070068" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <a href="tel:7007070068" class="call-float" aria-label="Call 7007070068">
+        <i class="fa-solid fa-phone"></i>
+    </a>
+
+    <!-- Hamburger Script -->
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+    </script>
+
+    <!-- Precise 100vh Viewport Lock Engine -->
+    <script>
+    (function () {
+        function syncHeroViewport() {
+            const nav = document.querySelector('.navbar') || document.getElementById('siteNavbar');
+            const hero = document.getElementById('home');
+            if (!hero) return;
+
+            const navH = nav ? nav.getBoundingClientRect().height : 80;
+            const isFixed = nav ? (window.getComputedStyle(nav).position === 'fixed' || window.getComputedStyle(nav).position === 'sticky') : true;
+
+            if (isFixed) {
+                hero.style.height = '100dvh';
+                hero.style.paddingTop = Math.round(navH) + 'px';
+            } else {
+                hero.style.height = `calc(100dvh - ${Math.round(navH)}px)`;
+                hero.style.paddingTop = '0px';
+            }
+        }
+
+        window.addEventListener('resize', syncHeroViewport);
+        window.addEventListener('orientationchange', syncHeroViewport);
+        document.addEventListener('DOMContentLoaded', syncHeroViewport);
+        syncHeroViewport();
+    })();
+    </script>
+
+    <!-- Interactive Architectural Particle Canvas Engine -->
+    <script>
+    (function () {
+        const canvas = document.getElementById('heroParticles');
+        const hero = document.getElementById('home');
+        if (!canvas || !hero) return;
+
+        const ctx = canvas.getContext('2d');
+        let width = 0, height = 0, elements = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        const colors = [
+            'rgba(166, 124, 50, 0.70)',
+            'rgba(225, 195, 141, 0.65)',
+            'rgba(196, 155, 93, 0.50)',
+            'rgba(245, 245, 245, 0.35)'
+        ];
+
+        const ELEMENT_TYPES = ['node', 'cross', 'cube', 'setsquare', 'elevation', 'crosshair', 'dimension'];
+
+        function resize() {
+            const dpr = window.devicePixelRatio || 1;
+            width = hero.offsetWidth;
+            height = hero.offsetHeight;
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            ctx.scale(dpr, dpr);
+        }
+
+        class BlueprintParticle {
+            constructor() { this.reset(true); }
+            reset(initial = false) {
+                this.x = Math.random() * width;
+                this.y = initial ? Math.random() * height : height + 15;
+                this.type = ELEMENT_TYPES[Math.floor(Math.random() * ELEMENT_TYPES.length)];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.size = this.type === 'node' ? Math.random() * 1.5 + 0.8 : Math.random() * 3 + 5;
+                this.vx = (Math.random() - 0.5) * 0.35;
+                this.vy = -(Math.random() * 0.35 + 0.15);
+                this.angle = Math.random() * Math.PI * 2;
+                this.vAngle = (Math.random() - 0.5) * 0.008;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy; this.angle += this.vAngle;
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - this.x, dy = mouse.y - this.y;
+                    const dist = Math.hypot(dx, dy);
+                    if (dist < mouse.radius) {
+                        const force = (mouse.radius - dist) / mouse.radius;
+                        const angle = Math.atan2(dy, dx);
+                        this.x -= Math.cos(angle) * force * 2;
+                        this.y -= Math.sin(angle) * force * 2;
+                    }
+                }
+                if (this.x < -20) this.x = width + 20;
+                if (this.x > width + 20) this.x = -20;
+                if (this.y < -20) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.strokeStyle = this.color;
+                ctx.fillStyle = this.color;
+                ctx.lineWidth = 0.65;
+                const s = this.size;
+
+                switch (this.type) {
+                    case 'node':
+                        ctx.beginPath(); ctx.arc(0, 0, s, 0, Math.PI * 2); ctx.fill(); break;
+                    case 'cross':
+                        ctx.beginPath(); ctx.moveTo(-s, 0); ctx.lineTo(s, 0); ctx.moveTo(0, -s); ctx.lineTo(0, s); ctx.stroke(); break;
+                    case 'cube':
+                        const isoH = s * 0.577;
+                        ctx.beginPath();
+                        ctx.moveTo(0, -s); ctx.lineTo(s * 0.866, -isoH * 0.5); ctx.lineTo(0, 0); ctx.lineTo(-s * 0.866, -isoH * 0.5); ctx.closePath();
+                        ctx.stroke(); break;
+                    case 'setsquare':
+                        ctx.beginPath(); ctx.moveTo(-s * 0.5, s * 0.6); ctx.lineTo(s * 0.7, s * 0.6); ctx.lineTo(-s * 0.5, -s * 0.8); ctx.closePath(); ctx.stroke(); break;
+                    case 'crosshair':
+                        ctx.beginPath(); ctx.arc(0, 0, s * 0.32, 0, Math.PI * 2); ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(-s * 0.6, 0); ctx.lineTo(s * 0.6, 0); ctx.moveTo(0, -s * 0.6); ctx.lineTo(0, s * 0.6); ctx.stroke(); break;
+                    case 'dimension':
+                        ctx.beginPath(); ctx.moveTo(-s * 0.7, 0); ctx.lineTo(s * 0.7, 0); ctx.stroke(); break;
+                    default:
+                        ctx.beginPath(); ctx.arc(0, 0, 1.2, 0, Math.PI * 2); ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function init() {
+            elements = [];
+            const count = Math.min(Math.max(Math.floor((width * height) / 18000), 25), 55);
+            for (let i = 0; i < count; i++) elements.push(new BlueprintParticle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].update();
+                elements[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        hero.addEventListener('mousemove', e => {
+            const r = hero.getBoundingClientRect();
+            mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+        });
+        hero.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('resize', () => { resize(); init(); });
+        resize(); init(); animate();
+    })();
+    </script>
+
+    <!-- Filter & Lightbox Viewer Engine -->
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const filterBtns = document.querySelectorAll('.tab-btn');
+    const cards = document.querySelectorAll('.rr-card');
+
+    filterBtns.forEach(btn => {
+
+        btn.addEventListener('click', () => {
+
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const selectedFilter = btn.getAttribute('data-filter');
+
+            let firstMatchingCard = null;
+
+            cards.forEach(card => {
+
+                const category = card.getAttribute('data-category');
+
+                if (selectedFilter === 'all' || category === selectedFilter) {
+
+                    card.style.display = 'block';
+
+                    if (!firstMatchingCard) {
+                        firstMatchingCard = card;
+                    }
+
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    }, 10);
+
+                } else {
+
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 200);
+
+                }
+
+            });
+
+            // Scroll to the first matching image
+            if (firstMatchingCard) {
+
+                setTimeout(() => {
+
+                    firstMatchingCard.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+
+                }, 250);
+
+            }
+
+        });
+
+    });
+
+
+    // Lightbox Zoom
+
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+
+    cards.forEach(card => {
+
+        card.addEventListener('click', () => {
+
+            const img = card.querySelector('img');
+            const title = card.querySelector('h4')
+                ? card.querySelector('h4').textContent
+                : '';
+
+            if (img && lightbox) {
+
+                lightboxImg.src = img.src;
+                lightboxTitle.textContent = title;
+
+                lightbox.classList.add('active');
+
+                document.body.style.overflow = 'hidden';
+
+            }
+
+        });
+
+    });
+
+
+    function closeLightbox() {
+
+        if (lightbox) {
+
+            lightbox.classList.remove('active');
+
+            document.body.style.overflow = '';
+
+        }
+
+    }
+
+
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+
+    if (lightbox) {
+
+        lightbox.addEventListener('click', (e) => {
+
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+
+        });
+
+    }
+
+
+    document.addEventListener('keydown', (e) => {
+
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+
+    });
+
+});
+</script>
+
+</body>
+
+</html>

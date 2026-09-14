@@ -46,8 +46,140 @@ from
 "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
 
-import { db }
+import {
+    db,
+    auth
+}
 from "./firebase.js";
+
+import {
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+/* =========================================================
+   ADMIN LOGOUT
+========================================================= */
+
+document
+.getElementById("logoutBtn")
+?.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            await signOut(auth);
+
+            window.location.replace(
+                "index.html"
+            );
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "Logout Error:",
+                error
+            );
+
+            alert(
+                "Logout failed. Please try again."
+            );
+
+        }
+
+    }
+);
+
+/* =========================================================
+   ADMIN AUTHENTICATION GUARD
+========================================================= */
+
+/* =========================================================
+   ADMIN AUTHENTICATION + AUTHORIZATION GUARD
+========================================================= */
+
+const ADMIN_UIDS = [
+    "LhOv7g1OuYP4ELdkxBGBXVf565A2",
+    "X8TTAKUrHMTnYhtXvN1CdXhdJ552"
+];
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        /*
+         * STEP 1:
+         * User is not authenticated.
+         */
+
+        if (!user) {
+
+            window.location.replace(
+                "index.html"
+            );
+
+            return;
+        }
+
+
+        /*
+         * STEP 2:
+         * User is authenticated.
+         * Now check whether the UID belongs to the admin.
+         */
+
+        if (
+            !ADMIN_UIDS.includes(user.uid)
+        ) {
+
+            alert(
+                "You are authenticated, but you are not authorized to access the Admin Dashboard."
+            );
+
+            window.location.replace(
+                "index.html"
+            );
+
+            return;
+        }
+const adminEmail =
+    document.getElementById("loggedInAdminEmail");
+
+if (adminEmail) {
+    adminEmail.textContent =
+        user.email || "Administrator";
+}
+
+        /*
+         * STEP 3:
+         * Authentication + authorization confirmed.
+         */
+
+        document.body.classList.remove(
+            "admin-auth-checking"
+        );
+
+
+        /*
+         * STEP 4:
+         * Load dashboard data only for the admin.
+         */
+
+        loadLeads();
+
+        loadProjects();
+
+        loadDashboardStats();
+
+        loadLeadAnalytics();
+
+    }
+);
 
 async function loadLeads() {
 
@@ -2018,9 +2150,377 @@ document
     "click",
     exportLeadsCSV
 );
-loadLeads();
 
-loadProjects();
+async function syncAllLeadsToSheets() {
 
-loadDashboardStats();
-loadLeadAnalytics();
+    const syncButton =
+        document.getElementById(
+            "syncSheetsBtn"
+        );
+
+    try {
+
+        /*
+         * Disable button
+         */
+
+        if (syncButton) {
+
+            syncButton.disabled = true;
+
+            syncButton.textContent =
+                "Syncing...";
+
+        }
+
+
+        /*
+         * Get ALL leads from Firestore
+         */
+
+        const snapshot =
+            await getDocs(
+
+                collection(
+                    db,
+                    "leads"
+                )
+
+            );
+
+
+        /*
+         * Prepare leads array
+         */
+
+        const leads = [];
+
+
+        snapshot.forEach(
+            docItem => {
+
+                const lead =
+                    docItem.data();
+
+
+                /*
+                 * Convert Firestore timestamp
+                 */
+
+                let createdAt = "";
+
+
+                if (
+                    lead.createdAt &&
+                    typeof lead.createdAt.toDate ===
+                    "function"
+                ) {
+
+                    createdAt =
+                        lead.createdAt
+                            .toDate()
+                            .toLocaleString();
+
+                }
+
+                else if (
+                    lead.createdAt
+                ) {
+
+                    createdAt =
+                        String(
+                            lead.createdAt
+                        );
+
+                }
+
+
+                /*
+                 * Include Firestore
+                 * document ID
+                 */
+
+                leads.push({
+
+                    id:
+                        docItem.id,
+
+                    name:
+                        lead.name || "",
+
+                    phone:
+                        lead.phone || "",
+
+                    email:
+                        lead.email || "",
+
+                    city:
+                        lead.city || "",
+
+                    service:
+                        lead.service || "",
+
+                    projectBrief:
+                        lead.projectBrief || "",
+
+                    status:
+                        lead.status || "",
+
+                    notes:
+                        lead.notes || "",
+
+                    source:
+                        lead.source || "",
+
+                    createdAt
+
+                });
+
+            }
+        );
+
+
+        /*
+         * Send ALL leads in ONE request
+         */
+
+        const response =
+            await fetch(
+
+                "https://script.google.com/macros/s/AKfycbw-sTFHcpa_iB8srCkNiY01MjvpnwTe1Qzqn126YSSgNVUHbFNNtJGe7cP6ArXA3WAQ/exec",
+
+                {
+
+                    method: "POST",
+
+                    body:
+                        JSON.stringify({
+
+                            leads
+
+                        })
+
+                }
+
+            );
+
+
+        /*
+         * Read Apps Script response
+         */
+
+        const result =
+            await response.text();
+
+
+        console.log(
+            "Google Sheets Sync Result:",
+            result
+        );
+
+
+        /*
+         * Parse response
+         */
+
+        let syncResult;
+
+
+        try {
+
+            syncResult =
+                JSON.parse(result);
+
+        }
+
+        catch {
+
+            syncResult = null;
+
+        }
+
+
+        if (
+            syncResult &&
+            syncResult.success
+        ) {
+
+           alert(
+    "Google Sheets Sync Result:\n\n" +
+
+    "Added: " +
+    syncResult.added +
+
+    "\nUpdated: " +
+    syncResult.updated +
+
+    "\nUnchanged: " +
+    syncResult.unchanged +
+
+    "\nDeleted: " +
+    syncResult.deleted
+);
+
+        }
+
+        else {
+
+            alert(
+                "Google Sheets Sync Completed"
+            );
+
+        }
+
+    }
+
+
+    catch(error) {
+
+        console.error(
+            "Google Sheets Sync Error:",
+            error
+        );
+
+        alert(
+            "Google Sheets Sync Failed:\n\n" +
+            error.message
+        );
+
+    }
+
+
+    finally {
+
+        /*
+         * Enable button again
+         */
+
+        if (syncButton) {
+
+            syncButton.disabled =
+                false;
+
+            syncButton.textContent =
+                "Sync To Google Sheets";
+
+        }
+
+    }
+
+}
+document
+.getElementById(
+    "syncSheetsBtn"
+)
+?.addEventListener(
+    "click",
+    syncAllLeadsToSheets
+);
+// loadLeads();
+
+// loadProjects();
+
+// loadDashboardStats();
+// loadLeadAnalytics();
+
+/* =========================================================
+   ADMIN SECTION NAVIGATION - ACTIVE TAB
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const sectionNavLinks =
+        document.querySelectorAll(".admin-section-nav a");
+
+    const sectionIds = [
+        "leadsSection",
+        "offerManagement",
+        "projectManagement",
+        "viewProjects"
+    ];
+
+    const sections = sectionIds
+        .map(id => document.getElementById(id))
+        .filter(section => section);
+
+
+    if (!sectionNavLinks.length || !sections.length) {
+        return;
+    }
+
+
+    /* ---------------------------------------------------------
+       SET ACTIVE TAB
+    --------------------------------------------------------- */
+
+    function setActiveSection(id) {
+
+        sectionNavLinks.forEach(link => {
+
+            const targetId =
+                link.getAttribute("href").replace("#", "");
+
+            link.classList.toggle(
+                "active",
+                targetId === id
+            );
+
+        });
+
+    }
+
+
+    /* ---------------------------------------------------------
+       OBSERVE SECTIONS WHILE SCROLLING
+    --------------------------------------------------------- */
+
+    const sectionObserver =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        setActiveSection(
+                            entry.target.id
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                root: null,
+
+                /*
+                 * The sticky account bar + navigation
+                 * occupy the top part of the screen.
+                 */
+                rootMargin:
+                    "-150px 0px -55% 0px",
+
+                threshold: 0
+            }
+        );
+
+
+    /* ---------------------------------------------------------
+       START OBSERVING
+    --------------------------------------------------------- */
+
+    sections.forEach(section => {
+
+        sectionObserver.observe(section);
+
+    });
+
+
+    /* ---------------------------------------------------------
+       DEFAULT ACTIVE TAB
+    --------------------------------------------------------- */
+
+    setActiveSection("leadsSection");
+
+});

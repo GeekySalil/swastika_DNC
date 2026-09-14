@@ -19,30 +19,96 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <link
         rel="stylesheet"
         href="css/admin.css">
+<link
+        rel="icon"
+        href="assets/logos/logo-round.webp"
+    >
+        <style>
+    .admin-auth-checking {
+        visibility: hidden;
+    }
+</style>
 
 </head>
 
-<body>
-
+<body class="admin-auth-checking">
     <div class="admin-container">
 
         <!-- HEADER -->
 
         <div class="admin-header">
 
-            <h1>
-                Admin Dashboard
-            </h1>
+    <div>
+        <h1>
+            Admin Dashboard
+        </h1>
 
-            <p>
-                Manage offers, portfolio projects and website content.
-            </p>
+        <p>
+            Manage offers, portfolio projects and website content.
+        </p>
+    </div>
+
+</div>
+
+
+<!-- STICKY ADMIN ACCOUNT BAR -->
+
+<!-- STICKY ADMIN TOP BAR -->
+
+<div class="admin-sticky-wrapper">
+
+    <!-- ACCOUNT BAR -->
+
+    <div class="admin-account-bar">
+
+        <div class="admin-user-info">
+
+            <span>
+                Logged in as
+            </span>
+
+            <strong id="loggedInAdminEmail">
+                Loading...
+            </strong>
 
         </div>
+
+        <button
+            id="logoutBtn"
+            class="admin-btn">
+            Logout
+        </button>
+
+    </div>
+
+
+    <!-- SECTION NAVIGATION -->
+
+    <nav class="admin-section-nav" aria-label="Admin sections">
+
+        <a href="#leadsSection">
+            Leads
+        </a>
+
+        <a href="#offerManagement">
+            Offers
+        </a>
+
+        <a href="#projectManagement">
+            Add Projects
+        </a>
+
+        <a href="#viewProjects">
+            Existing Projects
+        </a>
+
+    </nav>
+
+</div>
         
         <div id="leadsSection">
 
-            <h2>Leads</h2>
+            <h2>Lead Analytics</h2>
             <div class="leads-toolbar">
 
     <input
@@ -255,7 +321,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 </section>
         <!-- OFFER MANAGEMENT -->
 
-        <div class="admin-card">
+        <div class="admin-card" id="offerManagement">
 
             <div class="admin-card-header">
 
@@ -767,7 +833,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 </div>
 <!-- EXISTING PROJECTS -->
 
-<div class="admin-card">
+<div class="admin-card" id="viewProjects">
 
     <div class="admin-card-header">
 

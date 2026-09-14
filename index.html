@@ -18,20 +18,38 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
-        <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.ico">
 
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.ico">
+        <link
+    rel="preload"
+    as="image"
+    href="assets/images/hero2.webp"
+    fetchpriority="high"
+    type="image/webp">
+<link
+    rel="preload"
+    as="image"
+    href="assets/logos/round-og.webp" 
+    fetchpriority="high"
+    type="image/webp">
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" /> -->
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <!-- AOS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" /> -->
 
     <meta property="og:title" content="Swastika Design & Constructions">
 <meta property="og:description" content="Premium Architecture, Interior Design & Construction Services in Varanasi">
 <meta property="og:url" content="https://swastikadnc.com">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://instagram.flko7-2.fna.fbcdn.net/v/t51.82787-19/670948820_18028833497807884_6025643383203281542_n.webp?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.flko7-2.fna.fbcdn.net&_nc_cat=104&_nc_oc=Q6cZ2gE-9byMQiqV2G_xEyFwuwTaB9yCaL8KwymYtOdofigZrOxGMXgSsp7lG8n9AE4nufY&_nc_ohc=VggNfE9GlpIQ7kNvwFPayRS&_nc_gid=yS46tNnBU_ZF0O3x_c5uUg&edm=APoiHPcBAAAA&ccb=7-5&oh=00_Af_jY8baUQOJW8l6gjh8i2usuHrA-LVTjPnqXPChMlqH0g&oe=6A2898B6&_nc_sid=22de04">
+<meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-PC0MVtz1xOjM2nSSoOU4ob8_FlOzQwYst5riCiEfSLHGISL6CFcZFr36&s=10">
 
 
 <!-- Twitter Card -->
@@ -44,7 +62,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 <meta name="twitter:description" content="Premium Architecture, Interior Design & Construction Services in Varanasi. Designing spaces that balance aesthetics, functionality, and timeless appeal.">
 
 <!-- Twitter Image -->
-<meta name="twitter:image" content="https://instagram.flko7-2.fna.fbcdn.net/v/t51.82787-19/670948820_18028833497807884_6025643383203281542_n.webp?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.flko7-2.fna.fbcdn.net&_nc_cat=104&_nc_oc=Q6cZ2gE-9byMQiqV2G_xEyFwuwTaB9yCaL8KwymYtOdofigZrOxGMXgSsp7lG8n9AE4nufY&_nc_ohc=VggNfE9GlpIQ7kNvwFPayRS&_nc_gid=yS46tNnBU_ZF0O3x_c5uUg&edm=APoiHPcBAAAA&ccb=7-5&oh=00_Af_jY8baUQOJW8l6gjh8i2usuHrA-LVTjPnqXPChMlqH0g&oe=6A2898B6&_nc_sid=22de04">
+<meta name="twitter:image" content="assets/logos/round-og.webp">
 
 <!-- Twitter URL -->
 <meta name="twitter:url" content="https://swastikadnc.com">
@@ -58,7 +76,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <link rel="stylesheet" href="css/animations.css" />
 </head>
 
-<body class="loading">
+<body>
 <div class="preloader">
 
     <div class="preloader-grid"></div>
@@ -66,7 +84,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <div class="preloader-inner">
 
         <img
-            src="assets/logos/logo-round.webp"
+            src="assets/logos/round-og.webp"
             alt="Swastika Design & Constructions"
             class="preloader-logo">
 
@@ -88,76 +106,105 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 <div id="site-content">
     <!-- Navbar -->
     <header class="navbar">
+    <div class="container nav-container">
 
-        <div class="container nav-container">
+        <div class="logo-wrapper">
 
-            <!-- Logo -->
-            <div class="logo-wrapper">
+    <!-- Round Logo -->
+    <img
+        src="assets/logos/logo-round.webp"
+        alt="Swastika Design & Constructions"
+        class="logo-round"
+    >
 
-                <img src="assets/logos/logo-round.webp" alt="logo" />
+    <!-- Wordmark -->
+    <img
+        src="assets/logos/swastika-wordmark.png"
+        alt="Swastika Design & Constructions"
+        class="logo-wordmark"
+    >
 
-                <div class="logo-text">
-                    <h2>Swastika Design & Constructions</h2>
-                    <span>Space. Structure. Silence.</span>
+</div>
+
+        <nav class="nav-links" id="navLinks">
+
+            <div class="mobile-menu-logo">
+                <img src="assets/logos/logo-round.webp"
+                     alt="Swastika Design & Constructions">
+
+                <div>
+                    <strong>SWASTIKA</strong>
+                    <span>Design & Constructions</span>
                 </div>
-
             </div>
 
-            <!-- Navigation -->
-            <nav class="nav-links" id="navLinks">
+            <a href="#home" class="active-nav">Home</a>
 
-                <a href="#home">Home</a>
-                <a href="#portfolio">Portfolio</a>
-                <a href="#services">Services</a>
-                <a href="#contact">Contact</a>
+            <a href="about.html">About</a>
 
-                <a href="admin-login.html" class="admin-btn">
-                    Admin Login
-                </a>
+            <a href="services.html">Services</a>
 
-            </nav>
+            <a href="#portfolio">Portfolio</a>
 
-            <!-- Mobile Hamburger -->
-            <div class="hamburger" id="hamburger">
+            <a href="blog.html">Blog</a>
 
-                <span></span>
-                <span></span>
-                <span></span>
+            
 
-            </div>
+            <a href="#contact">Contact</a>
 
+            <a href="socials.html">Follow Us</a>
+
+            <a href="admin-login.html"
+   class="admin-btn"
+   target="_blank"
+   rel="noopener">
+    <i class="fa-solid fa-lock"></i>
+</a>
+
+        </nav>
+
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
 
-    </header>
+    </div>
+</header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
 
         <!-- Swiper -->
-        <div class="swiper heroSwiper">
+        <!-- <div class="swiper heroSwiper">
 
             <div class="swiper-wrapper">
 
                 <div class="swiper-slide">
-                    <img src="assets/images/hero1.webp" alt="hero-image" />
-                </div>
+<img src="assets/images/hero1.webp" alt="Architecture and interior design project" fetchpriority="high" decoding="async" />                </div>
 
                 <div class="swiper-slide">
-                    <img src="assets/images/hero2.webp" alt="hero-image" />
-                </div>
+<img src="assets/images/hero2.webp" alt="Architecture and interior design project" loading="lazy" decoding="async" />                </div>
 
                 <div class="swiper-slide">
-                    <img src="assets/images/hero3.webp" alt="hero-image" />
-                </div>
+<img src="assets/images/hero3.webp" alt="Architecture and interior design project" loading="lazy" decoding="async" />                </div>
 
                 <div class="swiper-slide">
-                    <img src="assets/images/hero4.webp" alt="hero-image" />
+<img src="assets/images/hero4.webp" alt="Architecture and interior design project" loading="lazy" decoding="async" />
                 </div>
 
             </div>
 
-        </div>
+        </div> -->
+<!-- CSS HERO SLIDER -->
+<div class="hero-slider">
 
+    <div class="hero-slide hero-slide-1"></div>
+    <div class="hero-slide hero-slide-2"></div>
+    <div class="hero-slide hero-slide-3"></div>
+    <div class="hero-slide hero-slide-4"></div>
+
+</div>
         <!-- Overlay -->
         <div class="hero-overlay"></div>
 
@@ -327,9 +374,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
             <div class="offer-features">
 
-                <div>✓ Free Site Consultation</div>
-                <div>✓ Free Initial Planning</div>
-                <div>✓ Free 3D Design Discussion</div>
+                <div>✅ Free Site Consultation</div>
+                <div>✅ Free Initial Planning</div>
+                <div>✅ Free 3D Design Discussion</div>
 
             </div>
 
@@ -341,14 +388,30 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
             </div>
 
-            <a
-                href="#contact"
-                class="primary-btn"
-                id="offerButton">
+           <div class="ofr-buttons">
 
-                Claim Offer
+    <a
+        href="#contact"
+        class="primary-btn"
+        id="offerButton">
+        Claim Offer
+    </a>
 
-            </a>
+    <button
+        type="button"
+        class="secondary-btn"
+        id="shareOfferBtn"
+        aria-haspopup="true"
+        aria-expanded="false">
+        <!-- <i class="fa-solid fa-share-nodes"></i>&nbsp; -->
+        Share Offer
+    </button>
+
+</div>
+<!-- Share Popup Overlay -->
+
+
+
 
         </div>
 
@@ -366,9 +429,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
             <div class="about-featured-image">
 
-                <img src="assets/images/about.webp"
+                <img src="assets/images/new.webp"
                      alt="Swastika Design & Constructions">
-
+                     
             </div>
 
             <!-- About Content -->
@@ -405,20 +468,25 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     construction.
                 </p>
 
-                <div class="founder-box">
+                
+<div class="founder-row">
 
-                    <h4>Ankur Pratap Singh</h4>
+    <div class="founder-box">
+        <h4>Ankur Pratap Singh</h4>
+        <span>
+            Principal Designer · Swastika Design & Constructions
+        </span>
+    </div>
 
-                    <span>
-                        Principal Designer · Swastika Design &
-                        Constructions
-                    </span>
+    <a href="about.html" class="primary-btn">
+        Read Our Story
+    </a>
 
-                </div>
+</div>
 
-                <a href="#" class="primary-btn">
-                    Read Our Story
-                </a>
+
+
+               
 
             </div>
 
@@ -426,14 +494,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
         <!-- Gallery Grid -->
 
-        <div class="about-gallery">
+        <!-- <div class="about-gallery">
 
             <img src="assets/images/Reception-1.webp" alt="">
             <img src="assets/images/interior-tv-unit.webp" alt="">
             <img src="assets/images/interior-bedroom.webp" alt="">
             <img src="assets/images/interior-wardrobe.webp" alt="">
 
-        </div>
+        </div> -->
 
     </div>
 
@@ -443,6 +511,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <!-- =========================
      SERVICES SECTION
 ========================= -->
+
 
 <section class="services-section" id="services">
 
@@ -467,122 +536,268 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
         <div class="services-grid-layout">
 
-    <!-- LEFT SIDE -->
+            <!-- LEFT SIDE -->
+            <div class="services-list">
 
-    <div class="services-list">
+                <div class="services-sidebar-header">
 
-        <div class="services-sidebar-header">
-
-            <h3>OUR SERVICES</h3>
-
-            <p>
-                From concept sketches to final construction,
-                we provide end-to-end architectural solutions.
-            </p>
-
-        </div>
-
-        <div class="service-item active"
-            data-image="assets/images/Architectural Planning.webp">
-
-            <h4>Architectural Planning</h4>
-
-            <p>
-                Where every project begins. We translate your needs into precise,
-                buildable plans and layouts.
-            </p>
-
-        </div>
-
-        <!-- <div class="service-item"
-            data-image="assets/images/2d.webp">
-
-            <h4>2D Drafting</h4>
-
-            <p>
-                Construction-ready drawings detailed to the millimetre.
-            </p>
-
-        </div> -->
-
-        <div class="service-item"
-            data-image="assets/images/3D Visualisation .webp">
-
-            <h4>3D Visualization</h4>
-
-            <p>
-                Photoreal renders that allow clients to see their project
-                before execution.
-            </p>
-
-        </div>
-
-        <div class="service-item"
-            data-image="assets/images/Interior Design.webp">
-
-            <h4>Interior Design</h4>
-
-            <p>
-                Elegant interiors curated with intentional materials,
-                lighting and furniture.
-            </p>
-
-        </div>
-
-        <div class="service-item"
-            data-image="assets/images/Complete Construction.webp">
-
-            <h4>Complete Build & Construction</h4>
-
-            <p>
-                Complete project execution managed under one accountable team.
-            </p>
-
-        </div>
-
-        <div class="service-item"
-            data-image="assets/images/Site Supervision.webp">
-
-            <h4>Site Supervision</h4>
-
-            <p>
-                Continuous monitoring to ensure quality and precision.
-            </p>
-
-        </div>
-
-        <a href="#contact"
-           class="primary-btn services-btn">
-
-            Get Free Consultation
-
-        </a>
-
+    <div class="mobile-services-image">
+        <img
+            src="assets/images/SDNC_Team.webp"
+            alt="Swastika Design & Constructions Team">
     </div>
 
-    <!-- RIGHT SIDE -->
-
-    <div class="service-preview">
-
-        <img
-            id="servicePreviewBg"
-            class="preview-bg"
-            src="assets/images/SDNC_Team.webp"
-            alt="">
-
-        <img
-            id="servicePreview"
-            class="preview-main"
-            src="assets/images/SDNC_Team.webp"
-            alt="Service Preview">
-
+    <div class="services-sidebar-content">
+        <h3>OUR SERVICES</h3>
+        <p>
+            From concept sketches to final construction,
+            we provide end-to-end architectural solutions.
+        </p>
     </div>
 
 </div>
 
+                <div class="service-item"
+     data-image="assets/images/plan.webp">
+
+    <h4>Architectural Planning</h4>
+
+    <p>
+        Where every project begins. We translate your needs into precise,
+        buildable plans and layouts.
+    </p>
+
+    <img
+        class="mobile-service-image"
+        src="assets/images/plan.webp"
+        alt="Architectural Planning">
+</div>
+
+                <!--
+                <div class="service-item"
+                    data-image="assets/images/2d.webp">
+
+                    <h4>2D Drafting</h4>
+
+                    <p>
+                        Construction-ready drawings detailed to the millimetre.
+                    </p>
+
+                </div>
+                -->
+
+                <div class="service-item"
+     data-image="assets/images/3d.webp">
+
+    <h4>3D Visualization</h4>
+
+    <p>
+        Photoreal renders that allow clients to see their project
+        before execution.
+    </p>
+
+    <img
+        class="mobile-service-image"
+        src="assets/images/3d.webp"
+        alt="3D Visualization">
+</div>
+
+                <div class="service-item"
+     data-image="assets/images/interior.webp">
+
+    <h4>Interior Design</h4>
+
+    <p>
+        Elegant interiors curated with intentional materials,
+        lighting and furniture.
+    </p>
+
+    <img
+        class="mobile-service-image"
+        src="assets/images/interior.webp"
+        alt="Interior Design">
+</div>
+
+                <div class="service-item"
+     data-image="assets/images/constr.webp">
+
+    <h4>Complete Build & Construction</h4>
+
+    <p>
+        Complete project execution managed under one accountable team.
+    </p>
+
+    <img
+        class="mobile-service-image"
+        src="assets/images/constr.webp"
+        alt="Complete Build & Construction">
+</div>
+
+                <div class="service-item"
+     data-image="assets/images/site.webp">
+
+    <h4>Site Supervision</h4>
+
+    <p>
+        Continuous monitoring to ensure quality and precision.
+    </p>
+
+    <img
+        class="mobile-service-image"
+        src="assets/images/site.webp"
+        alt="Site Supervision">
+</div>
+
+                <a href="#contact"
+                   class="primary-btn services-btn">
+
+                    Get Free Consultation
+
+                </a>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="service-preview">
+
+                <img
+                    id="servicePreview"
+                    class="preview-main"
+                    src="assets/images/SDNC_Team.webp"
+                    alt="Service Preview">
+
+            </div>
+
+        </div>
+
     </div>
 
 </section>
+
+
+<!-- =========================================================
+     RENDER VS REALITY SECTION
+========================================================= -->
+
+<section class="render-reality-section" id="render-reality">
+
+    <div class="container">
+
+        <!-- Section Heading -->
+        <div class="section-heading center">
+
+            <span class="section-tag">
+                Render vs Reality
+            </span>
+
+            <h2>
+                From Vision to Reality
+            </h2>
+
+            <p class="render-reality-intro">
+                See how our architectural visions translate into real,
+                finished spaces.
+            </p>
+
+        </div>
+
+        <!-- Render vs Reality Grid -->
+        <div class="render-reality-grid">
+
+            <!-- CARD 1 -->
+            <div class="render-reality-card">
+                <img
+                    src="assets/images/RR/render_vs_reality_commercial_building_9x16.webp"
+                    alt="Render vs Reality Project 1"
+                    loading="lazy"
+                    decoding="async">
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="render-reality-card">
+                <img
+                    src="assets/images/RR/render_vs_reality_house_9x16.webp"
+                    alt="Render vs Reality Project 2"
+                    loading="lazy"
+                    decoding="async">
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="render-reality-card">
+                <img
+                    src="assets/images/RR/render_vs_reality_exterior_2_9x16.webp"
+                    alt="Render vs Reality Project 3"
+                    loading="lazy"
+                    decoding="async">
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="render-reality-card">
+                <img
+                    src="assets/images/RR/render_vs_reality_living_room_9x16.webp"
+                    alt="Render vs Reality Project 4"
+                    loading="lazy"
+                    decoding="async">
+            </div>
+
+            <!-- CARD 5 -->
+            <div class="render-reality-card">
+                <img
+                    src="assets/images/RR/render_vs_reality_dressing_area_9x16.webp"
+                    alt="Render vs Reality Project 5"
+                    loading="lazy"
+                    decoding="async">
+            </div>
+
+            <!-- CARD 6 -->
+            <div class="render-reality-card">
+                <img
+                    src="assets/images/RR/render_vs_reality_bedroom_tv_unit_9x16.webp"
+                    alt="Render vs Reality Project 6"
+                    loading="lazy"
+                    decoding="async">
+            </div>
+
+            <!-- CARD 7 -->
+            <div class="render-reality-card">
+                <img
+                    src="assets/images/RR/render_vs_reality_bedroom_2_9x16.webp"
+                    alt="Render vs Reality Project 7"
+                    loading="lazy"
+                    decoding="async">
+            </div>
+
+            <!-- CARD 8 — VIEW MORE -->
+            <a
+                href="render.html"
+                class="render-reality-card render-reality-more"
+                aria-label="View more Render vs Reality images">
+
+                <div class="render-reality-more-content">
+
+                    <span class="render-reality-more-icon">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                    <span class="render-reality-more-title">
+                        View More Images
+                    </span>
+
+                    <span class="render-reality-more-subtitle">
+                        Explore all Render vs Reality projects
+                    </span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
 
     <!-- Portfolio -->
     <section class="portfolio-section" id="portfolio">
@@ -607,7 +822,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     class="active"
     data-filter="all">
 
-    All Projects
+    Featured Projects
 
 </button>
 
@@ -660,7 +875,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     </section>
 
     <!-- Testimonials -->
-    <section
+    <!-- <section
     class="testimonials-section"
     id="testimonials">
 
@@ -771,221 +986,1097 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
     </div>
 
+</section> -->
+
+<!-- =========================================================
+     TESTIMONIALS / CLIENT REVIEWS
+========================================================= -->
+
+<section class="testimonials-section" id="testimonials">
+
+    <div class="container">
+
+        <!-- Section Heading -->
+        <div class="section-heading center">
+
+            <span class="section-tag">
+                Client Reviews
+            </span>
+
+            <h2>
+                Trusted. Proven. Recommended.
+            </h2>
+
+            <p class="reviews-intro">
+                Real experiences from clients who trusted us
+                with their architectural, interior and construction projects.
+            </p>
+
+        </div>
+
+<br>
+        <!-- Compact Rating Bar -->
+        <div class="reviews-rating-bar">
+
+            <div class="reviews-rating-left">
+
+                <div class="google-review-icon">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+                <div>
+                    <span class="reviews-label">
+                        GOOGLE REVIEWS
+                    </span>
+
+                    <div class="reviews-stars">
+                        ★★★★★
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="reviews-rating-score">
+
+                <strong>5.0</strong>
+
+                <span>
+                    Excellent Rating
+                </span>
+
+            </div>
+
+        </div>
+<br>
+
+        <!-- Review Cards -->
+        <div
+    class="reviews-carousel"
+    id="reviewsCarousel"
+    aria-label="Client reviews">
+
+    <div class="reviews-track" id="reviewsTrack">
+
+        <!-- REVIEW 1 -->
+
+         <article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    A
+                </div>
+
+                <div class="review-author">
+                    <h4>Ayush Singh</h4>
+                    <span>10 Reviews</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                Swastika Design works for quality, it is worth visiting them as they are providing you best in market. Don't just believe me visit them once and you ll gain the confidence why swastika nothing else.
+            </p>
+
+        </article>
+
+<article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    R
+                </div>
+
+                <div class="review-author">
+                    <h4>Rajib Mishra</h4>
+                    <span>1 Review</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                Had a great experience working with the team on our home design.Their attention to detail and budget management suggestions really stood out.<br>
+
+The team was approachable, professional, and easy to communicate with, making the whole process smooth and stress-free. Highly recommended for those looking for hassle free design and work!
+            </p>
+
+        </article>
+
+        
+
+
+        <!-- REVIEW 2 -->
+        <article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    P
+                </div>
+
+                <div class="review-author">
+                    <h4>Prince Rai Gautam</h4>
+                    <span>7 Reviews</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                Trying to build one of the most technically transparent construction pages from Varanasi.
+Documenting real site practices instead of fake luxury renders.Would love to connect with people interested in quality construction and architecture.
+            </p>
+
+        </article>
+
+
+        <!-- REVIEW 3 -->
+
+
+
+         <article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    S
+                </div>
+
+                <div class="review-author">
+                    <h4>Saurabh Singh</h4>
+                    <span>2 Reviews</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                Great work sir, your constraction Design is supub, after complete my house , it looks so beautiful in my area. Every person asked me who is your Engineer ? Really sir Swastik Design and Construction doing great work. It proper monitoring till complete the house.
+            </p>
+
+        </article>
+
+
+
+        <article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    L
+                </div>
+
+                <div class="review-author">
+                    <h4>Lokesh Rajput</h4>
+                    <span>18 Reviews</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                Attractive and satisfactory work ,With full compassion. The work is being done, keeping all intrest of the customer on top priority. Managing and using each and every inches of land for better use.
+Great work Swastik....!! 👌👌👍👍
+            </p>
+
+        </article>
+
+
+
+
+        <article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    S
+                </div>
+
+                <div class="review-author">
+                    <h4>Sai Ram</h4>
+                    <span>1 Review</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                One of the best architect and engineer in banaras region and that too at reasonable rate.
+            </p>
+
+        </article>
+
+
+        <!-- ADD AS MANY REVIEWS AS NEEDED -->
+<article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    A
+                </div>
+
+                <div class="review-author">
+                    <h4>Ayush Gupta</h4>
+                    <span>1 Review</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                Really very impressive services at very genuine cost......must visit for ur dream house plans.....🙏😊
+            </p>
+
+        </article>
+
+        
+       
+       
+
+<article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    K
+                </div>
+
+                <div class="review-author">
+                    <h4>Kajal Singh</h4>
+                    <span>1 Review</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                An innovative and highly skilled construction in Varanasi with reasonable price👍
+            </p>
+
+        </article>
+        <article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    D
+                </div>
+
+                <div class="review-author">
+                    <h4>DBV Singh</h4>
+                    <span>1 Review</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                Excellent Quality Service, Flexible. Nice Interactive Sessions. Time bound. Economical.
+            </p>
+
+        </article>
+        
+        <article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    A
+                </div>
+
+                <div class="review-author">
+                    <h4>Anand Singh</h4>
+                    <span>6 Reviews</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                Excellent work by SWASTIKA DESIGN.... 👌
+            </p>
+
+        </article>
+        <article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    N
+                </div>
+
+                <div class="review-author">
+                    <h4>Nirbhay Tiwari</h4>
+                    <span>1 Review</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                Best Quality and attractive
+design....Awesome
+            </p>
+
+        </article>
+        <article class="review-card">
+
+            <div class="review-card-top">
+
+                <div class="review-avatar">
+                    K
+                </div>
+
+                <div class="review-author">
+                    <h4>Kshitij Pandey</h4>
+                    <span>14 Reviews</span>
+                </div>
+
+                <div class="review-google">
+                    <i class="fa-brands fa-google"></i>
+                </div>
+
+            </div>
+
+            <div class="review-stars">
+                ★★★★★
+            </div>
+
+            <p class="review-text">
+                Great Designs and support nature of architect.
+            </p>
+
+        </article>
+
+    </div>
+
+</div>
+
+
+        <!-- Review Actions -->
+        <div class="review-buttons">
+
+            <a
+                href="https://maps.app.goo.gl/Q53nYEW3QXFTWgFJ8"
+                target="_blank"
+                rel="noopener"
+                class="primary-btn">
+
+                <i class="fa-brands fa-google"></i>&nbsp;
+                View Google Profile
+
+            </a>
+
+
+            <a
+                href="https://www.google.com/maps/place/Swastika+Design+%26+Constructions/@25.2707429,83.0131893,790m/data=!3m1!1e3!4m8!3m7!1s0x398e316faf0ace29:0xda290089b181b40d!8m2!3d25.2707429!4d83.0131893!9m1!1b1!16s%2Fg%2F11h88tpbj5?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener"
+                class="secondary-btn">
+
+                Leave A Review
+
+            </a>
+
+        </div>
+
+    </div>
+
 </section>
 
     <!-- Contact -->
-    <section class="contact-section" id="contact">
+    <!-- =========================================================
+     CONTACT SECTION
+========================================================= -->
 
-        <div class="container contact-container">
+<section class="contact-section" id="contact">
 
-            <!-- Left -->
-            <div class="contact-left">
+    <div class="container">
 
-                <span class="section-tag">Contact Us</span>
+        <!-- =================================================
+             TOP CONTACT AREA
+        ================================================== -->
+
+        <div class="contact-top-grid">
+
+
+            <!-- =============================================
+                 CONTACT DETAILS
+            ============================================== -->
+
+            <div class="contact-details-panel">
+
+                <span class="section-tag">
+                    Contact Us
+                </span>
 
                 <h2>
                     Let's create a space
                     that feels timeless.
                 </h2>
 
-                <p>
+                <p class="contact-intro">
                     Every meaningful space begins with a conversation.
                     Tell us about your vision.
                 </p>
 
-                <!-- Contact Info -->
+
+                <!-- Contact Information -->
+
                 <div class="contact-info">
 
-                    <div class="contact-item">
-
-                        <h4>WhatsApp</h4>
-                        <p>+91 70070 70068</p>
-
-                    </div>
 
                     <div class="contact-item">
 
-                        <h4>Email</h4>
-                        <p>info@swastikadnc.com</p>
+                        <div class="contact-item-icon">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+<a
+                    href="https://wa.me/917007070068"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        <div>
+                            <h4>WhatsApp</h4>
 
+                            <p>
+                                +91 70070 70068
+                            </p>
+                        </div>
+</a>
                     </div>
+
 
                     <div class="contact-item">
 
-                        <h4>Office</h4>
+                        <div class="contact-item-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+<a
+                    href="mailto:info@swastikadnc.com"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        <div>
+                            <h4>Email</h4>
 
-                        <p>
-                            Lane No. 7, Krishna Nagar Colony,
-                            Samne Ghat, Lanka, Varanasi
-                        </p>
+                            <p>
+                                info@swastikadnc.com
+                            </p>
+                        </div>
+</a>
+                    </div>
+
+
+                    <div class="contact-item">
+
+                        <div class="contact-item-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+
+                        <div>
+                            <h4>Office</h4>
+
+                            <p>
+                                Lane No. 7, Krishna Nagar Colony,
+                                Samne Ghat, Lanka, Varanasi
+                            </p>
+                        </div>
 
                     </div>
+
 
                 </div>
 
-                <!-- Form -->
-                <form class="contact-form" id="contactForm">
+            </div>
 
-    <input
-        id="leadName"
-        type="text"
-        placeholder="Full Name"
-        required>
 
-    <input
-        id="leadPhone"
-        type="tel"
-        placeholder="Phone Number"
-        required>
+            <!-- =============================================
+                 ENQUIRY FORM
+            ============================================== -->
 
-    <input
-        id="leadEmail"
-        type="email"
-        placeholder="Email Address"
-        required>
+            <div class="contact-form-wrapper">
 
-<input
-    id="leadCity"
-    type="text"
-    placeholder="City"
-    required>
+                <div class="contact-form-header">
 
-<select
-    id="leadService"
-    required>
+                    <span class="form-eyebrow">
+                        START A CONVERSATION
+                    </span>
 
-    <option value="">
-        Service Required
-    </option>
+                    <h2 class="contact-form-heading">
+                        Any Questions? Ask Us Right Away!
+                    </h2>
 
-    <option>
-        Architectural Planning
-    </option>
+                    <p class="contact-form-subtext">
+                        Tell us a little about your project and
+                        our team will get back to you.
+                    </p>
 
-    <option>
-        3D Visualization
-    </option>
+                </div>
 
-    <option>
-        Interior Design
-    </option>
 
-    <option>
-        Complete Build & Construction
-    </option>
+                <form
+                    class="contact-form"
+                    id="contactForm"
+                    action="https://formsubmit.co/60ca8a3d2d617ef9d28b22fee7fcc3ac"
+                    method="POST"
+                >
 
-    <option>
-        Site Supervision
-    </option>
+                    <!-- FormSubmit settings -->
 
-    <option>
-        Multiple Services
-    </option>
+                    <input
+                        type="hidden"
+                        name="_subject"
+                        value="New Project Enquiry - Swastika Design & Constructions"
+                    >
 
-</select>
+                    <input
+                        type="hidden"
+                        name="_template"
+                        value="table"
+                    >
 
-<textarea
-    id="leadMessage"
-    placeholder="Project Brief (Optional)"></textarea>
+                    <input
+                        type="hidden"
+                        name="_captcha"
+                        value="true"
+                    >
 
-    <div class="form-buttons">
 
-        <button
-            type="button"
-            id="whatsappBtn"
-            class="primary-btn">
+                    <!-- Honeypot -->
 
-            Ask on WhatsApp
+                    <input
+                        type="text"
+                        name="_honey"
+                        tabindex="-1"
+                        autocomplete="off"
+                        style="display:none"
+                    >
 
-        </button>
 
-        <button
-            type="submit"
-            class="secondary-btn">
+                    <!-- =====================================
+                         FORM ROW
+                    ====================================== -->
 
-            Email Us
+                    <div class="form-row">
 
-        </button>
+
+                        <!-- Full Name -->
+
+                        <div class="form-field">
+
+                            <input
+                                id="leadName"
+                                name="Full Name"
+                                type="text"
+                                placeholder="Full Name *"
+                                autocomplete="name"
+                                maxlength="60"
+                            >
+
+                            <small
+                                class="form-error"
+                                id="nameError">
+                            </small>
+
+                        </div>
+
+
+                        <!-- Phone -->
+
+                        <div class="form-field">
+
+                            <input
+                                id="leadPhone"
+                                name="Phone Number"
+                                type="tel"
+                                placeholder="Phone Number *"
+                                autocomplete="tel"
+                                inputmode="numeric"
+                                maxlength="10"
+                            >
+
+                            <small
+                                class="form-error"
+                                id="phoneError">
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- =====================================
+                         FORM ROW
+                    ====================================== -->
+
+                    <div class="form-row">
+
+
+                        <!-- Email -->
+
+                        <div class="form-field">
+
+                            <input
+                                id="leadEmail"
+                                name="Email Address"
+                                type="email"
+                                placeholder="Email Address (Optional)"
+                                autocomplete="email"
+                                maxlength="100"
+                            >
+
+                            <small
+                                class="form-error"
+                                id="emailError">
+                            </small>
+
+                        </div>
+
+
+                        <!-- City -->
+
+                        <div class="form-field">
+
+                            <input
+                                id="leadCity"
+                                name="City"
+                                type="text"
+                                placeholder="City *"
+                                autocomplete="address-level2"
+                                maxlength="60"
+                            >
+
+                            <small
+                                class="form-error"
+                                id="cityError">
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- =====================================
+                         SERVICE
+                    ====================================== -->
+
+                    <div class="form-field">
+
+                        <select
+                            id="leadService"
+                            name="Service Required"
+                        >
+
+                            <option value="">
+                                Service Required *
+                            </option>
+
+                            <option value="Architectural Planning">
+                                Architectural Planning
+                            </option>
+
+                            <option value="3D Visualization">
+                                3D Visualization
+                            </option>
+
+                            <option value="Interior Design">
+                                Interior Design
+                            </option>
+
+                            <option value="Complete Build & Construction">
+                                Complete Build & Construction
+                            </option>
+
+                            <option value="Site Supervision">
+                                Site Supervision
+                            </option>
+
+                            <option value="Multiple Services">
+                                Multiple Services
+                            </option>
+
+                        </select>
+
+                        <small
+                            class="form-error"
+                            id="serviceError">
+                        </small>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         PROJECT BRIEF
+                    ====================================== -->
+
+                    <div class="form-field full-width">
+
+                        <textarea
+                            id="leadMessage"
+                            name="Project Brief"
+                            placeholder="Project Brief (Optional)"
+                            maxlength="1000"
+                            rows="4"
+                        ></textarea>
+
+                        <small
+                            class="form-error"
+                            id="messageError">
+                        </small>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         FORM STATUS
+                    ====================================== -->
+
+                    <div
+                        id="formStatus"
+                        class="form-status"
+                        role="alert"
+                        aria-live="polite"
+                    ></div>
+
+
+                    <!-- =====================================
+                         BUTTONS
+                    ====================================== -->
+
+                    <div class="form-buttons">
+
+                        <button
+                            type="button"
+                            id="whatsappBtn"
+                            class="primary-btn"
+                        >
+                            <i class="fa-brands fa-whatsapp"></i>&nbsp;
+                            Ask on WhatsApp
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="emailBtn"
+                            class="secondary-btn"
+                        >
+                            <i class="fa-solid fa-envelope"></i>&nbsp;
+                            Email Us
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             LARGE MAP
+        ================================================== -->
+
+        <div class="contact-map">
+
+            <div class="map-header">
+
+                <div>
+                    <span class="map-eyebrow">
+                        FIND US
+                    </span>
+
+                    <h3>
+                        Visit Our Office
+                    </h3>
+                </div>
+
+                <div class="map-location">
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span>
+                        Samne Ghat, Lanka, Varanasi
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div id="mapFrame" class="map-frame">
+
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3452.9642703231657!2d83.0131893!3d25.2707429!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e316faf0ace29%3A0xda290089b181b40d!2sSwastika%20Design%20%26%20Constructions!5e1!3m2!1sen!2sin!4v1780648198815!5m2!1sen!2sin"
+                    width="100%"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+
+            </div>
+
+        </div>
 
     </div>
 
-</form>
-
-            </div>
-
-            <!-- Right -->
-            <div class="contact-right">
-
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3452.9642703231657!2d83.0131893!3d25.2707429!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398e316faf0ace29%3A0xda290089b181b40d!2sSwastika%20Design%20%26%20Constructions!5e1!3m2!1sen!2sin!4v1780648198815!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-            </div>
-
-        </div>
-
-    </section>
+</section>
 
     <!-- Footer -->
     <footer class="footer">
-
-        <div class="container footer-container">
-
-            <!-- Brand -->
-            <div class="footer-brand">
-
-                <img src="assets/logos/round-og.webp" alt="logo" />
-
-                <h3>Swastika Design & Constructions</h3>
-
+    <div class="container">
+<div class="footer-cta">
+            <div>
+                <span class="footer-cta-label">LET'S BUILD SOMETHING TIMELESS</span>
+                <h3>Have a project in mind?</h3>
                 <p>
-                    Space. Structure. Silence.
+                    Tell us about your vision and let's turn it into a space
+                    that feels distinctly yours.
+                </p>
+            </div>
+
+            <a href="#contact" class="footer-cta-btn">
+                Start a Conversation
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+<br><br>
+        <div class="footer-main">
+
+            <!-- Brand / About -->
+            <div class="footer-brand">
+                <div class="footer-brand-top">
+                    <img
+                        src="assets/logos/logo-round.webp"
+                        alt="Swastika Design & Constructions"
+                    >
+
+                    <div>
+                        <h3>Swastika Design & Constructions</h3>
+                        <span>Architecture • Interiors • Construction</span>
+                    </div>
+                </div><br>
+
+                <p class="footer-description">
+                    Thoughtfully designed spaces, intelligently planned structures,
+                    and quality construction — from concept to completion.
                 </p>
 
+                <div class="footer-tagline">
+                    <span>Designed for Life,</span>
+                    <span>Built to Last.</span>
+                </div>
             </div>
+
 
             <!-- Quick Links -->
-            <div class="footer-links">
-
+            <div class="footer-column">
                 <h4>Quick Links</h4>
 
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
-                <a href="#portfolio">Portfolio</a>
-                <a href="#contact">Contact</a>
-
+                <a href="#home" >Home</a>
+                <a href="about.html">About Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="#testimonials">Reviews</a>
+                <a href="socials.html">Follow Us</a>
             </div>
 
-            <!-- Social Links -->
-            <div class="footer-links">
 
-                <h4>Socials</h4>
+            <!-- Services -->
+            <div class="footer-column">
+                <h4>Our Services</h4>
 
-                <a href="https://www.instagram.com/swastika.dnc/" target="_blank">
-                    Instagram
+                <a href="services.html#planning">Architectural Planning</a>
+                <a href="services.html#visualization">3D Visualization</a>
+                <a href="services.html#interiors">Interior Design</a>
+                <a href="services.html#construction">Complete Construction</a>
+                <a href="services.html#supervision">Site Supervision</a>
+            </div>
+
+
+            <!-- Contact -->
+            <div class="footer-column footer-contact">
+                <h4>Get In Touch</h4>
+
+                <a
+                    href="https://wa.me/917007070068"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="footer-contact-item"
+                >
+                    <span class="footer-contact-icon">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </span>
+                    <span>
+                        <small>WhatsApp</small>
+                        +91 70070 70068
+                    </span>
                 </a>
 
-                <a href="https://www.facebook.com/SwastikDnC" target="_blank">
-                    Facebook
+                <a
+                    href="mailto:info@swastikadnc.com"
+                    class="footer-contact-item"
+                >
+                    <span class="footer-contact-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <span>
+                        <small>Email</small>
+                        info@swastikadnc.com
+                    </span>
                 </a>
 
-                <a href="https://www.youtube.com/@swastikDnC" target="_blank">
-                    YouTube
+                <a
+                    href="#mapFrame"
+                    class="footer-contact-item"
+                >
+                    <span class="footer-contact-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </span>
+                    <span>
+                        <small>Office</small>
+                        Samne Ghat, Lanka, Varanasi
+                    </span>
                 </a>
 
+                <!-- Socials -->
+                <div class="footer-socials">
+                    <a
+                        href="https://www.instagram.com/swastika.dnc/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                    >
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a
+                        href="https://www.facebook.com/SwastikDnC"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Facebook"
+                    >
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a
+                        href="https://www.youtube.com/@swastikDnC"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="YouTube"
+                    >
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
             </div>
 
         </div>
+
+
+        <!-- Footer CTA -->
+        
 
         <!-- Bottom -->
         <div class="footer-bottom">
 
             <p>
+                
+            </p>
+
+            <div class="footer-bottom-links">
+                <a href="#home">Back to Top <i class="fa-solid fa-arrow-up"></i></a>
+            </div>
+
+            <p class="footer-credit">
                 © 2026 Swastika Design & Constructions.
                 All Rights Reserved.
             </p>
 
         </div>
 
-    </footer>
+    </div>
+</footer>
 
     <!-- WhatsApp Floating Button -->
     
@@ -999,27 +2090,25 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 </a>
 
 
-    <!-- Chatbot -->
+  <a href="tel:7007070068"
+   class="call-float"
+   aria-label="Call 7007070068">
+    <i class="fa-solid fa-phone"></i>
+</a>
 
-<div class="chatbot-button"
-     aria-label="AI Chatbot">
-
-    <i class="fa-solid fa-robot"></i>
-
-</div>
 
 
 <!-- Swiper -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
 
 <!-- GSAP -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 
 <!-- ScrollTrigger -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script> -->
 
 <!-- AOS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
 
 <!-- Main JS -->
 <script src="js/main.js"></script>
@@ -1121,9 +2210,355 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 </script>
 </div>
+<!-- =========================================================
+     ADMIN LOGIN MODAL
+========================================================= -->
+
+<div
+    id="adminLoginModal"
+    class="admin-login-modal"
+    aria-hidden="true">
+
+    <div
+        class="admin-login-overlay"
+        id="adminLoginOverlay">
+    </div>
+
+
+    <div
+        class="admin-login-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="adminLoginTitle">
+
+
+        <!-- CLOSE BUTTON -->
+
+        <button
+            type="button"
+            class="admin-login-close"
+            id="closeAdminLogin"
+            aria-label="Close login">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+
+        <!-- BRAND -->
+
+        <div class="admin-login-brand">
+
+            <div class="admin-login-logo">
+
+                <img
+                    src="assets/logos/logo-round.webp"
+                    alt="Swastika Design & Constructions">
+
+            </div>
+
+
+            <span class="admin-login-eyebrow">
+                ADMINISTRATION
+            </span>
+
+
+            <h2 id="adminLoginTitle">
+                Welcome Back
+            </h2>
+
+
+            <p>
+                Sign in to access the
+                SDNC
+                dashboard.
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <form
+            id="adminLoginForm"
+            class="admin-login-form"
+            novalidate>
+
+
+            <!-- EMAIL -->
+
+            <div class="admin-input-group">
+
+                <label
+                    for="adminLoginEmail">
+
+                    Email Address
+
+                </label>
+
+
+                <div class="admin-input-wrapper">
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        id="adminLoginEmail"
+                        placeholder="admin@example.com"
+                        autocomplete="username"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="admin-input-group">
+
+                <div class="admin-password-label">
+
+                    <label
+                        for="adminLoginPassword">
+
+                        Password
+
+                    </label>
+
+                    <button
+                        type="button"
+                        id="forgotAdminPassword"
+                        class="forgot-password">
+
+                        Forgot password?
+
+                    </button>
+
+                </div>
+
+
+                <div class="admin-input-wrapper">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="adminLoginPassword"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+
+
+                    <button
+                        type="button"
+                        id="toggleAdminPassword"
+                        class="password-toggle"
+                        aria-label="Show password">
+
+                        <i class="fa-solid fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- REMEMBER ME -->
+
+            <div class="admin-login-options">
+
+                <label class="remember-admin">
+
+                    <input
+                        type="checkbox"
+                        id="rememberAdmin"
+                        checked>
+
+                    <span>
+                        Remember me
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div
+                id="adminLoginError"
+                class="admin-login-error"
+                role="alert">
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                id="adminLoginSubmit"
+                class="admin-login-submit">
+
+                <span id="adminLoginBtnText">
+                    Sign In
+                </span>
+
+                <span
+                    id="adminLoginSpinner"
+                    class="admin-login-spinner"
+                    style="display:none;">
+
+                    <i class="fa-solid fa-circle-notch fa-spin"></i>
+
+                </span>
+
+            </button>
+
+
+            <!-- SECURITY MESSAGE -->
+
+            <div class="admin-login-security">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Secure authentication powered by Firebase
+                </span>
+
+            </div>
+
+
+            <!-- BACK -->
+
+            <button
+                type="button"
+                id="backFromAdminLogin"
+                class="admin-login-back">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to website
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+<!-- SHARE OFFER MODAL -->
+<div class="share-offer-overlay" id="shareOfferOverlay"></div>
+
+<div class="share-offer-popup" id="shareOfferPopup" aria-hidden="true">
+
+    <div class="share-offer-header">
+        <div>
+            <span>SHARE THIS OFFER</span>
+            
+        </div>
+
+        <button
+            type="button"
+            id="closeShareOffer"
+            class="share-close-btn"
+            aria-label="Close share options">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <p class="share-offer-text">
+        Spread this exclusive offer with your friends and family.
+    </p>
+
+    <div class="share-options">
+
+        <a
+            href="#"
+            id="shareWhatsApp"
+            class="share-option whatsapp"
+            target="_blank"
+            rel="noopener noreferrer">
+            <span class="share-option-icon">
+                <i class="fa-brands fa-whatsapp"></i>
+            </span>
+            <span>WhatsApp</span>
+        </a>
+
+        <a
+            href="#"
+            id="shareFacebook"
+            class="share-option facebook"
+            target="_blank"
+            rel="noopener noreferrer">
+            <span class="share-option-icon">
+                <i class="fa-brands fa-facebook-f"></i>
+            </span>
+            <span>Facebook</span>
+        </a>
+
+        <a
+            href="#"
+            id="shareX"
+            class="share-option x-social"
+            target="_blank"
+            rel="noopener noreferrer">
+            <span class="share-option-icon">
+                <i class="fa-brands fa-x-twitter"></i>
+            </span>
+            <span>X</span>
+        </a>
+
+        <a
+            href="#"
+            id="shareTelegram"
+            class="share-option telegram"
+            target="_blank"
+            rel="noopener noreferrer">
+            <span class="share-option-icon">
+                <i class="fa-brands fa-telegram"></i>
+            </span>
+            <span>Telegram</span>
+        </a>
+
+        <button
+            type="button"
+            id="copyOfferLink"
+            class="share-option copy-link">
+            <span class="share-option-icon">
+                <i class="fa-solid fa-link"></i>
+            </span>
+            <span id="copyOfferText">Copy Link</span>
+        </button>
+
+        <button
+            type="button"
+            id="nativeShareOffer"
+            class="share-option native-share">
+            <span class="share-option-icon">
+                <i class="fa-solid fa-share-nodes"></i>
+            </span>
+            <span>More</span>
+        </button>
+
+    </div>
+
+</div>
 <script
     type="module"
     src="/js/contact.js">
+</script>
+<!-- Admin Login Modal -->
+<script
+    src="js/admin-login-modal.js">
+</script>
+
+<!-- Firebase Authentication -->
+<script
+    type="module"
+    src="js/auth.js">
 </script>
 </body>
 

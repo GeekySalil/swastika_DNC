@@ -143,14 +143,14 @@ p {
 } */
 
 .secondary-btn {
-    border: 1px solid var(--border);
+    border: 3.5px solid #A67C32;
     background: transparent;
-    color: var(--text);
+    color:  #A67C32;
 }
 
 .secondary-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color:antiquewhite;
+    color:antiquewhite;
 }
 
 /* =========================
@@ -368,7 +368,7 @@ p {
 
 .stat-card h2 {
     color: var(--accent);
-    font-size: 42px;
+    font-size: 38px;
     margin-bottom: 10px;
 }
 
@@ -519,7 +519,7 @@ p {
 
     background-repeat: no-repeat;
 
-    background-attachment: fixed;
+    background-attachment: scroll;
 
 }
 
@@ -592,7 +592,7 @@ p {
 }
 
 .portfolio-overlay h3 {
-    font-size: 32px;
+    font-size: 22px;
 }
 
 /* =========================
@@ -644,7 +644,7 @@ p {
 
     background-repeat: no-repeat;
 
-    background-attachment: fixed;
+    background-attachment: scroll;
 
 }
 .contact-section .container {
@@ -722,7 +722,8 @@ p {
 ========================= */
 
 .footer {
-    padding-top: 100px;
+    padding-top: 80px;
+    padding-left:1rem;
     background: #0b0b0b;
 }
 
@@ -734,12 +735,12 @@ p {
 }
 
 .footer-brand img {
-    width: 80px;
-    margin-bottom: 20px;
+    /* width: 80px; */
+    margin-bottom: 0px;
 }
 
 .footer-brand h3 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .footer-links h4 {
@@ -780,7 +781,7 @@ p {
     font-weight: 600;
 }
 
-.chatbot-button {
+.call-float {
     position: fixed;
     left: 25px;
     bottom: 25px;
@@ -809,3 +810,24 @@ p {
     background: var(--accent);
     border-radius: 10px;
 }
+
+.hero-mini-title {
+    display: inline-block;
+    width: fit-content;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 7px 16px;
+    border-radius: 999px;
+    /* backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px); */
+}
+
+.founder-line {
+    display: inline-flex;
+    width: fit-content;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 7px 16px;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+

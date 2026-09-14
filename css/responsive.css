@@ -62,81 +62,57 @@
 ========================================= */
 
 @media (max-width: 992px) {
-
-    /* Navbar */
-
     .nav-links {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: min(320px, 85vw);
+        height: 100vh;
+        background: #ffffff;
+        flex-direction: column;
+        justify-content: center;
+        gap: 23px;
+        transform: translateX(100%);
+        z-index: 1000;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.08);
+        border-left: 1px solid rgba(17, 17, 17, 0.06);
+    }
 
-    position: fixed;
+    .nav-links.active {
+        transform: translateX(0);
+    }
 
-    top: 0;
-    right: 0;
+    .nav-links a {
+        color: #222;
+    }
 
-    width: min(320px, 85vw);
-    height: 100vh;
-
-    background: #111;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    gap: 35px;
-
-    transform: translateX(100%);
-    /* transition: transform 0.5s ease; */
-
-    z-index: 1000;
-
-}
-
-.nav-links.active {
-
-    transform: translateX(0);
-
-}
+    .nav-links a:hover {
+        color: var(--accent);
+    }
 
     .hamburger {
-
         display: flex !important;
-
         flex-direction: column;
-
         justify-content: center;
-
         align-items: center;
-
         gap: 6px;
-
         cursor: pointer;
-
         width: 32px;
-
         height: 32px;
-
         position: relative;
-
         z-index: 1001;
-
         flex-shrink: 0;
-
     }
 
     .hamburger span {
-
         display: block;
-
         width: 28px;
-
         height: 2px;
-
-        background: white;
-
+        background: #222;
         border-radius: 2px;
-
         transition: 0.3s ease;
-
     }
+
 
     /* Hero */
 
@@ -247,7 +223,7 @@
     /* Global */
     
     section {
-        padding: 80px 0;
+        padding: 40px 0;
     }
 
     .container {
@@ -272,31 +248,31 @@
 }
 
 .nav-container {
-    height: 80px;
+    height: 73px;
 }
 
-.logo-wrapper img {
+/* .logo-wrapper img {
     width: 42px;
-}
+} */
 
-.logo-text {
+/* .logo-text {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .logo-text h2 {
-    font-size: 10px;
+    font-size: 15px;
     line-height: 1.11;
     margin: 0;
     max-width: 130px;
 }
 
 .logo-text span {
-    font-size: 8px;
+    font-size: 9px;
     line-height: 1.11;
     margin-top: 3px;
-}
+} */
 
     /* Hero */
 
@@ -552,14 +528,14 @@
     }
 
     .footer-brand img {
-        margin: auto;
+        /* margin: auto; */
         margin-bottom: 20px;
     }
 
     /* Floating Buttons */
 
     .whatsapp-float,
-    .chatbot-button {
+    .call-float {
         padding: 14px 18px;
         font-size: 14px;
     }
@@ -599,14 +575,14 @@
 
 }
 
-    *,
+    /* *,
     *::before,
     *::after {
 
         animation: none !important;
         transition: none !important;
 
-    }
+    } */
 
 }
 
@@ -672,7 +648,7 @@
         bottom: 15px;
     }
 
-    .chatbot-button {
+    .call-float {
         left: 15px;
         bottom: 15px;
     }
@@ -723,14 +699,14 @@
         display: none;
 
     }
-    *,
+    /* *,
     *::before,
     *::after {
 
         animation: none !important;
         transition: none !important;
 
-    }
+    } */
 
 }
 
@@ -755,28 +731,86 @@
    STATS RESPONSIVE
 ========================= */
 
+/* =========================
+   STATS RESPONSIVE
+========================= */
+
 @media (max-width: 992px) {
 
     .stats-grid {
-
         grid-template-columns: repeat(2, 1fr);
-
+        gap: 16px;
     }
 
 }
 
+
+/* =========================
+   COMPACT MOBILE STATS
+========================= */
+
 @media (max-width: 576px) {
 
-    .stats-grid {
-
-        grid-template-columns: 1fr;
-
+    .stats-section {
+        padding: 45px 0;
+        margin-top: -30px;
     }
 
+    .stats-section .section-heading {
+        margin-bottom: 25px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 18px 10px;
+        min-height: 105px;
+        border-radius: 12px;
+    }
+
+    .stat-card h2 {
+        font-size: 28px;
+        line-height: 1;
+        margin-bottom: 8px;
+    }
+
+    .stat-card p {
+        font-size: 12px;
+        line-height: 1.3;
+        margin: 0;
+    }
+
+}
+
+
+/* =========================
+   EXTRA SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
     .stats-section {
+        padding: 40px 0;
+    }
 
-        margin-top: -30px;
+    .stats-grid {
+        gap: 10px;
+    }
 
+    .stat-card {
+        padding: 16px 8px;
+        min-height: 95px;
+    }
+
+    .stat-card h2 {
+        font-size: 25px;
+    }
+
+    .stat-card p {
+        font-size: 11px;
     }
 
 }
@@ -869,6 +903,11 @@
 
 @media (max-width: 768px) {
 
+    .ofr-buttons{
+        display:flex;
+        flex-direction:column;
+        gap:6px;
+    }
     .services-grid {
 
         grid-template-columns: 1fr;
@@ -917,4 +956,73 @@
 
     }
 
+}
+
+@media (max-width: 992px) {
+    .nav-links {
+        background: #ffffff;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.08);
+        border-left: 1px solid rgba(17, 17, 17, 0.06);
+    }
+
+    .nav-links a {
+        color: #222;
+    }
+
+    .nav-links a:hover {
+        color: var(--accent);
+    }
+
+    .hamburger span {
+        background: #222;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 0 5px;
+    }
+
+    .nav-container {
+        height: 73px;
+    }
+
+    .logo-wrapper {
+        gap: 8px;
+        max-width: calc(100% - 50px);
+    }
+
+    .logo-round {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logo-wordmark {
+        width: 155px;
+        max-width: 100%;
+        height: auto;
+    }
+
+}
+@media (max-width: 400px) {
+
+    .logo-wrapper {
+        gap: 6px;
+    }
+
+    .logo-round {
+        width: 35px;
+        height: 35px;
+    }
+
+    .logo-wordmark {
+        width: 125px;
+    }
+
+}
+
+.navbar{
+    background: #000000;
+    height:4.5em;
 }

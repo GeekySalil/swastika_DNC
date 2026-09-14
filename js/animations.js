@@ -521,57 +521,130 @@ if (heroButtons.length > 0) {
 //     }
 
 // });
-window.addEventListener("load", () => {
+/* =========================================================
+   FAST + SMOOTH PRELOADER
+========================================================= */
 
-    const tl = gsap.timeline();
+// (function () {
 
-    tl.fromTo(
-        ".preloader-logo",
-        {
-            opacity: 0,
-            scale: 0.8
-        },
-        {
-            opacity: 1,
-            scale: 1,
-            duration: 1.2,
-            ease: "power3.out"
-        }
-    )
+//     const preloader = document.querySelector(".preloader");
+//     const logo = document.querySelector(".preloader-logo");
+//     const tagline = document.querySelectorAll(
+//         ".preloader-tagline span"
+//     );
 
-    .to(
-        ".preloader-tagline span",
-        {
-            opacity: 1,
-            y: 0,
-            stagger: 0.25,
-            duration: 0.4
-        }
-    )
+//     if (!preloader) return;
 
-    .to(
-        ".preloader",
-        {
-            opacity: 0,
-            duration: 0.8,
-            delay: 0.4
-        }
-    )
+//     const startPreloader = () => {
 
-    .set(
-    ".preloader",
-    {
-        display: "none"
-    }
-)
+//         /* Make sure preloader starts visible */
+//         preloader.style.display = "flex";
+//         preloader.style.opacity = "1";
 
-.call(() => {
+//         /*
+//          * LOGO
+//          */
+//         if (logo) {
 
-    document.body.classList.remove(
-        "loading"
-    );
+//             gsap.fromTo(
+//                 logo,
+//                 {
+//                     opacity: 0,
+//                     scale: 0.88
+//                 },
+//                 {
+//                     opacity: 1,
+//                     scale: 1,
+//                     duration: 0.55,
+//                     ease: "power2.out"
+//                 }
+//             );
 
-});
+//         }
+
+//         /*
+//          * TAGLINE
+//          */
+//         if (tagline.length) {
+
+//             gsap.fromTo(
+//                 tagline,
+//                 {
+//                     opacity: 0,
+//                     y: 6
+//                 },
+//                 {
+//                     opacity: 1,
+//                     y: 0,
+//                     duration: 0.25,
+//                     stagger: 0.08,
+//                     delay: 0.15,
+//                     ease: "power2.out"
+//                 }
+//             );
+
+//         }
+
+//         /*
+//          * REMOVE PRELOADER QUICKLY
+//          *
+//          * IMPORTANT:
+//          * This timer is independent of page loading.
+//          */
+//         setTimeout(() => {
+
+//             gsap.to(
+//                 preloader,
+//                 {
+//                     opacity: 0,
+//                     duration: 0.35,
+//                     ease: "power2.out",
+
+//                     onComplete: () => {
+
+//                         preloader.style.display = "none";
+
+//                         document.body.classList.remove(
+//                             "loading"
+//                         );
+
+//                         document.body.classList.add(
+//                             "preloader-finished"
+//                         );
+
+//                     }
+//                 }
+//             );
+
+//         }, 800);
+
+//     };
 
 
-});
+//     /*
+//      * DO NOT USE window.load
+//      */
+
+//     if (document.readyState === "loading") {
+
+//         document.addEventListener(
+//             "DOMContentLoaded",
+//             () => {
+
+//                 requestAnimationFrame(() => {
+//                     startPreloader();
+//                 });
+
+//             },
+//             { once: true }
+//         );
+
+//     } else {
+
+//         requestAnimationFrame(() => {
+//             startPreloader();
+//         });
+
+//     }
+
+// })();

@@ -1,0 +1,941 @@
+/* =========================================================
+   ABOUT US PAGE STYLES — SWASTIKA DESIGN & CONSTRUCTIONS
+========================================================= */
+
+/* Active nav item indicator */
+.nav-links a.active-nav {
+    color: var(--accent) !important;
+}
+
+.nav-links a.active-nav::after {
+    width: 100% !important;
+}
+.navbar{
+    padding-left: 1rem;
+    padding-right:1rem;
+}
+
+/* =========================================================
+   1. ABOUT HERO (DARK LUXURY CANVASS)
+========================================================= */
+.about-hero {
+    position: relative;
+    padding: 160px 0 80px;
+    background:
+        radial-gradient(circle at 80% 20%, rgba(166, 124, 50, 0.12), transparent 45%),
+        #0b0b0b;
+    color: #f5f5f5;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    height:100vh;
+}
+
+.about-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+}
+/* --- Interactive Background Canvas --- */
+.hero-particles-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Sits above the grid lines, below your text */
+    pointer-events: none; /* Allows buttons and links to be clicked effortlessly */
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    line-height: 1.15;
+    color: #ffffff;
+    margin: 10px 0 20px;
+    font-weight: 600;
+}
+
+.about-hero-lead {
+    font-size: clamp(15px, 1.3vw, 17px);
+    line-height: 1.7;
+    color: #b3b3b3;
+    max-width: 680px;
+    margin: 0 auto 40px;
+}
+
+/* Trust Bar */
+.about-trust-bar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 14px 28px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(166, 124, 50, 0.3);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+}
+
+.trust-badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 13px;
+    color: #e5e5e5;
+}
+
+.trust-badge-item strong {
+    color: var(--accent);
+    font-size: 14px;
+}
+
+.trust-stars {
+    color: #FFD700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.trust-badge-divider {
+    width: 1px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* =========================================================
+   2. OUR STORY SECTION (WARM ALABASTER LIGHT THEME)
+========================================================= */
+.story-section {
+    padding: 100px 0;
+    background: #f8f7f4;
+    color: #171717;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.story-content h2 {
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    line-height: 1.18;
+    color: #171717;
+    margin: 10px 0 24px;
+}
+
+.story-highlight {
+    font-size: 17px !important;
+    font-weight: 500;
+    line-height: 1.65;
+    color: #263D31 !important;
+    border-left: 3px solid var(--accent);
+    padding-left: 18px;
+    margin-bottom: 22px !important;
+}
+
+.story-content p {
+    color: #555555;
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+}
+
+.story-visual {
+    position: relative;
+}
+
+.story-img-main {
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 16px 45px rgba(23, 23, 23, 0.1);
+    border: 1px solid rgba(23, 23, 23, 0.08);
+}
+
+.story-img-main img {
+    height: 480px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.story-img-main:hover img {
+    transform: scale(1.03);
+}
+
+.story-floating-card {
+    position: absolute;
+    bottom: -25px;
+    left: -25px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgba(166, 124, 50, 0.35);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.09);
+}
+
+.story-floating-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #FEF3C7;
+    color: #A67C32;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.story-floating-card h4 {
+    margin: 0 0 2px;
+    font-size: 15px;
+    color: #171717;
+}
+
+.story-floating-card span {
+    font-size: 12px;
+    color: #666666;
+}
+
+/* =========================================================
+   3. 3 PILLARS / NON-NEGOTIABLES
+========================================================= */
+.pillars-section {
+    padding: 90px 0;
+    background: #ffffff;
+    border-top: 1px solid rgba(23, 23, 23, 0.06);
+    border-bottom: 1px solid rgba(23, 23, 23, 0.06);
+}
+
+.section-subtext {
+    max-width: 620px;
+    margin: 12px auto 0;
+    color: #666666;
+    font-size: 14.5px;
+    text-align: center;
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 50px;
+}
+
+.pillar-card {
+    position: relative;
+    padding: 40px 30px 35px;
+    background: #f2dd9f95;
+    border: 1px solid rgba(23, 23, 23, 0.08);
+    border-radius: 20px;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.pillar-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(166, 124, 50, 0.45);
+    box-shadow: 0 18px 40px rgba(23, 23, 23, 0.08);
+    background: #ffffff;
+}
+
+.pillar-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 18px;
+}
+
+.pillar-card h3 {
+    font-size: 22px;
+    color: #171717;
+    margin-bottom: 14px;
+}
+
+.pillar-card p {
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* =========================================================
+   4. THE TEAM & LEADERSHIP
+========================================================= */
+.team-section {
+    padding: 100px 0;
+    background: #f8f7f4;
+}
+.section-heading h2{
+    color:#171717;
+}
+
+/* Principal Spotlight */
+.principal-spotlight {
+    max-width: 1100px;
+    margin: 40px auto 50px;
+}
+
+.principal-card {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    background:  #FEF6D8;
+    border-radius: 24px;
+    border: 1px solid rgba(166, 124, 50, 0.3);
+    box-shadow: 0 16px 50px rgba(23, 23, 23, 0.08);
+    overflow: hidden;
+    align-items: center;
+}
+
+.principal-card {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    background: #FEF6D8;
+    border-radius: 24px;
+    border: 1px solid rgba(166, 124, 50, 0.3);
+    box-shadow: 0 16px 50px rgba(23, 23, 23, 0.08);
+    overflow: hidden;
+    align-items: center;
+}
+
+.principal-image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    height: auto;
+    overflow: hidden;
+}
+
+.principal-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+
+.principal-badge {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    background: rgba(15, 15, 15, 0.82);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(166, 124, 50, 0.45);
+    padding: 7px 14px;
+    border-radius: 30px;
+}
+
+.principal-badge span {
+    color: var(--accent-light);
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.principal-info {
+    padding: 45px 40px;
+}
+
+.member-role {
+    font-size: 12px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.principal-info h3 {
+    font-size: 32px;
+    color: #171717;
+    margin-bottom: 18px;
+}
+
+.member-bio {
+    color: #555555;
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+/* Expertise Tags */
+.principal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 30px;
+}
+
+.principal-tags span {
+    background: #fef3c7;
+    color: #263D31;
+    border: 1px solid rgba(166, 124, 50, 0.2);
+    border-radius: 8px;
+    padding: 6px 13px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Connect with Ankur CTA */
+.principal-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding-top: 15px;
+    border-top: 1px solid rgba(23, 23, 23, 0.08);
+}
+
+.whatsapp-lead-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 26px;
+    background: #25D366;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.whatsapp-lead-btn i {
+    font-size: 18px;
+}
+
+.whatsapp-lead-btn:hover {
+    background: #1eb956;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.35);
+}
+
+.cta-micro-text {
+    font-size: 12px;
+    color: #777777;
+}
+
+/* Secondary Team Grid */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.team-card {
+    background: #ffffff;
+    border: 1px solid rgba(23, 23, 23, 0.08);
+    border-radius: 18px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(23, 23, 23, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(166, 124, 50, 0.4);
+}
+.team-card > img {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 4 / 5;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 14px;
+    margin: 0 auto 22px;
+    border: 1px solid rgba(23, 23, 23, 0.08);
+    background: #f5f4ef;
+}
+.team-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.team-avatar-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #FEF3C7;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.team-card-header h4 {
+    margin: 0 0 3px;
+    font-size: 19px;
+    color: #171717;
+}
+
+.team-designation {
+    font-size: 12.5px;
+    color: var(--accent);
+    font-weight: 600;
+    display: block;
+}
+
+.team-card-text {
+    color: #555555;
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 20px;
+}
+
+.team-meta-tag {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #263D31;
+    background: #f5f4ef;
+    padding: 6px 12px;
+    border-radius: 6px;
+    width: fit-content;
+}
+
+/* =========================================================
+   5. CITIES WE SERVE
+========================================================= */
+.locations-section {
+    padding: 100px 0;
+    background: #ffffff;
+    border-top: 1px solid rgba(23, 23, 23, 0.06);
+}
+
+.cities-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-top: 50px;
+}
+
+.city-card {
+    background: #f8f7f4;
+    border: 1px solid rgba(23, 23, 23, 0.08);
+    border-radius: 16px;
+    padding: 26px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.city-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(166, 124, 50, 0.4);
+    box-shadow: 0 12px 30px rgba(23, 23, 23, 0.07);
+}
+
+.city-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.city-pin {
+    color: var(--accent);
+    font-size: 16px;
+}
+
+.city-card h3 {
+    font-size: 20px;
+    color: #171717;
+    margin-bottom: 10px;
+}
+
+.city-card p {
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: #666666;
+    margin-bottom: 18px;
+}
+
+.city-distance {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* HQ Card Specific */
+.city-card.hq-card {
+    background: #FEFDF9;
+    border-color: rgba(166, 124, 50, 0.5);
+    box-shadow: 0 10px 30px rgba(166, 124, 50, 0.08);
+}
+
+.hq-badge {
+    background: var(--accent);
+    color: #111111;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+}
+
+.city-card.hq-card .city-top i {
+    color: var(--accent);
+    font-size: 18px;
+}
+
+/* =========================================================
+   6. BOTTOM CTA BANNER
+========================================================= */
+.about-bottom-cta {
+    padding: 80px 0;
+    background: url('../assets/images/blog/hero.png') no-repeat center;
+    background-size: cover;
+}
+
+
+
+.about-cta-box {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(166, 124, 50, 0.1), transparent 65%),
+        #ffffff;
+    border: 1px solid rgba(166, 124, 50, 0.35);
+    border-radius: 24px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.06);
+}
+
+.cta-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.about-cta-box h2 {
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    color: #171717;
+    margin-bottom: 12px;
+}
+
+.about-cta-box p {
+    color: #666666;
+    font-size: 14.5px;
+    max-width: 540px;
+    margin: 0 auto 30px;
+}
+
+.about-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* =========================================================
+   RESPONSIVE QUERIES
+========================================================= */
+@media (max-width: 1200px) {
+    .cities-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .story-floating-card {
+        bottom: 15px;
+        left: 15px;
+    }
+
+    .principal-card {
+        grid-template-columns: 1fr;
+    }
+
+    .principal-image-wrap {
+        min-height: 320px;
+        max-height: 380px;
+    }
+
+    .pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .cities-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero {
+        padding: 130px 0 60px;
+    }
+
+    .about-trust-bar {
+        border-radius: 20px;
+        gap: 14px;
+        padding: 16px;
+    }
+
+    .trust-badge-divider {
+        display: none;
+    }
+
+    .story-section,
+    .pillars-section,
+    .team-section,
+    .locations-section {
+        padding: 60px 0;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .principal-info {
+        padding: 30px 20px;
+    }
+
+    .principal-info h3 {
+        font-size: 26px;
+    }
+
+    .whatsapp-lead-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .about-cta-box {
+        padding: 40px 20px;
+    }
+
+    .about-cta-buttons {
+        flex-direction: column;
+    }
+
+    .about-cta-buttons a {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .cities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .story-img-main img {
+        height: 320px;
+    }
+}
+
+/* =========================================
+   MOBILE HORIZONTAL SPACING
+========================================= */
+
+@media (max-width: 768px) {
+
+    .about-hero-content,
+    .story-grid,
+    .pillars-grid,
+    .principal-spotlight,
+    .team-grid,
+    .cities-grid,
+    .about-cta-box {
+        width: calc(100% - 30px);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.logo-round {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.logo-wordmark {
+    width: 190px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+/* =========================================
+   NAVBAR LOGO
+========================================= */
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.logo-round {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.logo-wordmark {
+    width: 190px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 992px) {
+
+    .logo-wrapper {
+        gap: 10px;
+        max-width: calc(100% - 60px);
+    }
+
+    .logo-round {
+        width: 46px;
+        height: 46px;
+    }
+
+    .logo-wordmark {
+        width: 175px;
+        height: auto;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 0 5px;
+    }
+
+    .nav-container {
+        height: 73px;
+    }
+
+    .logo-wrapper {
+        gap: 8px;
+        max-width: calc(100% - 55px);
+    }
+
+    .logo-round {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logo-wordmark {
+        width: 155px;
+        height: auto;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 480px) {
+
+    .logo-wrapper {
+        gap: 7px;
+        max-width: calc(100% - 50px);
+    }
+
+    .logo-round {
+        width: 36px;
+        height: 36px;
+    }
+
+    .logo-wordmark {
+        width: 135px;
+    }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+    .logo-wrapper {
+        gap: 6px;
+    }
+
+    .logo-round {
+        width: 32px;
+        height: 32px;
+    }
+
+    .logo-wordmark {
+        width: 120px;
+    }
+
+}
+
+.navbar{
+    padding-left:1.2em;
+    padding-right:0.5em;
+}
+

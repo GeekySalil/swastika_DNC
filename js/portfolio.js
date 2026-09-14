@@ -123,18 +123,16 @@ function renderProjects(
 
                     <div class="portfolio-overlay">
 
-                        <span>
-
-                            ${project.status}
-
-                        </span>
-
+                       
+<p>
+        ${project.description || ""}
+    </p>
                         <h3>
 
                             ${project.title}
 
                         </h3>
-
+ 
                         <p>
 
                             ${project.location}

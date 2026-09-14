@@ -1,40 +1,371 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Admin Login</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | Swastika Design & Constructions</title>
+
+
+    <!-- =====================================================
+         FONTAWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon.ico">
+
+
+    <!-- =====================================================
+         GOOGLE FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600&family=Playfair+Display:wght@600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         MAIN WEBSITE CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
 </head>
 
+
 <body>
 
-    <div>
 
-        <h1>Admin Login</h1>
+    <!-- =====================================================
+         ADMIN LOGIN PAGE
+    ====================================================== -->
 
-        <input
-            type="email"
-            id="email"
-            placeholder="Email">
+    <main class="admin-login-page">
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Password">
+        <!-- Background Overlay -->
 
-        <button id="loginBtn">
+        <div class="admin-login-page-overlay"></div>
 
-            Login
 
-        </button>
+        <!-- =================================================
+             LOGIN CARD
+        ================================================== -->
 
-    </div>
+        <section
+            class="admin-login-card"
+            aria-label="Administrator Login"
+        >
+
+
+            <!-- =================================================
+                 CLOSE BUTTON
+            ================================================== -->
+
+            <button
+                type="button"
+                class="admin-login-close"
+                id="closeAdminLogin"
+                aria-label="Back to website"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+
+            <!-- =================================================
+                 BRAND
+            ================================================== -->
+
+            <div class="admin-login-brand">
+
+
+                <!-- Logo -->
+
+                <div class="admin-login-logo">
+
+                    <img
+                        src="assets/logos/logo-round.webp"
+                        alt="Swastika Design & Constructions"
+                    >
+
+                </div>
+
+
+                <!-- Eyebrow -->
+
+                <span class="admin-login-eyebrow">
+                    ADMINISTRATION
+                </span>
+
+
+                <!-- Heading -->
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+
+                <!-- Description -->
+
+                <p>
+                    Sign in to access the SDNC dashboard.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 LOGIN FORM
+            ================================================== -->
+
+            <form
+                class="admin-login-form"
+                id="adminLoginForm"
+            >
+
+
+                <!-- =================================================
+                     EMAIL
+                ================================================== -->
+
+                <div class="admin-input-group">
+
+                    <label for="adminLoginEmail">
+                        Email Address
+                    </label>
+
+
+                    <div class="admin-input-wrapper">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+
+                        <input
+                            type="email"
+                            id="adminLoginEmail"
+                            name="email"
+                            placeholder="admin@example.com"
+                            autocomplete="email"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PASSWORD
+                ================================================== -->
+
+                <div class="admin-input-group">
+
+
+                    <div class="admin-password-label">
+
+
+                        <label for="adminLoginPassword">
+                            Password
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="forgot-password"
+                            id="forgotAdminPassword"
+                        >
+                            Forgot password?
+                        </button>
+
+                    </div>
+
+
+                    <div class="admin-input-wrapper">
+
+                        <i class="fa-solid fa-lock"></i>
+
+
+                        <input
+                            type="password"
+                            id="adminLoginPassword"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                        >
+
+
+                        <!-- Password Visibility -->
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="toggleAdminPassword"
+                            aria-label="Show password"
+                        >
+
+                            <i class="fa-solid fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     REMEMBER ME
+                ================================================== -->
+
+                <div class="admin-login-options">
+
+                    <label class="remember-admin">
+
+                        <input
+                            type="checkbox"
+                            id="rememberAdmin"
+                            checked
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- =================================================
+                     ERROR MESSAGE
+                ================================================== -->
+
+                <div
+                    class="admin-login-error"
+                    id="adminLoginError"
+                    role="alert"
+                ></div>
+
+
+                <!-- =================================================
+                     LOGIN BUTTON
+                ================================================== -->
+
+                <button
+                    type="submit"
+                    class="admin-login-submit"
+                    id="adminLoginSubmit"
+                >
+
+                    <span id="adminLoginBtnText">
+                        Sign In
+                    </span>
+
+
+                    <i
+                        class="fa-solid fa-spinner fa-spin"
+                        id="adminLoginSpinner"
+                        style="display: none;"
+                    ></i>
+
+                </button>
+
+            </form>
+
+
+            <!-- =================================================
+                 SECURITY MESSAGE
+            ================================================== -->
+
+            <div class="admin-login-security">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Secure authentication powered by Firebase
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 BACK TO WEBSITE
+            ================================================== -->
+
+            <button
+                type="button"
+                class="admin-login-back"
+                id="backFromAdminLogin"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to website
+
+            </button>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FIREBASE AUTHENTICATION
+    ====================================================== -->
 
     <script
         type="module"
-        src="js/auth.js">
+        src="js/auth.js"
+    ></script>
+
+
+    <!-- =====================================================
+         BACK TO WEBSITE
+    ====================================================== -->
+
+    <script>
+
+        document
+            .getElementById("closeAdminLogin")
+            ?.addEventListener("click", () => {
+
+                window.location.href = "index.html";
+
+            });
+
+
+        document
+            .getElementById("backFromAdminLogin")
+            ?.addEventListener("click", () => {
+
+                window.location.href = "index.html";
+
+            });
+
     </script>
+
 
 </body>
 

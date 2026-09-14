@@ -1,0 +1,681 @@
+/* =========================================================
+   SERVICES PAGE STYLES — SWASTIKA DESIGN & CONSTRUCTIONS
+========================================================= */
+
+/* Active nav indicator */
+.nav-links a.active-nav {
+    color: var(--accent) !important;
+}
+
+.nav-links a.active-nav::after {
+    width: 100% !important;
+}
+
+/* .navbar {
+    background: #0b0b0b !important;
+} */
+
+/* =========================================================
+   1. HERO BANNER (Dark Canvas)
+========================================================= */
+.services-hero {
+    position: relative;
+    padding: 160px 0 90px;
+    background:
+        radial-gradient(circle at 80% 20%, rgba(166, 124, 50, 0.12), transparent 45%),
+        #0b0b0b;
+    color: #f5f5f5;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+}
+
+.services-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+}
+
+.services-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.services-hero h1 {
+    font-size: clamp(2.3rem, 5vw, 4.2rem);
+    line-height: 1.15;
+    color: #ffffff;
+    margin: 12px 0 20px;
+    font-weight: 600;
+}
+
+.services-hero-lead {
+    font-size: clamp(15px, 1.3vw, 17.5px);
+    line-height: 1.75;
+    color: #b8b8b8;
+    max-width: 720px;
+    margin: 0 auto 35px;
+}
+
+/* Quick Navigation Anchor Badges */
+.services-quick-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.quick-nav-pill {
+    display: inline-block;
+    padding: 9px 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(166, 124, 50, 0.35);
+    border-radius: 40px;
+    color: var(--accent-light);
+    font-size: 12.5px;
+    font-weight: 500;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.quick-nav-pill:hover {
+    background: var(--accent);
+    color: #111111;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   2. DETAILED SERVICES (Alternating Zigzag Layout)
+========================================================= */
+.services-detail-section {
+    padding: 110px 0 70px;
+    background: #f8f7f4;
+    color: #171717;
+}
+
+.service-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 75px;
+    align-items: center;
+    margin-bottom: 120px;
+    padding-bottom: 20px;
+}
+
+.service-row:last-child {
+    margin-bottom: 40px;
+}
+
+/* Reversal for alternating pattern */
+.service-row.reverse .service-image-col {
+    order: 2;
+}
+
+.service-row.reverse .service-content-col {
+    order: 1;
+}
+
+/* =========================================================
+   IMAGE COLUMN & FRAME
+========================================================= */
+.service-image-col {
+    width: 100%;
+}
+
+.service-image-frame {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(23, 23, 23, 0.09);
+    box-shadow: 0 16px 45px rgba(23, 23, 23, 0.09);
+    transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+}
+
+.service-image-frame:hover {
+    transform: translateY(-6px);
+    border-color: rgba(166, 124, 50, 0.45);
+    box-shadow: 0 22px 55px rgba(23, 23, 23, 0.14);
+}
+
+.service-image-frame img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.service-image-frame:hover img {
+    transform: scale(1.01);
+}
+
+.service-index-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(15, 15, 15, 0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(166, 124, 50, 0.5);
+    padding: 6px 14px;
+    border-radius: 30px;
+}
+.section-heading h2{
+    color:#0b0b0b
+}
+
+.service-index-badge span {
+    color: var(--accent-light);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+/* =========================================================
+   CONTENT COLUMN
+========================================================= */
+.service-content-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.service-badge {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.service-content-col h2 {
+    font-size: clamp(2rem, 3.4vw, 2.9rem);
+    line-height: 1.18;
+    color: #171717;
+    margin: 0 0 18px;
+    font-weight: 600;
+}
+
+.service-lead {
+    font-size: 16px !important;
+    font-weight: 500;
+    line-height: 1.68;
+    color: #263D31 !important;
+    border-left: 3px solid var(--accent);
+    padding-left: 16px;
+    margin-bottom: 18px !important;
+}
+
+.service-description {
+    color: #555555;
+    font-size: 14.5px;
+    line-height: 1.75;
+    margin-bottom: 24px;
+}
+
+/* Deliverables checklist */
+.service-deliverables {
+    background: #ffffff;
+    border: 1px solid rgba(23, 23, 23, 0.08);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+}
+
+.service-deliverables h4 {
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #171717;
+    margin-bottom: 14px;
+    font-weight: 700;
+}
+
+.service-deliverables ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.service-deliverables li {
+    font-size: 13.5px;
+    color: #555555;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    line-height: 1.5;
+}
+
+.service-deliverables li i {
+    color: var(--accent);
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.service-action-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* =========================================================
+   3. PROCESS / METHODOLOGY
+========================================================= */
+.process-section {
+    padding: 100px 0;
+    background: #ffffff;
+    border-top: 1px solid rgba(23, 23, 23, 0.06);
+    border-bottom: 1px solid rgba(23, 23, 23, 0.06);
+}
+
+.process-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-top: 50px;
+}
+
+.process-card {
+    background: #f8f7f4;
+    border: 1px solid rgba(23, 23, 23, 0.08);
+    border-radius: 18px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.process-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(166, 124, 50, 0.45);
+    box-shadow: 0 14px 35px rgba(23, 23, 23, 0.08);
+    background: #ffffff;
+}
+
+.process-step {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 14px;
+}
+
+.process-card h3 {
+    font-size: 17px;
+    color: #171717;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.process-card p {
+    color: #666666;
+    font-size: 12.8px;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN (Tablets & Mobile Devices)
+========================================================= */
+@media (max-width: 1200px) {
+    .service-row {
+        gap: 45px;
+        margin-bottom: 90px;
+    }
+
+    .process-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .services-hero {
+        min-height: auto;
+        padding: 140px 0 70px;
+    }
+
+    /* Stack alternating rows to a consistent image-first vertical layout */
+    .service-row {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        margin-bottom: 80px;
+    }
+
+    .service-row.reverse .service-image-col,
+    .service-row .service-image-col {
+        order: 1 !important;
+    }
+
+    .service-row.reverse .service-content-col,
+    .service-row .service-content-col {
+        order: 2 !important;
+    }
+
+    .service-image-frame img {
+        height: 380px;
+    }
+
+    .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-hero {
+        padding: 130px 0 50px;
+    }
+
+    .services-quick-nav {
+        display: none; /* Keeps mobile viewport uncluttered */
+    }
+
+    .services-detail-section,
+    .process-section {
+        padding: 60px 0;
+    }
+
+    .service-row {
+        margin-bottom: 65px;
+    }
+
+    .service-content-col h2 {
+        font-size: 1.8rem;
+    }
+
+    .service-lead {
+        font-size: 14.5px !important;
+    }
+
+    .service-description {
+        font-size: 13.5px;
+    }
+
+    .service-image-frame img {
+        height: 280px;
+    }
+
+    .service-action-row a {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .process-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-image-frame img {
+        height: 240px;
+    }
+
+    .service-deliverables {
+        padding: 18px 16px;
+    }
+
+    .service-deliverables li {
+        font-size: 12.5px;
+    }
+}
+/* =========================================================
+   1. HERO BANNER (100vh DARK LUXURY CANVAS)
+========================================================= */
+.services-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 720px;
+    padding-top: 75px; /* Exact clearance for fixed navbar */
+    background:
+        radial-gradient(circle at 80% 20%, rgba(166, 124, 50, 0.14), transparent 50%),
+        #0b0b0b;
+    color: #f5f5f5;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Background blueprint drafting grid lines */
+.services-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+}
+
+/* Canvas overlay for interactive elements */
+.hero-particles-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.services-hero-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.services-hero-content {
+    max-width: 920px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.services-hero h1 {
+    font-size: clamp(2.5rem, 5.2vw, 4.4rem);
+    line-height: 1.15;
+    color: #ffffff;
+    margin: 14px 0 20px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.services-hero-lead {
+    font-size: clamp(14.5px, 1.35vw, 17px);
+    line-height: 1.75;
+    color: #b8b8b8;
+    max-width: 750px;
+    margin: 0 auto 30px;
+}
+
+/* Hero CTA Buttons */
+.services-hero-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+/* Quick Navigation Anchor Badges */
+.services-quick-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.quick-nav-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(166, 124, 50, 0.35);
+    border-radius: 40px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.quick-nav-pill span {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.quick-nav-pill:hover {
+    background: var(--accent);
+    color: #111111;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.quick-nav-pill:hover span {
+    color: #111111;
+}
+
+/* Trust Bar */
+.services-trust-bar {
+    margin: 0 auto;
+}
+
+/* Scroll down indicator */
+.hero-scroll-down {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--accent);
+    font-size: 14px;
+    z-index: 2;
+    animation: bounceDown 2.2s infinite ease-in-out;
+    opacity: 0.8;
+    text-decoration: none;
+    padding: 8px;
+}
+
+.hero-scroll-down:hover {
+    opacity: 1;
+}
+
+@keyframes bounceDown {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, 0);
+    }
+    40% {
+        transform: translate(-50%, -7px);
+    }
+    60% {
+        transform: translate(-50%, -4px);
+    }
+}
+
+/* Responsive adjustment for Mobile/Tablet */
+@media (max-width: 992px) {
+    .services-hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 130px 0 80px;
+    }
+
+    .services-quick-nav {
+        gap: 8px;
+    }
+
+    .hero-scroll-down {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-hero {
+        padding: 115px 0 60px;
+    }
+
+    .services-hero-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .services-hero-actions a {
+        width: 100%;
+    }
+
+    .services-quick-nav {
+        display: none; /* Keeps mobile viewport uncluttered */
+    }
+}
+/* Trust Bar */
+.about-trust-bar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 14px 28px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(166, 124, 50, 0.3);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+}
+
+.trust-badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 13px;
+    color: #e5e5e5;
+}
+
+.trust-badge-item strong {
+    color: var(--accent);
+    font-size: 14px;
+}
+
+.trust-stars {
+    color: #FFD700;
+    font-size: 13px;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.trust-badge-divider {
+    width: 1px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.12);
+}
