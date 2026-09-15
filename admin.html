@@ -408,428 +408,289 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         </div>
 
         <!-- PORTFOLIO MANAGEMENT -->
-
-        <!-- PORTFOLIO MANAGEMENT -->
-
 <div class="admin-card" id="projectManagement">
-
-    <div class="admin-card-header">
-
-        <h2>
-            Portfolio Management
-        </h2>
-
-    </div>
-
-    <div class="admin-grid">
-
-        <div class="admin-field full-width">
-
-            <label>
-                Project Title
-            </label>
-
-            <input
-                type="text"
-                id="projectTitle">
-
-        </div>
-
-        <div class="admin-field full-width">
-
-            <label>
-                Project Description
-            </label>
-
-            <textarea
-                id="projectDescription">
-            </textarea>
-
-        </div>
-
-        <div class="admin-field">
-
-            <label>
-                Location
-            </label>
-
-            <input
-                type="text"
-                id="projectLocation">
-
-        </div>
-
-        <div class="admin-field">
-
-            <label>
-                Area (sqft)
-            </label>
-
-            <input
-                type="number"
-                id="projectArea">
-
-        </div>
-
-        <div class="admin-field">
-
-            <label>
-                Year
-            </label>
-
-            <input
-                type="number"
-                id="projectYear">
-
-        </div>
-
-        <div class="admin-field">
-
-            <label>
-                Status
-            </label>
-
-            <select id="projectStatus">
-
-                <option>
-                    Completed
-                </option>
-
-                <option>
-                    Ongoing
-                </option>
-
-            </select>
-
-        </div>
-
-    </div>
-
-    <!-- IMAGES -->
-
-    <div class="image-upload-section">
-
-        <h3>
-            Project Visuals
-        </h3>
-        <div
-    id="existingImages"
-    class="existing-images">
-
+<div class="admin-card-header"><h2>Portfolio Management</h2></div>
+<div class="admin-grid">
+<div class="admin-field full-width"><label>Project Title</label><input type="text" id="projectTitle"></div>
+<div class="admin-field full-width"><label>Project Description</label><textarea id="projectDescription"></textarea></div>
+<div class="admin-field"><label>Category</label>
+<select id="projectCategory"><option value="">Select Category</option><option value="Design + Build">Design + Build</option><option value="Interiors">Interiors</option><option value="Elevation">Elevation</option><option value="Individual">Individual</option></select></div>
+<div class="admin-field"><label>Subcategory</label>
+<select id="projectSubcategory"><option value="">Select Subcategory</option><option value="Residential">Residential</option><option value="Commercial">Commercial</option></select></div>
+<div class="admin-field"><label>Work Type</label>
+<select id="projectWorkType"><option value="">Select Work Type</option><option value="Interior Design & Execution">Interior Design &amp; Execution</option><option value="Construction">Construction</option><option value="Interior Design">Interior Design</option><option value="Design Only">Design Only</option></select></div>
+<div class="admin-field"><label>Location</label><input type="text" id="projectLocation"></div>
+<div class="admin-field"><label>Area</label><input
+    type="text"
+    id="projectArea"
+    placeholder="e.g. 2BHK, Villa, 2500 sq.ft"></div>
+<div class="admin-field"><label>Year</label><input type="number" id="projectYear"></div>
+<div class="admin-field"><label>Status</label>
+<select id="projectStatus"><option value="">Select Status</option><option value="Concept">Concept</option><option value="Ongoing">Ongoing</option><option value="Completed">Completed</option></select></div>
+<div class="admin-field featured-field"><label>Featured</label><div class="featured-radio-group"><label><input type="radio" name="projectFeatured" value="true"> True</label><label><input type="radio" name="projectFeatured" value="false" checked> False</label></div><small class="field-help">Maximum 6 featured projects.</small></div>
 </div>
-        <div class="image-grid">
-
-            <!-- View 1 -->
-
-            <div class="image-upload-card">
-
-                <label>
-                    View 1
-                </label>
-
-                <input
-                    type="file"
-                    id="view1"
-                    accept="image/*">
-
-                <select id="category1">
-
-    <option value="">
-        Select Category
-    </option>
-
-    <option value="Elevation">
-        Elevation
-    </option>
-
-    <option value="Interiors">
-        Interiors
-    </option>
-
-    <option value="Ceiling Design">
-        Ceiling Design
-    </option>
-
-    <option value="Construction">
-        Construction
-    </option>
-
-    <option value="3D Renders">
-        3D Renders
-    </option>
-
+<div class="image-upload-section"><h3>Project Visuals</h3><div id="existingImages" class="existing-images"></div><div class="image-grid"><div class="image-upload-card">
+<label>View 1</label>
+<input type="file" id="view1" accept="image/*">
+<select id="category1"><option value="">Select Category</option>
+<option value="Design + Build">Design + Build</option>
+<option value="Interiors">Interiors</option>
+<option value="Elevation">Elevation</option></select>
+<select id="subcategory1"><option value="">Select Subcategory</option>
+<option value="3D Render">3D Render</option>
+<option value="Site Photos">Site Photos</option>
+<option value="All Rooms">All Rooms</option>
+<option value="Bedroom TV Unit">Bedroom TV Unit</option>
+<option value="Bedroom">Bedroom</option>
+<option value="Ceiling">Ceiling</option>
+<option value="Corridor">Corridor</option>
+<option value="Lounge">Lounge</option>
+<option value="Reception">Reception</option>
+<option value="DP Shop">DP Shop</option>
+<option value="Drawing">Drawing</option>
+<option value="Wardrobe">Wardrobe</option>
+<option value="Kitchen">Kitchen</option>
+<option value="Living">Living</option>
+<option value="Living-Dining">Living-Dining</option>
+<option value="Living-Pooja">Living-Pooja</option>
+<option value="Living-TV Unit">Living-TV Unit</option>
+<option value="Living-Vanity">Living-Vanity</option>
+<option value="Living Room">Living Room</option>
+<option value="Main Door">Main Door</option>
+<option value="Office">Office</option>
+<option value="Office Ceiling">Office Ceiling</option>
+<option value="Office Chair">Office Chair</option>
+<option value="Office Toilet">Office Toilet</option>
+<option value="Porch Ceiling">Porch Ceiling</option>
+<option value="Temple">Temple</option>
+<option value="Bathroom">Bathroom</option>
+<option value="TV Unit">TV Unit</option>
+<option value="Lift Lobby">Lift Lobby</option>
+<option value="PG Room">PG Room</option>
+<option value="Double Height Living">Double Height Living</option>
+<option value="Living Ceiling">Living Ceiling</option>
+<option value="Reception Pooja">Reception Pooja</option>
+<option value="Staircase">Staircase</option>
 </select>
-            </div>
-
-            <!-- View 2 -->
-
-            <div class="image-upload-card">
-
-                <label>
-                    View 2
-                </label>
-
-                <input
-                    type="file"
-                    id="view2"
-                    accept="image/*">
-
-                <select id="category2">
-
-    <option value="">
-        Select Category
-    </option>
-
-    <option value="Elevation">
-        Elevation
-    </option>
-
-    <option value="Interiors">
-        Interiors
-    </option>
-
-    <option value="Ceiling Design">
-        Ceiling Design
-    </option>
-
-    <option value="Construction">
-        Construction
-    </option>
-
-    <option value="3D Renders">
-        3D Renders
-    </option>
-
+</div><div class="image-upload-card">
+<label>View 2</label>
+<input type="file" id="view2" accept="image/*">
+<select id="category2"><option value="">Select Category</option>
+<option value="Design + Build">Design + Build</option>
+<option value="Interiors">Interiors</option>
+<option value="Elevation">Elevation</option></select>
+<select id="subcategory2"><option value="">Select Subcategory</option>
+<option value="3D Render">3D Render</option>
+<option value="Site Photos">Site Photos</option>
+<option value="All Rooms">All Rooms</option>
+<option value="Bedroom TV Unit">Bedroom TV Unit</option>
+<option value="Bedroom">Bedroom</option>
+<option value="Ceiling">Ceiling</option>
+<option value="Corridor">Corridor</option>
+<option value="Lounge">Lounge</option>
+<option value="Reception">Reception</option>
+<option value="DP Shop">DP Shop</option>
+<option value="Drawing">Drawing</option>
+<option value="Wardrobe">Wardrobe</option>
+<option value="Kitchen">Kitchen</option>
+<option value="Living">Living</option>
+<option value="Living-Dining">Living-Dining</option>
+<option value="Living-Pooja">Living-Pooja</option>
+<option value="Living-TV Unit">Living-TV Unit</option>
+<option value="Living-Vanity">Living-Vanity</option>
+<option value="Living Room">Living Room</option>
+<option value="Main Door">Main Door</option>
+<option value="Office">Office</option>
+<option value="Office Ceiling">Office Ceiling</option>
+<option value="Office Chair">Office Chair</option>
+<option value="Office Toilet">Office Toilet</option>
+<option value="Porch Ceiling">Porch Ceiling</option>
+<option value="Temple">Temple</option>
+<option value="Bathroom">Bathroom</option>
+<option value="TV Unit">TV Unit</option>
+<option value="Lift Lobby">Lift Lobby</option>
+<option value="PG Room">PG Room</option>
+<option value="Double Height Living">Double Height Living</option>
+<option value="Living Ceiling">Living Ceiling</option>
+<option value="Reception Pooja">Reception Pooja</option>
+<option value="Staircase">Staircase</option>
 </select>
-
-            </div>
-
-            <!-- View 3 -->
-
-            <div class="image-upload-card">
-
-                <label>
-                    View 3
-                </label>
-
-                <input
-                    type="file"
-                    id="view3"
-                    accept="image/*">
-
-                <select id="category3">
-
-    <option value="">
-        Select Category
-    </option>
-
-    <option value="Elevation">
-        Elevation
-    </option>
-
-    <option value="Interiors">
-        Interiors
-    </option>
-
-    <option value="Ceiling Design">
-        Ceiling Design
-    </option>
-
-    <option value="Construction">
-        Construction
-    </option>
-
-    <option value="3D Renders">
-        3D Renders
-    </option>
-
+</div><div class="image-upload-card">
+<label>View 3</label>
+<input type="file" id="view3" accept="image/*">
+<select id="category3"><option value="">Select Category</option>
+<option value="Design + Build">Design + Build</option>
+<option value="Interiors">Interiors</option>
+<option value="Elevation">Elevation</option></select>
+<select id="subcategory3"><option value="">Select Subcategory</option>
+<option value="3D Render">3D Render</option>
+<option value="Site Photos">Site Photos</option>
+<option value="All Rooms">All Rooms</option>
+<option value="Bedroom TV Unit">Bedroom TV Unit</option>
+<option value="Bedroom">Bedroom</option>
+<option value="Ceiling">Ceiling</option>
+<option value="Corridor">Corridor</option>
+<option value="Lounge">Lounge</option>
+<option value="Reception">Reception</option>
+<option value="DP Shop">DP Shop</option>
+<option value="Drawing">Drawing</option>
+<option value="Wardrobe">Wardrobe</option>
+<option value="Kitchen">Kitchen</option>
+<option value="Living">Living</option>
+<option value="Living-Dining">Living-Dining</option>
+<option value="Living-Pooja">Living-Pooja</option>
+<option value="Living-TV Unit">Living-TV Unit</option>
+<option value="Living-Vanity">Living-Vanity</option>
+<option value="Living Room">Living Room</option>
+<option value="Main Door">Main Door</option>
+<option value="Office">Office</option>
+<option value="Office Ceiling">Office Ceiling</option>
+<option value="Office Chair">Office Chair</option>
+<option value="Office Toilet">Office Toilet</option>
+<option value="Porch Ceiling">Porch Ceiling</option>
+<option value="Temple">Temple</option>
+<option value="Bathroom">Bathroom</option>
+<option value="TV Unit">TV Unit</option>
+<option value="Lift Lobby">Lift Lobby</option>
+<option value="PG Room">PG Room</option>
+<option value="Double Height Living">Double Height Living</option>
+<option value="Living Ceiling">Living Ceiling</option>
+<option value="Reception Pooja">Reception Pooja</option>
+<option value="Staircase">Staircase</option>
 </select>
-
-            </div>
-
-            <!-- View 4 -->
-
-            <div class="image-upload-card">
-
-                <label>
-                    View 4
-                </label>
-
-                <input
-                    type="file"
-                    id="view4"
-                    accept="image/*">
-
-                <select id="category4">
-
-    <option value="">
-        Select Category
-    </option>
-
-    <option value="Elevation">
-        Elevation
-    </option>
-
-    <option value="Interiors">
-        Interiors
-    </option>
-
-    <option value="Ceiling Design">
-        Ceiling Design
-    </option>
-
-    <option value="Construction">
-        Construction
-    </option>
-
-    <option value="3D Renders">
-        3D Renders
-    </option>
-
+</div><div class="image-upload-card">
+<label>View 4</label>
+<input type="file" id="view4" accept="image/*">
+<select id="category4"><option value="">Select Category</option>
+<option value="Design + Build">Design + Build</option>
+<option value="Interiors">Interiors</option>
+<option value="Elevation">Elevation</option></select>
+<select id="subcategory4"><option value="">Select Subcategory</option>
+<option value="3D Render">3D Render</option>
+<option value="Site Photos">Site Photos</option>
+<option value="All Rooms">All Rooms</option>
+<option value="Bedroom TV Unit">Bedroom TV Unit</option>
+<option value="Bedroom">Bedroom</option>
+<option value="Ceiling">Ceiling</option>
+<option value="Corridor">Corridor</option>
+<option value="Lounge">Lounge</option>
+<option value="Reception">Reception</option>
+<option value="DP Shop">DP Shop</option>
+<option value="Drawing">Drawing</option>
+<option value="Wardrobe">Wardrobe</option>
+<option value="Kitchen">Kitchen</option>
+<option value="Living">Living</option>
+<option value="Living-Dining">Living-Dining</option>
+<option value="Living-Pooja">Living-Pooja</option>
+<option value="Living-TV Unit">Living-TV Unit</option>
+<option value="Living-Vanity">Living-Vanity</option>
+<option value="Living Room">Living Room</option>
+<option value="Main Door">Main Door</option>
+<option value="Office">Office</option>
+<option value="Office Ceiling">Office Ceiling</option>
+<option value="Office Chair">Office Chair</option>
+<option value="Office Toilet">Office Toilet</option>
+<option value="Porch Ceiling">Porch Ceiling</option>
+<option value="Temple">Temple</option>
+<option value="Bathroom">Bathroom</option>
+<option value="TV Unit">TV Unit</option>
+<option value="Lift Lobby">Lift Lobby</option>
+<option value="PG Room">PG Room</option>
+<option value="Double Height Living">Double Height Living</option>
+<option value="Living Ceiling">Living Ceiling</option>
+<option value="Reception Pooja">Reception Pooja</option>
+<option value="Staircase">Staircase</option>
 </select>
-
-            </div>
-
-            <!-- View 5 -->
-
-            <div class="image-upload-card">
-
-                <label>
-                    View 5
-                </label>
-
-                <input
-                    type="file"
-                    id="view5"
-                    accept="image/*">
-
-                <select id="category5">
-
-    <option value="">
-        Select Category
-    </option>
-
-    <option value="Elevation">
-        Elevation
-    </option>
-
-    <option value="Interiors">
-        Interiors
-    </option>
-
-    <option value="Ceiling Design">
-        Ceiling Design
-    </option>
-
-    <option value="Construction">
-        Construction
-    </option>
-
-    <option value="3D Renders">
-        3D Renders
-    </option>
-
+</div><div class="image-upload-card">
+<label>View 5</label>
+<input type="file" id="view5" accept="image/*">
+<select id="category5"><option value="">Select Category</option>
+<option value="Design + Build">Design + Build</option>
+<option value="Interiors">Interiors</option>
+<option value="Elevation">Elevation</option></select>
+<select id="subcategory5"><option value="">Select Subcategory</option>
+<option value="3D Render">3D Render</option>
+<option value="Site Photos">Site Photos</option>
+<option value="All Rooms">All Rooms</option>
+<option value="Bedroom TV Unit">Bedroom TV Unit</option>
+<option value="Bedroom">Bedroom</option>
+<option value="Ceiling">Ceiling</option>
+<option value="Corridor">Corridor</option>
+<option value="Lounge">Lounge</option>
+<option value="Reception">Reception</option>
+<option value="DP Shop">DP Shop</option>
+<option value="Drawing">Drawing</option>
+<option value="Wardrobe">Wardrobe</option>
+<option value="Kitchen">Kitchen</option>
+<option value="Living">Living</option>
+<option value="Living-Dining">Living-Dining</option>
+<option value="Living-Pooja">Living-Pooja</option>
+<option value="Living-TV Unit">Living-TV Unit</option>
+<option value="Living-Vanity">Living-Vanity</option>
+<option value="Living Room">Living Room</option>
+<option value="Main Door">Main Door</option>
+<option value="Office">Office</option>
+<option value="Office Ceiling">Office Ceiling</option>
+<option value="Office Chair">Office Chair</option>
+<option value="Office Toilet">Office Toilet</option>
+<option value="Porch Ceiling">Porch Ceiling</option>
+<option value="Temple">Temple</option>
+<option value="Bathroom">Bathroom</option>
+<option value="TV Unit">TV Unit</option>
+<option value="Lift Lobby">Lift Lobby</option>
+<option value="PG Room">PG Room</option>
+<option value="Double Height Living">Double Height Living</option>
+<option value="Living Ceiling">Living Ceiling</option>
+<option value="Reception Pooja">Reception Pooja</option>
+<option value="Staircase">Staircase</option>
 </select>
-
-            </div>
-
-            <!-- View 6 -->
-
-            <div class="image-upload-card">
-
-                <label>
-                    View 6
-                </label>
-
-                <input
-                    type="file"
-                    id="view6"
-                    accept="image/*">
-
-                <select id="category6">
-
-    <option value="">
-        Select Category
-    </option>
-
-    <option value="Elevation">
-        Elevation
-    </option>
-
-    <option value="Interiors">
-        Interiors
-    </option>
-
-    <option value="Ceiling Design">
-        Ceiling Design
-    </option>
-
-    <option value="Construction">
-        Construction
-    </option>
-
-    <option value="3D Renders">
-        3D Renders
-    </option>
-
+</div><div class="image-upload-card">
+<label>View 6</label>
+<input type="file" id="view6" accept="image/*">
+<select id="category6"><option value="">Select Category</option>
+<option value="Design + Build">Design + Build</option>
+<option value="Interiors">Interiors</option>
+<option value="Elevation">Elevation</option></select>
+<select id="subcategory6"><option value="">Select Subcategory</option>
+<option value="3D Render">3D Render</option>
+<option value="Site Photos">Site Photos</option>
+<option value="All Rooms">All Rooms</option>
+<option value="Bedroom TV Unit">Bedroom TV Unit</option>
+<option value="Bedroom">Bedroom</option>
+<option value="Ceiling">Ceiling</option>
+<option value="Corridor">Corridor</option>
+<option value="Lounge">Lounge</option>
+<option value="Reception">Reception</option>
+<option value="DP Shop">DP Shop</option>
+<option value="Drawing">Drawing</option>
+<option value="Wardrobe">Wardrobe</option>
+<option value="Kitchen">Kitchen</option>
+<option value="Living">Living</option>
+<option value="Living-Dining">Living-Dining</option>
+<option value="Living-Pooja">Living-Pooja</option>
+<option value="Living-TV Unit">Living-TV Unit</option>
+<option value="Living-Vanity">Living-Vanity</option>
+<option value="Living Room">Living Room</option>
+<option value="Main Door">Main Door</option>
+<option value="Office">Office</option>
+<option value="Office Ceiling">Office Ceiling</option>
+<option value="Office Chair">Office Chair</option>
+<option value="Office Toilet">Office Toilet</option>
+<option value="Porch Ceiling">Porch Ceiling</option>
+<option value="Temple">Temple</option>
+<option value="Bathroom">Bathroom</option>
+<option value="TV Unit">TV Unit</option>
+<option value="Lift Lobby">Lift Lobby</option>
+<option value="PG Room">PG Room</option>
+<option value="Double Height Living">Double Height Living</option>
+<option value="Living Ceiling">Living Ceiling</option>
+<option value="Reception Pooja">Reception Pooja</option>
+<option value="Staircase">Staircase</option>
 </select>
-
-            </div>
-
-        </div>
-
-    </div>
-    <div class="project-previews">
-
-    <h3>
-        Image Preview
-    </h3>
-
-    <div
-        class="preview-grid"
-        id="previewGrid">
-
-    </div>
-
-</div>
-    <div
-    class="upload-progress"
-    id="uploadProgress">
-
-    <div class="progress-info">
-
-        <span id="progressText">
-
-            Ready
-
-        </span>
-
-        <span id="progressPercent">
-
-            0%
-
-        </span>
-
-    </div>
-
-    <div class="progress-track">
-
-        <div
-            class="progress-fill"
-            id="progressFill">
-        </div>
-
-    </div>
-
-</div>
-    <button
-        class="admin-btn"
-        id="saveProject">
-
-        Save Project
-
-    </button>
-
+</div></div></div>
+<div class="project-previews"><h3>Image Preview</h3><div class="preview-grid" id="previewGrid"></div></div>
+<div class="upload-progress" id="uploadProgress"><div class="progress-info"><span id="progressText">Ready</span><span id="progressPercent">0%</span></div><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></div>
+<button class="admin-btn" id="saveProject">Save Project</button>
 </div>
 <!-- EXISTING PROJECTS -->
 

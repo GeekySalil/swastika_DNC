@@ -1677,3 +1677,64 @@ html {
 .admin-section-nav{
     padding-top: 0.2rem;;
 }
+
+/* =========================================================
+   PROJECT SCHEMA / FEATURED CONTROLS
+========================================================= */
+.featured-field { min-height: 100%; }
+.featured-radio-group { display:flex; align-items:center; gap:24px; min-height:48px; }
+.featured-radio-group label { display:flex; align-items:center; gap:8px; color:var(--text); cursor:pointer; }
+.featured-radio-group input { width:18px; height:18px; accent-color:var(--accent); cursor:pointer; }
+.field-help { color:var(--muted); font-size:12px; }
+.image-upload-card select + select { margin-top:10px; }
+.existing-image-info > label { display:block; margin:10px 0 6px; color:var(--muted); font-size:12px; }
+.existing-image-info select { width:100%; padding:10px; border-radius:9px; background:#1f1f1f; color:#fff; border:1px solid rgba(255,255,255,.08); }
+.image-actions { flex-wrap:wrap; }
+.save-image-meta-btn { flex:1 1 100%; background:var(--accent); color:#111; border:0; padding:10px; border-radius:8px; cursor:pointer; font-weight:600; }
+@media(max-width:768px){ .featured-radio-group{flex-wrap:wrap;} }
+
+/* =========================================
+   FIX PROJECT DROPDOWN OPTIONS
+   ========================================= */
+
+.admin-field select,
+.image-upload-card select,
+.existing-image-card select {
+    color: #ffffff;
+    background-color: #111111;
+    color-scheme: dark;
+}
+
+/* Dropdown options */
+.admin-field select option,
+.image-upload-card select option,
+.existing-image-card select option {
+    background-color: #111111 !important;
+    color: #ffffff !important;
+}
+
+/* Placeholder / first option */
+.admin-field select option:first-child,
+.image-upload-card select option:first-child,
+.existing-image-card select option:first-child {
+    color: #bdbdbd !important;
+    background-color: #111111 !important;
+}
+
+/* Selected option */
+.admin-field select option:checked,
+.image-upload-card select option:checked,
+.existing-image-card select option:checked {
+    background-color: #666666 !important;
+    color: #ffffff !important;
+}
+
+/* Focused dropdown */
+.admin-field select:focus,
+.image-upload-card select:focus,
+.existing-image-card select:focus {
+    color: #ffffff;
+    background-color: #111111;
+    border-color: var(--accent);
+    outline: none;
+}

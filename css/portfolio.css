@@ -1,0 +1,112 @@
+
+/* Shared portfolio/project viewer */
+.featured-project-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+.portfolio-view-all-wrap{text-align:center;margin-top:38px;}
+.portfolio-view-all-wrap .primary-btn{display:inline-flex;}
+.portfolio-card{position:relative;cursor:pointer;outline:none;}
+.portfolio-card:focus-visible{outline:2px solid currentColor;outline-offset:5px;}
+.portfolio-image-wrap{overflow:hidden;}
+.portfolio-card img{display:block;width:100%;height:500px;object-fit:cover;transition:transform .45s ease;}
+.portfolio-card:hover img{transform:scale(1.035);}
+.portfolio-card-info{padding:14px 4px 4px;}
+.portfolio-card-info h3{margin:0 0 5px;font-size:1rem;}
+.portfolio-card-info p{margin:0;font-size:.82rem;letter-spacing:.02em;}
+.project-dot{font-size:1.45em;line-height:0;vertical-align:-.08em;margin:0 .15em;}
+.portfolio-skeleton{height:500px;border-radius:18px;background:linear-gradient(110deg,rgba(0,0,0,.05) 30%,rgba(255,255,255,.35) 45%,rgba(0,0,0,.05) 60%);background-size:200% 100%;animation:portfolioSkeleton 1.3s infinite;}
+@keyframes portfolioSkeleton{to{background-position:-200% 0;}}
+.portfolio-error,.portfolio-empty{text-align:center;grid-column:1/-1;padding:50px 10px;}
+
+.portfolio-page-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:30px 0 18px;}
+.portfolio-page-tabs button,.individual-subtabs button{border:1px solid rgba(0,0,0,.12);background:transparent;padding:11px 18px;border-radius:999px;cursor:pointer;font:inherit;transition:.25s ease;}
+.portfolio-page-tabs button.active,.individual-subtabs button.active{background:#111;color:#fff;border-color:#111;}
+.individual-subtabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 15px;margin-bottom:25px;scrollbar-width:thin;}
+.individual-subtabs button{white-space:nowrap;padding:9px 14px;font-size:.86rem;}
+
+.portfolio-main-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+.portfolio-pagination{display:flex;justify-content:center;align-items:center;gap:7px;margin:42px 0 15px;flex-wrap:wrap;}
+.portfolio-pagination button{min-width:40px;height:40px;border:1px solid rgba(0,0,0,.14);background:transparent;border-radius:9px;cursor:pointer;}
+.portfolio-pagination button.active{background:#111;color:#fff;border-color:#111;}
+.portfolio-pagination button:disabled{opacity:.35;cursor:not-allowed;}
+
+.project-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:25px;background:rgba(0,0,0,.78);z-index:99999;}
+.project-modal.show{display:flex;}
+.project-modal-content{position:relative;width:min(1100px,96vw);max-height:94vh;overflow:auto;background:#fff;border-radius:22px;padding:24px;}
+.close-modal{position:absolute;right:17px;top:12px;font-size:34px;line-height:1;cursor:pointer;z-index:4;}
+.modal-image-wrapper{position:relative;display:flex;align-items:center;justify-content:center;background:#111;border-radius:15px;overflow:hidden;touch-action:pan-y;}
+.modal-image-wrapper #modalMainImage{display:block;max-width:100%;width:auto;height:min(62vh,650px);object-fit:contain;}
+.modal-nav-btn{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;cursor:pointer;z-index:2;}
+#prevImageBtn{left:12px;}#nextImageBtn{right:12px;}
+.modal-gallery-tabs{display:flex;gap:8px;overflow-x:auto;margin:15px 0 12px;}
+.modal-gallery-tabs button{border:1px solid rgba(0,0,0,.12);background:transparent;padding:9px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;}
+.modal-gallery-tabs button.active{background:#111;color:#fff;border-color:#111;}
+.modal-thumbnails{display:flex;gap:9px;overflow-x:auto;padding-bottom:8px;}
+.modal-thumb{border:2px solid transparent;padding:0;background:none;border-radius:8px;overflow:hidden;flex:0 0 82px;cursor:pointer;}
+.modal-thumb.active{border-color:#111;}.modal-thumb img{width:82px;height:62px;object-fit:cover;display:block;}
+.modal-project-info{padding:18px 3px 3px;}.modal-project-info h2{margin:0 0 12px;}.modal-project-info p{margin:7px 0;}.project-modal-actions{margin-top:18px;}.project-share-btn{border:0;border-radius:999px;padding:12px 19px;background:#111;color:#fff;cursor:pointer;font:inherit;}
+body.project-modal-open{overflow:hidden;}
+.modal-no-images{padding:12px;opacity:.7;}
+
+@media(max-width:1100px){.portfolio-main-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media(max-width:900px){.featured-project-grid,.portfolio-main-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.portfolio-card img{height:430px;}.portfolio-skeleton{height:430px;}}
+@media(max-width:600px){.featured-project-grid,.portfolio-main-grid{grid-template-columns:1fr;}.portfolio-card img{height:430px;}.portfolio-skeleton{height:430px;}.project-modal{padding:8px;}.project-modal-content{padding:13px;border-radius:15px;width:100%;max-height:96vh;}.modal-image-wrapper #modalMainImage{width:100%;height:auto;max-height:58vh;min-height:220px;}.modal-nav-btn{width:38px;height:38px;}.modal-thumbnails{gap:7px;}.modal-thumb{flex-basis:72px;}.modal-thumb img{width:72px;height:58px;}.portfolio-page-tabs{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;}.portfolio-page-tabs button{white-space:nowrap;}.portfolio-view-all-wrap{margin-top:28px;}}
+@media(min-width:601px) and (max-width:900px){.portfolio-page-tabs{justify-content:center;}.individual-subtabs{padding-left:4px;}}
+
+.modal-project-description{margin:0 0 16px !important;line-height:1.7;color:#777;}
+/* =========================================
+   PROJECT MODAL — DARK TITLE & DESCRIPTION
+   ========================================= */
+
+#projectModal .modal-project-info h2,
+#projectModal .modal-project-info h3,
+#projectModal #modalTitle {
+    color: #111111 !important;
+    opacity: 1 !important;
+}
+
+#projectModal .modal-project-info p,
+#projectModal #modalDescription {
+    color: #555555 !important;
+    opacity: 1 !important;
+}
+
+/* Keep labels clearly visible */
+#projectModal .modal-project-info p strong {
+    color: #222222 !important;
+    opacity: 1 !important;
+}
+/* =========================================
+   PROJECT VIEWER — EQUAL TOP/BOTTOM PADDING
+   ========================================= */
+
+#projectModal .modal-image-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #111 !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+#projectModal .modal-image-wrapper img,
+#projectModal #modalMainImage {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    margin: auto !important;
+}
+/* Space below navbar before PORTFOLIO heading */
+.portfolio-section {
+    padding-top: 7rem;
+}
+/* =========================================
+   SPACE BELOW CATEGORY ROW
+   ========================================= */
+
+.portfolio-main-tabs {
+    margin-bottom: 40px !important;
+}

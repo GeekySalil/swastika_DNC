@@ -39,7 +39,8 @@ import {
     query,
     orderBy,
 
-    deleteDoc
+    deleteDoc,
+    where
 
 }
 from
@@ -741,1148 +742,256 @@ document
 
     }
 );
-const previewGrid =
-document.getElementById(
-    "previewGrid"
-);
-
-for (
-    let i = 1;
-    i <= 6;
-    i++
-) {
-
-    const input =
-    document.getElementById(
-        `view${i}`
-    );
-
-    input.addEventListener(
-        "change",
-        e => {
-
-            const file =
-            e.target.files[0];
-
-            if (!file)
-                return;
-
-            const reader =
-            new FileReader();
-
-            reader.onload =
-            function() {
-
-                const img =
-                document.createElement(
-                    "img"
-                );
-
-                img.src =
-                reader.result;
-
-                previewGrid.appendChild(
-                    img
-                );
-
-            };
-
-            reader.readAsDataURL(
-                file
-            );
-
-        }
-    );
-
-}
-
-const saveProjectBtn =
-document.getElementById(
-    "saveProject"
-);
-
-
-saveProjectBtn?.addEventListener(
-    "click",
-    saveProject
-);
-let currentLeadId = null;
+const previewGrid = document.getElementById("previewGrid");
+const saveProjectBtn = document.getElementById("saveProject");
 let editingProjectId = null;
-async function saveProject() {
 
-    try {
-
-        saveProjectBtn.disabled = true;
-
-        saveProjectBtn.textContent =
-        "Uploading...";
-
-        progressFill.style.width =
-        "0%";
-
-        progressPercent.textContent =
-        "0%";
-
-        progressText.textContent =
-        "Preparing Upload...";
-
-        const title =
-        document.getElementById(
-            "projectTitle"
-        ).value;
-
-        const description =
-        document.getElementById(
-            "projectDescription"
-        ).value;
-
-        const location =
-        document.getElementById(
-            "projectLocation"
-        ).value;
-
-        const area =
-        document.getElementById(
-            "projectArea"
-        ).value;
-
-        const year =
-        document.getElementById(
-            "projectYear"
-        ).value;
-
-        const status =
-        document.getElementById(
-            "projectStatus"
-        ).value;
-
-        let images = [];
-
-        let totalFiles = 0;
-
-        for (
-            let i = 1;
-            i <= 6;
-            i++
-        ) {
-
-            const file =
-            document.getElementById(
-                `view${i}`
-            ).files[0];
-
-            if (file)
-                totalFiles++;
-
-        }
-
-       if (
-    totalFiles === 0 &&
-    !editingProjectId
-) {
-
-    alert(
-        "Please upload at least one image."
-    );
-
-    saveProjectBtn.disabled =
-    false;
-
-    saveProjectBtn.textContent =
-    "Save Project";
-
-    return;
-
-}
-
-        let uploaded = 0;
-
-        for (
-            let i = 1;
-            i <= 6;
-            i++
-        ) {
-
-            const file =
-            document.getElementById(
-                `view${i}`
-            ).files[0];
-
-            if (!file)
-                continue;
-
-            const category =
-            document.getElementById(
-                `category${i}`
-            ).value;
-            if (!category) {
-
-    alert(
-        `Please select category for View ${i}`
-    );
-
-    saveProjectBtn.disabled =
-    false;
-
-    saveProjectBtn.textContent =
-    "Save Project";
-
-    return;
-
-}
-            progressText.textContent =
-            `Uploading image ${uploaded + 1} of ${totalFiles}`;
-
-            const storageRef =
-            ref(
-                storage,
-                `projects/${Date.now()}-${file.name}`
-            );
-
-            await uploadBytes(
-                storageRef,
-                file
-            );
-
-            const url =
-            await getDownloadURL(
-                storageRef
-            );
-
-            uploaded++;
-
-            const percent =
-            Math.round(
-                (
-                    uploaded /
-                    totalFiles
-                ) * 100
-            );
-
-            progressFill.style.width =
-            percent + "%";
-
-            progressPercent.textContent =
-            percent + "%";
-
-            images.push({
-
-    url,
-
-    path:
-    storageRef.fullPath,
-
-    category
-
-});
-console.log(
-    "Current Images Array:",
-    images
-);
-        }
-
-        progressText.textContent =
-        "Saving Project Details...";
-        console.log(
-    "Final Images Array:",
-    images
-);
-if (
-    editingProjectId
-) {
-
-    const existingProject =
-    await getDoc(
-
-        doc(
-            db,
-            "projects",
-            editingProjectId
-        )
-
-    );
-
-    const existingImages =
-    existingProject.data()
-    .images || [];
-
-    if (
-        images.length > 0
-    ) {
-
-        images.unshift(
-            ...existingImages
-        );
-
-    }
-    else {
-
-        images.push(
-            ...existingImages
-        );
-
-    }
-
-}
-
-        const projectData = {
-
-    title,
-
-    description,
-
-    location,
-
-    area,
-
-    year,
-
-    status,
-
-    images
-
-};
-
-if (
-    editingProjectId
-) {
-
-    await updateDoc(
-
-        doc(
-            db,
-            "projects",
-            editingProjectId
-        ),
-
-        projectData
-
-    );
-
-}
-else {
-    console.log(
-    "Project Data Being Saved:",
-    projectData
-);
-    await addDoc(
-
-        collection(
-            db,
-            "projects"
-        ),
-
-        {
-
-            ...projectData,
-
-            createdAt:
-            Timestamp.now()
-
-        }
-
-    );
-
-}
-        loadProjects();
-        progressFill.style.width =
-        "100%";
-
-        progressPercent.textContent =
-        "100%";
-
-        progressText.textContent =
-        "Project Saved Successfully ✓";
-
-         editingProjectId =
-null;
-/* Reset Form */
-
-document.getElementById(
-    "projectTitle"
-).value = "";
-
-document.getElementById(
-    "projectDescription"
-).value = "";
-
-document.getElementById(
-    "projectLocation"
-).value = "";
-
-document.getElementById(
-    "projectArea"
-).value = "";
-
-document.getElementById(
-    "projectYear"
-).value = "";
-
-document.getElementById(
-    "projectStatus"
-).value = "";
-
-
-
-
-
-
-    document.getElementById(
-    "existingImages"
-).innerHTML = "";
-
-if (previewGrid) {
-
-    previewGrid.innerHTML = "";
-
-}for (
-    let i = 1;
-    i <= 6;
-    i++
-) {
-
-    const fileInput =
-    document.getElementById(
-        `view${i}`
-    );
-
-    if (fileInput) {
-
-        fileInput.value = "";
-
-    }
-
-}
-
-for (
-    let i = 1;
-    i <= 6;
-    i++
-) {
-
-    const category =
-    document.getElementById(
-        `category${i}`
-    );
-
-    if (category) {
-
-        category.selectedIndex = 0;
-
-    }
-
-}
-
-        document.querySelector(
-    "#projectManagement h2"
-).textContent =
-"Project Management";
-
-        saveProjectBtn.disabled =
-        false;
-
-        saveProjectBtn.textContent =
-        "Save Project";
-
-        setTimeout(() => {
-
-            progressFill.style.width =
-            "0%";
-
-            progressPercent.textContent =
-            "0%";
-
-            progressText.textContent =
-            "Ready";
-
-        }, 3000);
-
-    }
-
-    catch (error) {
-
-        console.error(
-            error
-        );
-
-        progressText.textContent =
-        "Upload Failed";
-
-        saveProjectBtn.disabled =
-        false;
-
-       
-
-saveProjectBtn.textContent =
-"Save Project";
-
-        alert(
-            error.message
-        );
-
-    }
-
-}
-
-async function loadProjects() {
-
-    const projectsList =
-    document.getElementById(
-        "projectsList"
-    );
-
-    projectsList.innerHTML =
-    "Loading...";
-
-    const snapshot =
-    await getDocs(
-
-        collection(
-            db,
-            "projects"
-        )
-
-    );
-
-    let html = "";
-
-    snapshot.forEach(docItem => {
-
-        const project =
-        docItem.data();
-
-        html += `
-
-        <div class="project-row">
-
-            <div class="project-info">
-
-                <h4>
-                    ${project.title}
-                </h4>
-
-                <p>
-                    ${project.location}
-                </p>
-
-            </div>
-
-            <div class="project-actions">
-
-                <button
-    class="edit-btn"
-    onclick="editProject('${docItem.id}')">
-
-    Edit
-
-</button>
-
-                <button
-                    class="delete-btn"
-                    onclick="deleteProject('${docItem.id}')">
-
-                    Delete
-
-                </button>
-
-            </div>
-
-        </div>
-
-        `;
-
+const INDIVIDUAL_SUBCATEGORIES = [
+    "All Rooms", "Bedroom TV Unit", "Bedroom", "Ceiling", "Corridor", "Lounge", "Reception", "DP Shop", "Drawing", "Wardrobe", "Kitchen", "Living", "Living-Dining", "Living-Pooja", "Living-TV Unit", "Living-Vanity", "Living Room", "Main Door", "Office", "Office Ceiling", "Office Chair", "Office Toilet", "Porch Ceiling", "Temple", "Bathroom", "TV Unit", "Lift Lobby", "PG Room", "Double Height Living", "Living Ceiling", "Reception Pooja", "Staircase"
+];
+const IMAGE_CATEGORIES = ["Design + Build", "Interiors", "Elevation"];
+
+function resetProjectForm() {
+    ["projectTitle","projectDescription","projectLocation","projectArea","projectYear"].forEach(id => {
+        const el = document.getElementById(id); if (el) el.value = "";
     });
-
-    if (!html) {
-
-        html =
-        "<p>No Projects Found</p>";
-
+    ["projectCategory","projectSubcategory","projectWorkType","projectStatus"].forEach(id => {
+        const el = document.getElementById(id); if (el) el.selectedIndex = 0;
+    });
+    const falseRadio = document.querySelector('input[name="projectFeatured"][value="false"]');
+    if (falseRadio) falseRadio.checked = true;
+    document.getElementById("existingImages").innerHTML = "";
+    if (previewGrid) previewGrid.innerHTML = "";
+    for (let i=1;i<=6;i++) {
+        const file=document.getElementById(`view${i}`); if(file) file.value="";
+        const cat=document.getElementById(`category${i}`); if(cat) cat.selectedIndex=0;
+        const sub=document.getElementById(`subcategory${i}`); if(sub) sub.selectedIndex=0;
     }
-
-    projectsList.innerHTML =
-    html;
-
 }
-window.deleteProject =
-async function(id) {
 
-    const confirmDelete =
-    confirm(
-        "Delete this project?"
-    );
+function setFeaturedValue(value) {
+    const radio=document.querySelector(`input[name="projectFeatured"][value="${value ? "true" : "false"}"]`);
+    if(radio) radio.checked=true;
+}
 
-    if (
-        !confirmDelete
-    ) return;
+async function getFeaturedCount(excludeId=null) {
+    const snapshot = await getDocs(query(collection(db,"projects"), where("featured","==",true)));
+    return snapshot.docs.filter(item => item.id !== excludeId).length;
+}
 
+async function validateFeatured(featured, excludeId=null) {
+    if (!featured) return true;
+    const count = await getFeaturedCount(excludeId);
+    if (count >= 6) {
+        alert("Already 6 projects exist as featured, remove one to add this.");
+        return false;
+    }
+    return true;
+}
+
+for (let i=1;i<=6;i++) {
+    const input=document.getElementById(`view${i}`);
+    input?.addEventListener("change", e => {
+        const file=e.target.files[0]; if(!file) return;
+        const reader=new FileReader();
+        reader.onload=()=>{
+            const img=document.createElement("img"); img.src=reader.result; img.alt=`View ${i}`;
+            previewGrid.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+saveProjectBtn?.addEventListener("click", saveProject);
+
+async function saveProject() {
     try {
+        saveProjectBtn.disabled=true; saveProjectBtn.textContent="Uploading...";
+        progressFill.style.width="0%"; progressPercent.textContent="0%"; progressText.textContent="Preparing Upload...";
 
-        const projectRef =
-        doc(
-            db,
-            "projects",
-            id
-        );
+        const title=document.getElementById("projectTitle").value.trim();
+        const description=document.getElementById("projectDescription").value.trim();
+        const category=document.getElementById("projectCategory").value;
+        const subcategory=document.getElementById("projectSubcategory").value;
+        const workType=document.getElementById("projectWorkType").value;
+        const location=document.getElementById("projectLocation").value.trim();
+        const area=document.getElementById("projectArea").value;
+        const year=document.getElementById("projectYear").value;
+        const status=document.getElementById("projectStatus").value;
+        const featured=document.querySelector('input[name="projectFeatured"]:checked')?.value === "true";
 
-        const snapshot =
-        await getDoc(
-            projectRef
-        );
+        if(!title || !category || !subcategory || !workType || !location || !year || !status){
+            alert("Please fill all required project fields.");
+            saveProjectBtn.disabled=false; saveProjectBtn.textContent=editingProjectId?"Update Project":"Save Project"; return;
+        }
+        if(!(await validateFeatured(featured, editingProjectId))) {
+            saveProjectBtn.disabled=false; saveProjectBtn.textContent=editingProjectId?"Update Project":"Save Project"; return;
+        }
 
-        if (
-            snapshot.exists()
-        ) {
-
-            const project =
-            snapshot.data();
-
-            if (
-                project.images &&
-                project.images.length
-            ) {
-
-                for (
-                    const image
-                    of project.images
-                ) {
-
-                    if (
-                        image.path
-                    ) {
-
-                        try {
-
-                            await deleteObject(
-
-                                ref(
-                                    storage,
-                                    image.path
-                                )
-
-                            );
-
-                        }
-                        catch(error) {
-
-                            console.log(
-                                "Image already missing:",
-                                image.path
-                            );
-
-                        }
-
-                    }
-
-                }
-
+        let newImages=[]; let totalFiles=0;
+        for(let i=1;i<=6;i++){ if(document.getElementById(`view${i}`).files[0]) totalFiles++; }
+        if(totalFiles===0 && !editingProjectId){
+            alert("Please upload at least one image.");
+            saveProjectBtn.disabled=false; saveProjectBtn.textContent="Save Project"; return;
+        }
+        let uploaded=0;
+        for(let i=1;i<=6;i++){
+            const file=document.getElementById(`view${i}`).files[0]; if(!file) continue;
+            const imageCategory=document.getElementById(`category${i}`).value;
+            const imageSubcategory=document.getElementById(`subcategory${i}`).value;
+            if(!imageCategory || !imageSubcategory){
+                alert(`Please select category and subcategory for View ${i}`);
+                saveProjectBtn.disabled=false; saveProjectBtn.textContent=editingProjectId?"Update Project":"Save Project"; return;
             }
-
+            progressText.textContent=`Uploading image ${uploaded+1} of ${totalFiles}`;
+            const storageRef=ref(storage,`projects/${Date.now()}-${i}-${file.name}`);
+            await uploadBytes(storageRef,file);
+            const url=await getDownloadURL(storageRef);
+            uploaded++;
+            const percent=Math.round((uploaded/totalFiles)*100);
+            progressFill.style.width=percent+"%"; progressPercent.textContent=percent+"%";
+            newImages.push({url,path:storageRef.fullPath,category:imageCategory,subcategory:imageSubcategory});
         }
 
-        await deleteDoc(
-            projectRef
-        );
+      let images = newImages;
+let createdAt = null;
 
-        alert(
-            "Project Deleted Successfully"
-        );
+if (editingProjectId) {
 
-        loadProjects();
-        loadDashboardStats();
+    const snap = await getDoc(
+        doc(db, "projects", editingProjectId)
+    );
+
+    if (!snap.exists()) {
+        throw new Error("Project no longer exists.");
     }
 
-    catch(error) {
+    const existing = snap.data();
 
-        console.error(
-            error
-        );
-
-        alert(
-            error.message
-        );
-
-    }
-
-};
-window.editProject =
-async function(id) {
-    document.querySelector(
-    "#projectManagement h2"
-).textContent =
-"Editing Project";
-    const projectRef =
-    doc(
-        db,
-        "projects",
-        id
-    );
-
-    const snapshot =
-    await getDoc(
-        projectRef
-    );
-
-    if (
-        !snapshot.exists()
-    ) return;
-
-    const project =
-    snapshot.data();
-    const existingImages =
-document.getElementById(
-    "existingImages"
-);
-
-existingImages.innerHTML = "";
-
-if (
-    project.images &&
-    project.images.length
-) {
-
-    project.images.forEach(
-
-        (image,index) => {
-
-            existingImages.innerHTML += `
-
-<div class="existing-image-card">
-
-    <img
-        src="${image.url}"
-        alt="">
-
-    <div
-        class="existing-image-info">
-
-        <h4>
-
-            View ${index + 1}
-
-        </h4>
-
-        <p>
-
-            ${image.category}
-
-        </p>
-
-        <div
-            class="image-actions">
-
-            <button
-                class="replace-image-btn"
-                onclick="replaceImage(
-                    '${id}',
-                    ${index}
-                )">
-
-                Replace
-
-            </button>
-
-            <button
-                class="delete-image-btn"
-                onclick="deleteImage(
-                    '${id}',
-                    ${index}
-                )">
-
-                Delete
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-`;
-
-        }
-
-    );
-
-}
-    editingProjectId =
-    id;
-
-    document.getElementById(
-        "projectTitle"
-    ).value =
-    project.title || "";
-
-    document.getElementById(
-        "projectDescription"
-    ).value =
-    project.description || "";
-
-    document.getElementById(
-        "projectLocation"
-    ).value =
-    project.location || "";
-
-    document.getElementById(
-        "projectArea"
-    ).value =
-    project.area || "";
-
-    document.getElementById(
-        "projectYear"
-    ).value =
-    project.year || "";
-
-    document.getElementById(
-        "projectStatus"
-    ).value =
-    project.status || "";
-
-    saveProjectBtn.textContent =
-    "Update Project";
-
-    document
-.getElementById(
-    "projectManagement"
-)
-
-.scrollIntoView({
-
-    behavior: "smooth",
-
-    block: "start"
-
-});
-
-
-};window.deleteImage =
-async function(
-    projectId,
-    imageIndex
-) {
-
-    const confirmDelete =
-    confirm(
-        "Delete this image?"
-    );
-
-    if (
-        !confirmDelete
-    ) return;
-
-    const projectRef =
-    doc(
-        db,
-        "projects",
-        projectId
-    );
-
-    const snapshot =
-    await getDoc(
-        projectRef
-    );
-
-    const project =
-    snapshot.data();
-
-    const image =
-    project.images[
-        imageIndex
+    /*
+     * IMPORTANT:
+     * Keep the existing images FIRST.
+     *
+     * This preserves the original first image
+     * as the project's permanent thumbnail.
+     *
+     * Newly uploaded images are added AFTER
+     * all existing images.
+     */
+    images = [
+        ...(existing.images || []),
+        ...newImages
     ];
 
-    if (
-        image.path
-    ) {
-
-        try {
-
-            const storageImageRef =
-            ref(
-                storage,
-                image.path
-            );
-
-            await deleteObject(
-                storageImageRef
-            );
-
+    createdAt = existing.createdAt || null;
+}
+        const projectData={title,description,category,subcategory,workType,location,area,year,status,featured,images};
+        if(editingProjectId){
+            await updateDoc(doc(db,"projects",editingProjectId),projectData);
+        } else {
+            await addDoc(collection(db,"projects"),{...projectData,createdAt:Timestamp.now()});
         }
-        catch(error) {
-
-            console.log(
-                "Old image not found"
-            );
-
-        }
-
+        await loadProjects(); await loadDashboardStats();
+        progressFill.style.width="100%"; progressPercent.textContent="100%"; progressText.textContent="Project Saved Successfully ✓";
+        editingProjectId=null; resetProjectForm();
+        document.querySelector("#projectManagement h2").textContent="Project Management";
+        saveProjectBtn.disabled=false; saveProjectBtn.textContent="Save Project";
+        setTimeout(()=>{progressFill.style.width="0%";progressPercent.textContent="0%";progressText.textContent="Ready";},2500);
+    } catch(error){
+        console.error(error); progressText.textContent="Upload Failed"; saveProjectBtn.disabled=false; saveProjectBtn.textContent=editingProjectId?"Update Project":"Save Project"; alert(error.message);
     }
+}
 
-    project.images.splice(
-        imageIndex,
-        1
-    );
+async function loadProjects(){
+    const projectsList=document.getElementById("projectsList"); projectsList.innerHTML="Loading...";
+    const snapshot=await getDocs(collection(db,"projects")); let html="";
+    snapshot.forEach(docItem=>{
+        const p=docItem.data();
+        html+=`<div class="project-row"><div class="project-info"><h4>${p.title||"Untitled"}</h4><p>${p.location||""} · ${p.category||""} · ${p.subcategory||""}${p.featured===true?" · Featured":""}</p></div><div class="project-actions"><button class="edit-btn" onclick="editProject('${docItem.id}')">Edit</button><button class="delete-btn" onclick="deleteProject('${docItem.id}')">Delete</button></div></div>`;
+    });
+    projectsList.innerHTML=html||"<p>No Projects Found</p>";
+}
 
-    await updateDoc(
-
-        projectRef,
-
-        {
-
-            images:
-            project.images
-
+window.deleteProject=async function(id){
+    if(!confirm("Delete this project?")) return;
+    try{
+        const projectRef=doc(db,"projects",id); const snapshot=await getDoc(projectRef);
+        if(snapshot.exists()){
+            const project=snapshot.data();
+            for(const image of (project.images||[])) if(image.path){ try{await deleteObject(ref(storage,image.path));}catch(e){console.log("Image already missing:",image.path);} }
         }
-
-    );
-
-    editProject(
-        projectId
-    );
-
+        await deleteDoc(projectRef); alert("Project Deleted Successfully"); await loadProjects(); await loadDashboardStats();
+    }catch(error){console.error(error);alert(error.message);}
 };
-window.replaceImage =
-async function(
-    projectId,
-    imageIndex
-) {
 
-    const picker =
-    document.getElementById(
-        "replaceImageInput"
-    );
-
-    picker.value = "";
-
-    picker.onchange =
-    async function(e) {
-
-        const file =
-        e.target.files[0];
-
-        if (!file)
-            return;
-
-        try {
-
-            const projectRef =
-            doc(
-                db,
-                "projects",
-                projectId
-            );
-
-            const snapshot =
-            await getDoc(
-                projectRef
-            );
-
-            const project =
-            snapshot.data();
-
-            const oldImage =
-            project.images[
-                imageIndex
-            ];
-
-            /* Delete old storage image */
-
-            if (
-                oldImage.path
-            ) {
-
-                try {
-
-                    await deleteObject(
-
-                        ref(
-                            storage,
-                            oldImage.path
-                        )
-
-                    );
-
-                }
-                catch(error) {
-
-                    console.log(
-                        "Old image already missing"
-                    );
-
-                }
-
-            }
-
-            /* Upload new image */
-
-            const storageRef =
-            ref(
-
-                storage,
-
-                `projects/${Date.now()}-${file.name}`
-
-            );
-            progressFill.style.width =
-"0%";
-
-progressPercent.textContent =
-"0%";
-
-progressText.textContent =
-"Starting Upload...";
-
-           await new Promise(
-
-    (resolve,reject) => {
-
-        const uploadTask =
-        uploadBytesResumable(
-
-            storageRef,
-
-            file
-
-        );
-
-        uploadTask.on(
-
-            "state_changed",
-
-            snapshot => {
-
-                const percent =
-                Math.round(
-
-                    (
-                        snapshot.bytesTransferred /
-
-                        snapshot.totalBytes
-
-                    ) * 100
-
-                );
-
-                progressFill.style.width =
-                percent + "%";
-
-                progressPercent.textContent =
-                percent + "%";
-
-                progressText.textContent =
-                `Replacing Image... ${percent}%`;
-
-            },
-
-            error => {
-
-                reject(error);
-
-            },
-
-            () => {
-
-                resolve();
-
-            }
-
-        );
-
-    }
-
-);
-
-            const url =
-            await getDownloadURL(
-
-                storageRef
-
-            );
-
-            project.images[
-                imageIndex
-            ] = {
-
-                url,
-
-                path:
-                storageRef.fullPath,
-
-                category:
-                oldImage.category
-
-            };
-
-            await updateDoc(
-
-                projectRef,
-
-                {
-
-                    images:
-                    project.images
-
-                }
-
-            );
-
-            progressFill.style.width =
-"100%";
-
-progressPercent.textContent =
-"100%";
-
-progressText.textContent =
-"Image Replaced Successfully ✓";
-
-            editProject(
-                projectId
-            );
-
-            progressFill.style.width =
-"100%";
-
-progressPercent.textContent =
-"100%";
-
-progressText.textContent =
-"Image Replaced Successfully ✓";
-
-alert(
-    "Image Replaced Successfully"
-);
-
-setTimeout(() => {
-
-    progressFill.style.width =
-    "0%";
-
-    progressPercent.textContent =
-    "0%";
-
-    progressText.textContent =
-    "Ready";
-
-}, 2500);
-
-        }
-
-        catch(error) {
-
-            console.error(
-                error
-            );
-
-            alert(
-                error.message
-            );
-
-        }
-
-    };
-
-    picker.click();
-
+function existingImageCard(projectId,image,index){
+    const catOptions=IMAGE_CATEGORIES.map(v=>`<option value="${v}" ${image.category===v?"selected":""}>${v}</option>`).join("");
+    const subOptions=INDIVIDUAL_SUBCATEGORIES.concat(["3D Render","Site Photos"]).filter((v,i,a)=>a.indexOf(v)===i).map(v=>`<option value="${v}" ${image.subcategory===v?"selected":""}>${v}</option>`).join("");
+    return `<div class="existing-image-card"><img src="${image.url}" alt=""><div class="existing-image-info"><h4>View ${index+1}</h4><label>Category</label><select class="existing-image-category" data-index="${index}">${catOptions}</select><label>Subcategory</label><select class="existing-image-subcategory" data-index="${index}">${subOptions}</select><div class="image-actions"><button class="replace-image-btn" onclick="replaceImage('${projectId}',${index})">Replace</button><button class="delete-image-btn" onclick="deleteImage('${projectId}',${index})">Delete</button><button class="save-image-meta-btn" onclick="saveImageMeta('${projectId}',${index})">Save</button></div></div></div>`;
+}
+
+window.editProject=async function(id){
+    document.querySelector("#projectManagement h2").textContent="Editing Project";
+    const snapshot=await getDoc(doc(db,"projects",id)); if(!snapshot.exists()) return;
+    const project=snapshot.data(); editingProjectId=id;
+    document.getElementById("projectTitle").value=project.title||"";
+    document.getElementById("projectDescription").value=project.description||"";
+    document.getElementById("projectCategory").value=project.category||"";
+    document.getElementById("projectSubcategory").value=project.subcategory||"";
+    document.getElementById("projectWorkType").value=project.workType||"";
+    document.getElementById("projectLocation").value=project.location||"";
+    document.getElementById("projectArea").value=project.area||"";
+    document.getElementById("projectYear").value=project.year||"";
+    document.getElementById("projectStatus").value=project.status||"";
+    setFeaturedValue(project.featured===true);
+    const existing=document.getElementById("existingImages"); existing.innerHTML="";
+    (project.images||[]).forEach((image,index)=> existing.insertAdjacentHTML("beforeend",existingImageCard(id,image,index)));
+    saveProjectBtn.textContent="Update Project";
+    document.getElementById("projectManagement").scrollIntoView({behavior:"smooth",block:"start"});
 };
+
+window.saveImageMeta=async function(projectId,index){
+    try{
+        const projectRef=doc(db,"projects",projectId); const snap=await getDoc(projectRef); if(!snap.exists()) return;
+        const project=snap.data(); const card=document.querySelector(`.existing-image-card:nth-child(${index+1})`);
+        if(!card) return;
+        const category=card.querySelector(".existing-image-category").value;
+        const subcategory=card.querySelector(".existing-image-subcategory").value;
+        if(!category||!subcategory){alert("Please select both category and subcategory.");return;}
+        project.images[index]={...project.images[index],category,subcategory};
+        await updateDoc(projectRef,{images:project.images});
+        alert("Image details saved successfully.");
+        await editProject(projectId);
+    }catch(error){console.error(error);alert(error.message);}
+};
+
+window.deleteImage=async function(projectId,imageIndex){
+    if(!confirm("Delete this image?")) return;
+    try{
+        const projectRef=doc(db,"projects",projectId); const snapshot=await getDoc(projectRef); const project=snapshot.data(); const image=project.images[imageIndex];
+        if(image?.path){try{await deleteObject(ref(storage,image.path));}catch(e){console.log("Old image not found");}}
+        project.images.splice(imageIndex,1); await updateDoc(projectRef,{images:project.images}); await editProject(projectId);
+    }catch(error){console.error(error);alert(error.message);}
+};
+
+window.replaceImage=async function(projectId,imageIndex){
+    const picker=document.getElementById("replaceImageInput"); picker.value="";
+    picker.onchange=async e=>{
+        const file=e.target.files[0]; if(!file)return;
+        try{
+            const projectRef=doc(db,"projects",projectId); const snapshot=await getDoc(projectRef); const project=snapshot.data(); const oldImage=project.images[imageIndex];
+            const storageRef=ref(storage,`projects/${Date.now()}-replace-${file.name}`);
+            progressFill.style.width="0%";progressPercent.textContent="0%";progressText.textContent="Starting Upload...";
+            const uploadTask=uploadBytesResumable(storageRef,file);
+            await new Promise((resolve,reject)=>uploadTask.on("state_changed",snap=>{const p=Math.round((snap.bytesTransferred/snap.totalBytes)*100);progressFill.style.width=p+"%";progressPercent.textContent=p+"%";progressText.textContent=`Replacing Image... ${p}%`;},reject,resolve));
+            const url=await getDownloadURL(storageRef);
+            if(oldImage?.path){try{await deleteObject(ref(storage,oldImage.path));}catch(e){console.log("Old image already missing");}}
+            project.images[imageIndex]={url,path:storageRef.fullPath,category:oldImage.category||"",subcategory:oldImage.subcategory||""};
+            await updateDoc(projectRef,{images:project.images}); progressFill.style.width="100%";progressPercent.textContent="100%";progressText.textContent="Image Replaced Successfully ✓"; await editProject(projectId); alert("Image Replaced Successfully");
+        }catch(error){console.error(error);alert(error.message);}
+    }; picker.click();
+};
+
 loadProjects();
 async function loadDashboardStats() {
 

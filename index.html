@@ -74,6 +74,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/portfolio.css" />
 </head>
 
 <body>
@@ -144,7 +145,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
             <a href="services.html">Services</a>
 
-            <a href="#portfolio">Portfolio</a>
+            <a href="portfolio.html">Portfolio</a>
 
             <a href="blog.html">Blog</a>
 
@@ -799,79 +800,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 
 
-    <!-- Portfolio -->
-    <section class="portfolio-section" id="portfolio">
-
+    <!-- Featured Portfolio -->
+    <section class="portfolio-section featured-portfolio-section" id="portfolio">
         <div class="container">
-
             <div class="section-heading center">
-
                 <span class="section-tag">Portfolio</span>
-
-                <h2>
-                    Spaces imagined,
-                    visualized, and brought to life.
-                </h2>
-
+                <h2>Spaces imagined, visualized, and brought to life.</h2>
             </div>
-
-            <!-- Filters -->
-            <div class="portfolio-filters">
-
-                <button
-    class="active"
-    data-filter="all">
-
-    Featured Projects
-
-</button>
-
-<button
-    data-filter="Elevation">
-
-    Elevation
-
-</button>
-
-<button
-    data-filter="Interiors">
-
-    Interiors
-
-</button>
-
-<button
-    data-filter="Ceiling Design">
-
-    Ceiling Design
-
-</button>
-
-<button
-    data-filter="Construction">
-
-    Construction
-
-</button>
-
-<button
-    data-filter="3D Renders">
-
-    3D Renders
-
-</button>
-
+            <div id="portfolioGrid" class="portfolio-grid featured-project-grid"></div>
+            <div class="portfolio-view-all-wrap">
+                <a href="portfolio.html" class="primary-btn">View All Projects</a>
             </div>
-
-            <!-- Grid -->
-            <div
-    id="portfolioGrid"
-    class="portfolio-grid">
-
-</div>
-
         </div>
-
     </section>
 
     <!-- Testimonials -->
@@ -2120,10 +2060,7 @@ design....Awesome
 <!-- Animations JS -->
 <script src="js/animations.js"></script>
 
-<script
-    type="module"
-    src="js/portfolio.js">
-</script>
+<script type="module" src="js/portfolio.js"></script>
 
 <div
     id="projectModal"
@@ -2140,7 +2077,8 @@ design....Awesome
 
         </span>
 
-        <div class="modal-image-wrapper">
+        <div id="modalGalleryTabs" class="modal-gallery-tabs"></div>
+<div class="modal-image-wrapper">
 
     <button
         id="prevImageBtn"
@@ -2195,6 +2133,12 @@ design....Awesome
         <strong>Status:</strong>
         <span id="modalStatus"></span>
     </p>
+
+    <div class="project-modal-actions">
+        <button type="button" id="shareProjectBtn" class="project-share-btn">
+            <i class="fa-solid fa-share-nodes"></i> Share Project
+        </button>
+    </div>
 
 </div>
 
