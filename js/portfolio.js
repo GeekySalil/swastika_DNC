@@ -6,40 +6,40 @@ import {
 
 const PAGE_SIZE = 20;
 
-const INDIVIDUAL_SUBCATEGORIES = [
-    "All Rooms",
-    "Bedroom TV Unit",
-    "Bedroom",
-    "Ceiling",
-    "Corridor",
-    "Lounge",
-    "Reception",
-    "DP Shop",
-    "Drawing",
-    "Wardrobe",
-    "Kitchen",
-    "Living",
-    "Living-Dining",
-    "Living-Pooja",
-    "Living-TV Unit",
-    "Living-Vanity",
-    "Living Room",
-    "Main Door",
-    "Office",
-    "Office Ceiling",
-    "Office Chair",
-    "Office Toilet",
-    "Porch Ceiling",
-    "Temple",
-    "Bathroom",
-    "TV Unit",
-    "Lift Lobby",
-    "PG Room",
-    "Double Height Living",
-    "Living Ceiling",
-    "Reception Pooja",
-    "Staircase"
+
+/* =========================================================
+   IMAGE TAG TAXONOMY
+   ========================================================= */
+
+const IMAGE_CATEGORIES = [
+    "living",
+    "ceiling",
+    "bedroom",
+    "kitchen",
+    "staircase",
+    "lobby",
+    "lounge",
+    "tv-unit",
+    "bathroom",
+    "temple",
+    "wardrobe",
+    "drawing",
+    "office",
+    "shop",
+    "corridor",
+    "reception"
 ];
+
+const INDIVIDUAL_DECOR_EXCLUDED_CATEGORIES = [
+    "3d-render",
+    "site-photos"
+];
+
+let activeDesignBuildFilter = "3d-render";
+
+let activeIndividualCategory = "ceiling";
+
+let activeIndividualSubcategory = "all";
 
 let allProjects = [];
 let currentProject = null;
@@ -47,8 +47,204 @@ let currentImageIndex = 0;
 let currentViewerImages = [];
 let currentViewerContext = 0;
 let currentPage = 1;
+let currentViewerMode = "project";
+
+/* =========================================================
+   PORTFOLIO PERFORMANCE CACHE
+   ========================================================= */
+
+const PORTFOLIO_CACHE_KEY =
+    "sdnc_portfolio_cache_v1";
+
+const PORTFOLIO_CACHE_TTL =
+    10 * 60 * 1000; // 10 minutes
+/* =========================================================
+   PORTFOLIO DATA CHANGE DETECTION
+   ========================================================= */
+
+const PORTFOLIO_DATA_VERSION_KEY =
+    "sdnc_portfolio_data_version";
+
+let portfolioDataVersion =
+    localStorage.getItem(
+        PORTFOLIO_DATA_VERSION_KEY
+    ) || "";
 
 
+window.addEventListener(
+    "storage",
+    event => {
+
+        if (
+            event.key !==
+            PORTFOLIO_DATA_VERSION_KEY
+        ) {
+            return;
+        }
+
+        if (
+            !event.newValue ||
+            event.newValue ===
+            portfolioDataVersion
+        ) {
+            return;
+        }
+
+        portfolioDataVersion =
+            event.newValue;
+
+        sessionStorage.removeItem(
+            PORTFOLIO_CACHE_KEY
+        );
+
+        loadPortfolio();
+    }
+);
+
+function readPortfolioCache() {
+
+    try {
+
+        const raw =
+            sessionStorage.getItem(
+                PORTFOLIO_CACHE_KEY
+            );
+
+        if (!raw) {
+            return null;
+        }
+
+        const cached =
+            JSON.parse(raw);
+
+        if (
+            !cached ||
+            !Array.isArray(
+                cached.projects
+            )
+        ) {
+            return null;
+        }
+
+        const savedAt =
+            Number(
+                cached.savedAt
+            );
+
+        if (
+            !savedAt ||
+            Date.now() - savedAt >
+                PORTFOLIO_CACHE_TTL
+        ) {
+            sessionStorage.removeItem(
+                PORTFOLIO_CACHE_KEY
+            );
+
+            return null;
+        }
+
+        return cached.projects;
+
+    } catch (error) {
+
+        console.warn(
+            "Portfolio cache read failed:",
+            error
+        );
+
+        return null;
+    }
+}
+
+
+function writePortfolioCache(
+    projects
+) {
+
+    try {
+
+        sessionStorage.setItem(
+            PORTFOLIO_CACHE_KEY,
+            JSON.stringify({
+                savedAt: Date.now(),
+                projects
+            })
+        );
+
+    } catch (error) {
+
+        /*
+         * Storage quota errors must never
+         * break the portfolio.
+         */
+
+        console.warn(
+            "Portfolio cache write failed:",
+            error
+        );
+
+    }
+}
+
+
+function renderLoadedPortfolio() {
+
+    /* Update project/category counters */
+    updatePortfolioCategoryCounters();
+
+
+    if (isPortfolioPage()) {
+
+        renderPortfolioMain();
+
+    } else {
+
+        renderFeatured();
+
+    }
+}
+
+
+function getSharedProjectId() {
+
+    return new URLSearchParams(
+        window.location.search
+    ).get("project");
+
+}
+
+
+function tryOpenSharedProject() {
+
+    const projectId =
+        getSharedProjectId();
+
+    if (!projectId) {
+        return false;
+    }
+
+    const projectExists =
+        allProjects.some(
+            project =>
+                project.id ===
+                projectId
+        );
+
+    if (!projectExists) {
+        return false;
+    }
+
+    setTimeout(() => {
+
+        openProjectModal(
+            projectId,
+            0
+        );
+
+    }, 0);
+
+    return true;
+}
 /* =========================================================
    HELPERS
    ========================================================= */
@@ -69,6 +265,121 @@ function esc(value) {
         "'": "&#39;",
         '"': "&quot;"
     }[char]));
+}
+
+/* =========================================================
+   IMAGE TAG HELPERS
+   ========================================================= */
+
+function normalizeImageTag(value) {
+
+    return String(value ?? "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "-");
+}
+
+
+function prettyImageTag(value) {
+
+    return String(value ?? "")
+        .replace(/[-_]+/g, " ")
+        .replace(/\b\w/g, char =>
+            char.toUpperCase()
+        );
+}
+
+
+function getImageTags(image) {
+
+    if (
+        !image ||
+        !Array.isArray(image.tags)
+    ) {
+        return [];
+    }
+
+    return image.tags
+        .map(tag => {
+
+            if (
+                !tag ||
+                !tag.category
+            ) {
+                return null;
+            }
+
+            return {
+                category:
+                    normalizeImageTag(
+                        tag.category
+                    ),
+
+                subcategories:
+                    Array.isArray(
+                        tag.subcategories
+                    )
+                        ? tag.subcategories
+                            .map(
+                                normalizeImageTag
+                            )
+                            .filter(Boolean)
+                        : []
+            };
+
+        })
+        .filter(Boolean);
+}
+
+
+function imageHasCategory(
+    image,
+    category
+) {
+
+    if (
+        category === "all"
+    ) {
+        return true;
+    }
+
+    return getImageTags(image)
+        .some(
+            tag =>
+                tag.category ===
+                category
+        );
+}
+
+
+function imageHasSubcategory(
+    image,
+    category,
+    subcategory
+) {
+
+    if (
+        subcategory === "all"
+    ) {
+        return true;
+    }
+
+    return getImageTags(image)
+        .some(tag => {
+
+            if (
+                tag.category !==
+                category
+            ) {
+                return false;
+            }
+
+            return tag.subcategories
+                .includes(
+                    subcategory
+                );
+
+        });
 }
 
 function getPortfolioGrid() {
@@ -106,37 +417,126 @@ function displayCategory(project) {
    PROJECT CARD
    ========================================================= */
 
-function projectCard(project, image = null) {
+/* =========================================================
+   PROJECT / IMAGE CARD
+   ========================================================= */
 
-    const images = Array.isArray(project?.images)
-        ? project.images
-        : [];
+function projectCard(
+    project,
+    image = null,
+    imageIndex = 0,
+    isPriorityImage = false
+) {
 
-    const selectedImage = image || images[0];
+    const images =
+        Array.isArray(project?.images)
+            ? project.images
+            : [];
+
+    let selectedImage;
+    let selectedImageIndex = 0;
+
+    /*
+     * -----------------------------------------------------
+     * INDIVIDUAL DECOR
+     * -----------------------------------------------------
+     *
+     * When a specific image is passed, this is an
+     * Individual Decor card.
+     *
+     * Individual Decor cards show ONLY the image.
+     * No category, subcategory, project title,
+     * location, year or tag text is displayed.
+     */
+
+    if (image) {
+
+        selectedImage = image;
+        selectedImageIndex = imageIndex;
+
+    } else {
+
+        /*
+         * -------------------------------------------------
+         * NORMAL PROJECT CARD
+         * -------------------------------------------------
+         *
+         * Normal project cards use the project's
+         * saved Main Image.
+         */
+
+        const mainIndex =
+            Number.isInteger(
+                Number(project?.mainImageIndex)
+            )
+                ? Number(project.mainImageIndex)
+                : 0;
+
+        if (images[mainIndex]?.url) {
+
+            selectedImage =
+                images[mainIndex];
+
+            selectedImageIndex =
+                mainIndex;
+
+        } else {
+
+            selectedImage =
+                images[0];
+
+            selectedImageIndex = 0;
+
+        }
+
+    }
 
     if (!selectedImage?.url) {
         return "";
     }
 
-    const imageIndex = image
-        ? images.indexOf(image)
-        : 0;
+    const title =
+        esc(
+            project.title ||
+            "Untitled Project"
+        );
+
+    const location =
+        project.location
+            ? esc(project.location)
+            : "";
+
+    const year =
+        project.year
+            ? esc(project.year)
+            : "";
+
+    /*
+     * -----------------------------------------------------
+     * NORMAL PROJECT INFORMATION
+     * -----------------------------------------------------
+     *
+     * This information is ONLY used for normal
+     * project cards.
+     *
+     * Individual Decor cards intentionally have
+     * no text information below the image.
+     */
 
     const categoryLine = [
-        displayCategory(project),
+
+        displayCategory(
+            project
+        ),
+
         project.subcategory
+
     ]
         .filter(Boolean)
         .map(esc)
-        .join(' <span class="project-dot">·</span> ');
-
-    const title = esc(
-        project.title || "Untitled Project"
-    );
-
-    const location = project.location
-        ? esc(project.location)
-        : "";
+        .join(
+            ' <span class="project-dot">·</span> '
+        );
 
     return `
         <article
@@ -144,52 +544,102 @@ function projectCard(project, image = null) {
             tabindex="0"
             role="button"
             data-project-id="${esc(project.id)}"
-            data-image-index="${imageIndex >= 0 ? imageIndex : 0}"
+            data-image-index="${selectedImageIndex}"
         >
 
             <div class="portfolio-image-wrap">
 
                 <img
-                    src="${esc(selectedImage.url)}"
+                    src="${esc(
+                        selectedImage.url
+                    )}"
                     alt="${title}"
-                    loading="lazy"
+                    loading="${
+                        isPriorityImage
+                            ? "eager"
+                            : "lazy"
+                    }"
                     decoding="async"
+                    ${
+                        isPriorityImage
+                            ? 'fetchpriority="high"'
+                            : ""
+                    }
                 >
 
             </div>
 
-            <div class="portfolio-card-info">
+            ${
+                /*
+                 * Individual Decor:
+                 * DO NOT render any card information.
+                 */
+                image
+                    ? ""
+                    : `
+                        <div class="portfolio-card-info">
 
-                <h3>
-                    ${title}
-                </h3>
+                            <h3>
+                                ${title}
+                            </h3>
 
-                ${
-                    categoryLine
-                        ? `
-                            <p class="project-card-category">
-                                ${categoryLine}
-                            </p>
-                        `
-                        : ""
-                }
+                            ${
+                                categoryLine
+                                    ? `
+                                        <p class="project-card-category">
+                                            ${categoryLine}
+                                        </p>
+                                    `
+                                    : ""
+                            }
 
-                ${
-                    location
-                        ? `
-                            <p class="project-card-location">
-                                ${location}
-                            </p>
-                        `
-                        : ""
-                }
+                            ${
+                                location || year
+                                    ? `
+                                        <p class="project-card-location">
 
-            </div>
+                                            ${
+                                                location
+                                                    ? `
+                                                        <span class="project-card-location-text">
+                                                            ${location}
+                                                        </span>
+                                                    `
+                                                    : ""
+                                            }
+
+                                            ${
+                                                location && year
+                                                    ? `
+                                                        <span class="project-card-info-dot project-card-year-dot">
+                                                            ·
+                                                        </span>
+                                                    `
+                                                    : ""
+                                            }
+
+                                            ${
+                                                year
+                                                    ? `
+                                                        <span class="project-card-year">
+                                                            ${year}
+                                                        </span>
+                                                    `
+                                                    : ""
+                                            }
+
+                                        </p>
+                                    `
+                                    : ""
+                            }
+
+                        </div>
+                    `
+            }
 
         </article>
     `;
 }
-
 
 /* =========================================================
    SKELETON
@@ -218,86 +668,391 @@ function showSkeleton() {
    FILTER PROJECTS
    ========================================================= */
 
-function getProjectsForMainTab() {
+/* =========================================================
+   FILTER IMAGES USING NEW IMAGE TAG SYSTEM
+   ========================================================= */
+/* =========================================================
+   PORTFOLIO CATEGORY COUNTERS
+   ========================================================= */
 
-    const activeTab =
-        $(".portfolio-main-tabs .active")?.dataset.tab ||
-        "all";
+function updatePortfolioCategoryCounters() {
+
+    const mainTabs =
+        document.querySelector(
+            ".portfolio-main-tabs"
+        );
+
+    if (!mainTabs) {
+        return;
+    }
 
 
-    /* -----------------------------------------
-       INDIVIDUAL DECOR
-       ----------------------------------------- */
+    /*
+     * Count actual projects by project-level category.
+     *
+     * Individual Decor is different:
+     * it displays individual image cards,
+     * so its counter counts matching images.
+     */
 
-    if (activeTab === "individual") {
+    const counts = {
 
-        const activeSubcategory =
-            $(".individual-subtabs .active")
-                ?.dataset.subcategory ||
-            "all";
+        all:
+            allProjects.filter(
+                project =>
+                    [
+                        "Design + Build",
+                        "Interiors",
+                        "Elevation"
+                    ].includes(
+                        project?.category
+                    )
+            ).length,
 
-        const items = [];
+        "Design + Build":
+            allProjects.filter(
+                project =>
+                    project?.category ===
+                    "Design + Build"
+            ).length,
 
-        allProjects.forEach(project => {
+        "Interiors":
+            allProjects.filter(
+                project =>
+                    project?.category ===
+                    "Interiors"
+            ).length,
 
-            const images = Array.isArray(project.images)
+        "Elevation":
+            allProjects.filter(
+                project =>
+                    project?.category ===
+                    "Elevation"
+            ).length,
+
+        individual:
+            getIndividualDecorImageCount()
+
+    };
+
+
+    /*
+     * Update the visible text of every
+     * main portfolio tab.
+     */
+
+    mainTabs
+        .querySelectorAll(
+            "button[data-tab]"
+        )
+        .forEach(button => {
+
+            const tab =
+                button.dataset.tab;
+
+            const count =
+                counts[tab];
+
+            if (
+                typeof count !==
+                "number"
+            ) {
+                return;
+            }
+
+
+            const labels = {
+
+                all:
+                    "ALL PROJECTS",
+
+                "Design + Build":
+                    "DESIGN + BUILD",
+
+                "Interiors":
+                    "INTERIORS",
+
+                "Elevation":
+                    "ELEVATION",
+
+                individual:
+                    "INDIVIDUAL DECOR"
+
+            };
+
+
+            button.textContent =
+                `${labels[tab]} (${count})`;
+
+        });
+
+}
+
+
+/* =========================================================
+   INDIVIDUAL DECOR IMAGE COUNT
+   ========================================================= */
+
+function getIndividualDecorImageCount() {
+
+    let count = 0;
+
+
+    allProjects.forEach(project => {
+
+        const images =
+            Array.isArray(
+                project?.images
+            )
                 ? project.images
                 : [];
 
-            images.forEach(image => {
 
-                if (
-                    !INDIVIDUAL_SUBCATEGORIES.includes(
-                        image?.subcategory
-                    )
-                ) {
-                    return;
-                }
+        images.forEach(image => {
 
-                if (
-                    activeSubcategory !== "all" &&
-                    image.subcategory !== activeSubcategory
-                ) {
-                    return;
-                }
-
-                items.push({
-                    project,
+            const validTags =
+                getImageTags(
                     image
+                ).filter(tag => {
+
+                    /*
+                     * 3D Render and Site Photos
+                     * never belong to Individual Decor.
+                     */
+
+                    return (
+                        tag?.category !==
+                            "3d-render" &&
+                        tag?.category !==
+                            "site-photos"
+                    );
+
                 });
 
-            });
+
+            if (validTags.length) {
+                count++;
+            }
 
         });
+
+    });
+
+
+    return count;
+}
+/* =========================================================
+   MAIN PORTFOLIO FILTERING
+   ========================================================= */
+
+function getProjectsForMainTab() {
+
+    const activeTab =
+        $(".portfolio-main-tabs .active")
+            ?.dataset.tab || "all";
+
+
+    /* =====================================================
+       INDIVIDUAL DECOR
+       ===================================================== */
+
+    if (activeTab === "individual") {
+
+        const items = [];
+
+
+        allProjects.forEach(project => {
+
+            const images =
+                Array.isArray(project.images)
+                    ? project.images
+                    : [];
+
+
+            images.forEach(
+                (image, imageIndex) => {
+
+                    if (!image?.url) {
+                        return;
+                    }
+
+
+                    const tags =
+                        getImageTags(image);
+
+
+                    /*
+                     * Individual Decor accepts
+                     * only actual decor categories.
+                     *
+                     * 3D Render and Site Photos
+                     * are intentionally excluded.
+                     */
+
+                    const validTags =
+                        tags.filter(tag =>
+                            !INDIVIDUAL_DECOR_EXCLUDED_CATEGORIES
+                                .includes(
+                                    tag.category
+                                )
+                        );
+
+
+                    if (!validTags.length) {
+                        return;
+                    }
+
+
+                    /*
+                     * CATEGORY
+                     */
+
+                    const categoryMatch =
+                        validTags.some(
+                            tag =>
+                                tag.category ===
+                                activeIndividualCategory
+                        );
+
+
+                    if (!categoryMatch) {
+                        return;
+                    }
+
+
+                    /*
+                     * SUBCATEGORY
+                     */
+
+                    if (
+                        activeIndividualSubcategory !==
+                        "all"
+                    ) {
+
+                        const subcategoryMatch =
+                            validTags.some(tag => {
+
+                                if (
+                                    tag.category !==
+                                    activeIndividualCategory
+                                ) {
+                                    return false;
+                                }
+
+
+                                return (
+                                    tag.subcategories ||
+                                    []
+                                ).includes(
+                                    activeIndividualSubcategory
+                                );
+
+                            });
+
+
+                        if (!subcategoryMatch) {
+                            return;
+                        }
+
+                    }
+
+
+                    /*
+                     * IMPORTANT:
+                     *
+                     * Add ONLY the matching image.
+                     * Never add the complete project.
+                     */
+
+                    items.push({
+                        project,
+                        image,
+                        imageIndex
+                    });
+
+                }
+            );
+
+        });
+
 
         return items;
     }
 
 
-    /* -----------------------------------------
+    /* =====================================================
        ALL PROJECTS
-       ----------------------------------------- */
+       ===================================================== */
 
     if (activeTab === "all") {
-        return allProjects;
+
+        return allProjects.filter(
+            project =>
+                [
+                    "Design + Build",
+                    "Interiors",
+                    "Elevation"
+                ].includes(
+                    project.category
+                )
+        );
+
     }
 
 
-    /* -----------------------------------------
-       CATEGORY
-       ----------------------------------------- */
+    /* =====================================================
+       DESIGN + BUILD
+       ===================================================== */
 
-    return allProjects.filter(project => {
+    if (
+        activeTab === "Design + Build"
+    ) {
 
-        return String(project.category || "")
-            .toLowerCase() ===
-            String(activeTab || "")
-                .toLowerCase();
+        return allProjects.filter(
+            project =>
+                project.category ===
+                "Design + Build"
+        );
 
-    });
+    }
+
+
+    /* =====================================================
+       INTERIORS
+       ===================================================== */
+
+    if (
+        activeTab === "Interiors"
+    ) {
+
+        return allProjects.filter(
+            project =>
+                project.category ===
+                "Interiors"
+        );
+
+    }
+
+
+    /* =====================================================
+       ELEVATION
+       ===================================================== */
+
+    if (
+        activeTab === "Elevation"
+    ) {
+
+        return allProjects.filter(
+            project =>
+                project.category ===
+                "Elevation"
+        );
+
+    }
+
+
+    return [];
 }
-
-
 /* =========================================================
    FEATURED PROJECTS
    ========================================================= */
@@ -314,17 +1069,25 @@ function renderFeatured() {
         .filter(project => project.featured === true)
         .slice(0, 6);
 
-    grid.innerHTML = featured.length
+   grid.innerHTML = featured.length
 
-        ? featured
-            .map(project => projectCard(project))
-            .join("")
+    ? featured
+        .map(
+            (project, index) =>
+                projectCard(
+                    project,
+                    null,
+                    0,
+                    index === 0
+                )
+        )
+        .join("")
 
-        : `
-            <p class="portfolio-empty">
-                No featured projects available.
-            </p>
-        `;
+    : `
+        <p class="portfolio-empty">
+            No featured projects available.
+        </p>
+    `;
 }
 
 
@@ -332,57 +1095,109 @@ function renderFeatured() {
    PORTFOLIO MAIN GRID
    ========================================================= */
 
+/* =========================================================
+   PORTFOLIO MAIN GRID
+   ========================================================= */
+
 function renderPortfolioMain() {
 
-    const grid = getPortfolioGrid();
+    const grid =
+        getPortfolioGrid();
+
 
     if (!grid) {
         return;
     }
 
-    const projects = getProjectsForMainTab();
 
-    const totalPages = Math.max(
-        1,
-        Math.ceil(projects.length / PAGE_SIZE)
-    );
+    const items =
+        getProjectsForMainTab();
 
-    currentPage = Math.min(
-        Math.max(1, currentPage),
-        totalPages
-    );
+
+    const totalPages =
+        Math.max(
+            1,
+            Math.ceil(
+                items.length /
+                PAGE_SIZE
+            )
+        );
+
+
+    currentPage =
+        Math.min(
+            Math.max(
+                1,
+                currentPage
+            ),
+            totalPages
+        );
+
 
     const start =
-        (currentPage - 1) * PAGE_SIZE;
+        (
+            currentPage - 1
+        ) * PAGE_SIZE;
+
 
     const visibleItems =
-        projects.slice(
+        items.slice(
             start,
             start + PAGE_SIZE
         );
+const activeTab =
+    $(".portfolio-main-tabs .active")
+        ?.dataset.tab || "all";
 
-    grid.innerHTML = visibleItems
-        .map(item => {
+const emptyMessage =
+    activeTab === "individual"
+        ? "No images found for this filter."
+        : "No projects found for this filter.";
 
-            if (item.image) {
+    grid.innerHTML =
+    visibleItems
+        .map(
+            (item, index) => {
+
+                const activeTab =
+                    $(".portfolio-main-tabs .active")
+                        ?.dataset.tab || "all";
+
+                if (
+                    activeTab ===
+                    "individual"
+                ) {
+
+                    return projectCard(
+                        item.project,
+                        item.image,
+                        item.imageIndex,
+                        index === 0
+                    );
+
+                }
+
                 return projectCard(
-                    item.project,
-                    item.image
+                    item,
+                    null,
+                    0,
+                    index === 0
                 );
+
             }
-
-            return projectCard(item);
-
-        })
+        )
         .join("")
+    ||
+    `
+        <p class="portfolio-empty">
+            ${emptyMessage}
+        </p>
+    `;
 
-        || `
-            <p class="portfolio-empty">
-                No projects available.
-            </p>
-        `;
 
-    renderPagination(totalPages);
+    renderPagination(
+        totalPages
+    );
 }
 
 
@@ -520,107 +1335,620 @@ function renderPagination(totalPages) {
    PORTFOLIO TABS
    ========================================================= */
 
+/* =========================================================
+   PORTFOLIO IMAGE CATEGORY TABS
+   ========================================================= */
+
+/* =========================================================
+   PORTFOLIO TAB SYSTEM
+   ========================================================= */
+
 function setupTabs() {
 
-    $all(
-        ".portfolio-main-tabs button"
-    ).forEach(button => {
+    const mainTabs =
+        document.querySelector(
+            ".portfolio-main-tabs"
+        );
 
-        button.addEventListener(
-            "click",
-            () => {
 
-                $all(
-                    ".portfolio-main-tabs button"
-                ).forEach(item => {
+    if (!mainTabs) {
+        return;
+    }
 
-                    item.classList.remove(
-                        "active"
-                    );
 
-                });
+    /* =====================================================
+       MAIN CATEGORY TABS
+       ===================================================== */
 
-                button.classList.add(
-                    "active"
+    mainTabs
+        .querySelectorAll(
+            "button[data-tab]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        mainTabs
+                            .querySelectorAll(
+                                "button[data-tab]"
+                            )
+                            .forEach(
+                                item => {
+
+                                    item.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+                            );
+
+
+                        button.classList.add(
+                            "active"
+                        );
+
+
+                        const tab =
+                            button.dataset.tab;
+
+
+                       /* Reset Individual Decor filters */
+
+activeIndividualCategory =
+    "ceiling";
+
+activeIndividualSubcategory =
+    "all";
+
+
+                        /* -------------------------
+                           DESIGN + BUILD
+                           ------------------------- */
+
+                        const designBuildWrap =
+                            document.getElementById(
+                                "designBuildTabsWrap"
+                            );
+
+
+                        if (
+                            designBuildWrap
+                        ) {
+
+                            designBuildWrap.hidden =
+                                tab !==
+                                "Design + Build";
+
+                        }
+
+
+                        /* -------------------------
+                           INDIVIDUAL DECOR
+                           ------------------------- */
+
+                        const individualWrap =
+                            document.getElementById(
+                                "individualSubtabsWrap"
+                            );
+
+
+                        if (
+                            individualWrap
+                        ) {
+
+                            individualWrap.hidden =
+                                tab !==
+                                "individual";
+
+                        }
+
+
+                        currentPage =
+                            1;
+
+
+                        if (
+                            tab ===
+                            "individual"
+                        ) {
+
+                            renderIndividualCategoryTabs();
+
+                        }
+
+
+                        renderPortfolioMain();
+
+                    }
                 );
 
+            }
+        );
 
-                const subcategoryWrap =
-                    document.getElementById(
-                        "individualSubtabsWrap"
-                    );
 
-                if (subcategoryWrap) {
+    /* =====================================================
+       DESIGN + BUILD TABS
+       ===================================================== */
 
-                    subcategoryWrap.hidden =
-                        button.dataset.tab !==
-                        "individual";
+    const designBuildTabs =
+        document.getElementById(
+            "designBuildTabs"
+        );
+
+
+    designBuildTabs
+        ?.querySelectorAll(
+            "button[data-design-build-filter]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        designBuildTabs
+                            .querySelectorAll(
+                                "button"
+                            )
+                            .forEach(
+                                item =>
+                                    item.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+
+                        button.classList.add(
+                            "active"
+                        );
+
+
+                       activeDesignBuildFilter =
+    normalizeImageTag(
+        button.dataset
+            .designBuildFilter
+    );
+
+                    }
+                );
+
+            }
+        );
+}
+
+/* =========================================================
+   INDIVIDUAL DECOR CATEGORY TABS
+   ========================================================= */
+
+function renderIndividualCategoryTabs() {
+
+    const container =
+        document.getElementById(
+            "individualSubtabs"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    const availableCategories =
+        new Set();
+
+
+    allProjects.forEach(project => {
+
+        const images =
+            Array.isArray(project.images)
+                ? project.images
+                : [];
+
+
+        images.forEach(image => {
+
+            getImageTags(image)
+    .forEach(tag => {
+
+        if (
+            INDIVIDUAL_DECOR_EXCLUDED_CATEGORIES.includes(
+                tag.category
+            )
+        ) {
+            return;
+        }
+
+        availableCategories.add(
+            tag.category
+        );
+
+    });
+
+        });
+
+    });
+
+
+    /*
+     * Ceiling is the default category.
+     * Other categories follow alphabetically.
+     */
+
+    const categories =
+        Array.from(
+            availableCategories
+        ).sort((a, b) => {
+
+            if (a === "ceiling") return -1;
+            if (b === "ceiling") return 1;
+
+            return prettyImageTag(a)
+                .localeCompare(
+                    prettyImageTag(b)
+                );
+
+        });
+
+
+    container.innerHTML =
+        categories
+            .map(category => `
+                <button
+                    type="button"
+                    class="${
+                        activeIndividualCategory ===
+                        category
+                            ? "active"
+                            : ""
+                    }"
+                    data-individual-category="${esc(
+                        category
+                    )}"
+                >
+                    ${prettyImageTag(
+                        category
+                    )}
+                </button>
+            `)
+            .join("");
+
+
+    container
+        .querySelectorAll(
+            "[data-individual-category]"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    activeIndividualCategory =
+                        normalizeImageTag(
+                            button.dataset
+                                .individualCategory
+                        );
+
+
+                    activeIndividualSubcategory =
+                        "all";
+
+
+                    container
+                        .querySelectorAll(
+                            "[data-individual-category]"
+                        )
+                        .forEach(item => {
+
+                            item.classList.toggle(
+                                "active",
+                                item === button
+                            );
+
+                        });
+
+
+                    renderIndividualSubcategoryTabs();
+
+
+                    currentPage = 1;
+
+                    renderPortfolioMain();
 
                 }
+            );
+
+        });
 
 
-                currentPage = 1;
+    renderIndividualSubcategoryTabs();
+}
 
-                renderPortfolioMain();
+/* =========================================================
+   INDIVIDUAL DECOR SUBCATEGORIES
+   ========================================================= */
 
-            }
+function renderIndividualSubcategoryTabs() {
+
+    const category =
+        activeIndividualCategory;
+
+
+    let existingWrap =
+        document.getElementById(
+            "individualImageSubcategoryWrap"
         );
 
-    });
+
+    /*
+     * "All Rooms" does not need another
+     * subcategory row.
+     */
+
+    if (
+        category === "all"
+    ) {
+
+        if (existingWrap) {
+            existingWrap.remove();
+        }
+
+        return;
+    }
 
 
-    $all(
-        ".individual-subtabs button"
-    ).forEach(button => {
+    const subcategories =
+        new Set();
 
-        button.addEventListener(
-            "click",
-            () => {
 
-                $all(
-                    ".individual-subtabs button"
-                ).forEach(item => {
+    allProjects.forEach(
+        project => {
 
-                    item.classList.remove(
-                        "active"
+            const images =
+                Array.isArray(
+                    project.images
+                )
+                    ? project.images
+                    : [];
+
+
+            images.forEach(
+                image => {
+
+                    getImageTags(
+                        image
+                    ).forEach(
+                        tag => {
+
+                            if (
+                                tag.category !==
+                                category
+                            ) {
+                                return;
+                            }
+
+
+                            (
+                                tag.subcategories ||
+                                []
+                            ).forEach(
+                                subcategory => {
+
+                                    subcategories.add(
+                                        subcategory
+                                    );
+
+                                }
+                            );
+
+                        }
                     );
 
-                });
+                }
+            );
 
-                button.classList.add(
-                    "active"
+        }
+    );
+
+
+    const values =
+        Array.from(
+            subcategories
+        ).sort(
+            (a, b) =>
+                prettyImageTag(a)
+                    .localeCompare(
+                        prettyImageTag(b)
+                    )
+        );
+
+
+   
+
+
+    /*
+     * Create subcategory container
+     * immediately below Individual
+     * Decor category tabs.
+     */
+
+    if (!existingWrap) {
+
+        existingWrap =
+            document.createElement(
+                "div"
+            );
+
+        existingWrap.id =
+            "individualImageSubcategoryWrap";
+
+        existingWrap.className =
+            "individual-subtabs";
+
+        const categoryWrap =
+            document.getElementById(
+                "individualSubtabsWrap"
+            );
+
+
+        categoryWrap?.appendChild(
+            existingWrap
+        );
+
+    }
+
+
+    existingWrap.innerHTML = `
+
+        <button
+            type="button"
+            class="${
+                activeIndividualSubcategory ===
+                "all"
+                    ? "active"
+                    : ""
+            }"
+            data-individual-subcategory="all"
+        >
+            All ${prettyImageTag(
+                category
+            )}
+        </button>
+
+        ${
+            values
+                .map(
+                    value => `
+                        <button
+                            type="button"
+                            class="${
+                                activeIndividualSubcategory ===
+                                value
+                                    ? "active"
+                                    : ""
+                            }"
+                            data-individual-subcategory="${esc(
+                                value
+                            )}"
+                        >
+                            ${prettyImageTag(
+                                value
+                            )}
+                        </button>
+                    `
+                )
+                .join("")
+        }
+
+    `;
+
+
+    existingWrap
+        .querySelectorAll(
+            "[data-individual-subcategory]"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        activeIndividualSubcategory =
+                            normalizeImageTag(
+                                button.dataset
+                                    .individualSubcategory
+                            );
+
+
+                        existingWrap
+                            .querySelectorAll(
+                                "[data-individual-subcategory]"
+                            )
+                            .forEach(
+                                item =>
+                                    item.classList.toggle(
+                                        "active",
+                                        item === button
+                                    )
+                            );
+
+
+                        currentPage =
+                            1;
+
+
+                        renderPortfolioMain();
+
+                    }
                 );
-
-                currentPage = 1;
-
-                renderPortfolioMain();
 
             }
         );
-
-    });
 }
+/* =========================================================
+   BUILD SUBCATEGORY TABS
+   ========================================================= */
+
+
 
 
 /* =========================================================
    VIEWER IMAGE SETS
    ========================================================= */
 
+/* =========================================================
+   PROJECT VIEWER IMAGE SETS
+   ========================================================= */
+
 function viewerSets(project) {
 
-    const images = Array.isArray(project?.images)
-        ? project.images
-        : [];
+    const images =
+        Array.isArray(
+            project?.images
+        )
+            ? project.images
+            : [];
 
-    const category =
-        project?.category || "";
 
-
-    /* -----------------------------------------
+    /* =====================================================
        DESIGN + BUILD
-       ----------------------------------------- */
+       ===================================================== */
 
-    if (category === "Design + Build") {
+    if (
+        project?.category ===
+        "Design + Build"
+    ) {
+
+        const renderImages =
+            images.filter(
+                image =>
+                    getImageTags(
+                        image
+                    ).some(
+                        tag =>
+                            tag.category ===
+                            "3d-render"
+                    )
+            );
+
+
+        const siteImages =
+            images.filter(
+                image =>
+                    getImageTags(
+                        image
+                    ).some(
+                        tag =>
+                            tag.category ===
+                            "site-photos"
+                    )
+            );
+
 
         return {
 
@@ -630,34 +1958,22 @@ function viewerSets(project) {
             ],
 
             sets: [
-
-                images.filter(
-                    image =>
-                        image?.category ===
-                            "Design + Build" &&
-                        image?.subcategory ===
-                            "3D Render"
-                ),
-
-                images.filter(
-                    image =>
-                        image?.category ===
-                            "Design + Build" &&
-                        image?.subcategory ===
-                            "Site Photos"
-                )
-
+                renderImages,
+                siteImages
             ]
 
         };
     }
 
 
-    /* -----------------------------------------
+    /* =====================================================
        INTERIORS
-       ----------------------------------------- */
+       ===================================================== */
 
-    if (category === "Interiors") {
+    if (
+        project?.category ===
+        "Interiors"
+    ) {
 
         return {
 
@@ -666,24 +1982,22 @@ function viewerSets(project) {
             ],
 
             sets: [
-
-                images.filter(
-                    image =>
-                        image?.category ===
-                        "Interiors"
-                )
-
+                images
             ]
 
         };
+
     }
 
 
-    /* -----------------------------------------
+    /* =====================================================
        ELEVATION
-       ----------------------------------------- */
+       ===================================================== */
 
-    if (category === "Elevation") {
+    if (
+        project?.category ===
+        "Elevation"
+    ) {
 
         return {
 
@@ -692,22 +2006,17 @@ function viewerSets(project) {
             ],
 
             sets: [
-
-                images.filter(
-                    image =>
-                        image?.category ===
-                        "Elevation"
-                )
-
+                images
             ]
 
         };
+
     }
 
 
-    /* -----------------------------------------
-       INDIVIDUAL
-       ----------------------------------------- */
+    /* =====================================================
+       OTHER PROJECTS
+       ===================================================== */
 
     return {
 
@@ -727,6 +2036,285 @@ function viewerSets(project) {
    VIEWER
    ========================================================= */
 
+   /* =========================================================
+   FULLSCREEN IMAGE VIEWER
+   ========================================================= */
+
+let fullscreenViewer = null;
+let fullscreenImage = null;
+
+
+/* -----------------------------------------
+   CREATE FULLSCREEN VIEWER
+   ----------------------------------------- */
+
+function createFullscreenViewer() {
+
+    if (fullscreenViewer) {
+        return;
+    }
+
+    fullscreenViewer =
+        document.createElement("div");
+
+    fullscreenViewer.className =
+        "project-fullscreen-viewer";
+
+    fullscreenViewer.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    fullscreenViewer.innerHTML = `
+
+    <button
+        type="button"
+        class="project-fullscreen-close"
+        id="projectFullscreenClose"
+        aria-label="Zoom out"
+        title="Zoom out"
+    >
+        ×
+    </button>
+
+    <button
+        type="button"
+        class="project-fullscreen-nav project-fullscreen-prev"
+        id="projectFullscreenPrev"
+        aria-label="Previous image"
+        title="Previous image"
+    >
+        <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <img
+        class="project-fullscreen-image"
+        id="projectFullscreenImage"
+        alt=""
+    >
+
+    <button
+        type="button"
+        class="project-fullscreen-nav project-fullscreen-next"
+        id="projectFullscreenNext"
+        aria-label="Next image"
+        title="Next image"
+    >
+        <i class="fas fa-chevron-right"></i>
+    </button>
+
+`;
+
+
+    document.body.appendChild(
+        fullscreenViewer
+    );
+
+
+    fullscreenImage =
+        document.getElementById(
+            "projectFullscreenImage"
+        );
+
+
+    document
+        .getElementById(
+            "projectFullscreenClose"
+        )
+        ?.addEventListener(
+            "click",
+            closeFullscreenImage
+        );
+
+document
+    .getElementById(
+        "projectFullscreenPrev"
+    )
+    ?.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+            moveFullscreenImage(-1);
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "projectFullscreenNext"
+    )
+    ?.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+            moveFullscreenImage(1);
+
+        }
+    );
+    /* Clicking the black background also closes it */
+
+    fullscreenViewer.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                fullscreenViewer
+            ) {
+
+                closeFullscreenImage();
+
+            }
+
+        }
+    );
+
+}
+
+/* =========================================================
+   FULLSCREEN IMAGE NAVIGATION
+   ========================================================= */
+
+function moveFullscreenImage(direction) {
+
+    if (
+        !currentViewerImages.length
+    ) {
+        return;
+    }
+
+
+    currentImageIndex =
+        (
+            currentImageIndex +
+            direction +
+            currentViewerImages.length
+        ) %
+        currentViewerImages.length;
+
+
+    const image =
+        currentViewerImages[
+            currentImageIndex
+        ];
+
+
+    if (
+        !image?.url ||
+        !fullscreenImage
+    ) {
+        return;
+    }
+
+
+    fullscreenImage.src =
+        image.url;
+
+    fullscreenImage.alt =
+        `${
+            currentProject?.title ||
+            "Project"
+        } image ${
+            currentImageIndex + 1
+        }`;
+
+}
+/* -----------------------------------------
+   OPEN FULLSCREEN IMAGE
+   ----------------------------------------- */
+
+function openFullscreenImage() {
+
+    if (
+        !currentViewerImages.length
+    ) {
+        return;
+    }
+
+
+    const image =
+        currentViewerImages[
+            currentImageIndex
+        ];
+
+
+    if (!image?.url) {
+        return;
+    }
+
+
+    createFullscreenViewer();
+
+
+    fullscreenImage.src =
+        image.url;
+
+    fullscreenImage.alt =
+        `${
+            currentProject?.title ||
+            "Project"
+        } image ${
+            currentImageIndex + 1
+        }`;
+
+
+    fullscreenViewer.classList.add(
+        "show"
+    );
+
+    fullscreenViewer.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body.classList.add(
+        "project-fullscreen-open"
+    );
+
+}
+
+
+/* -----------------------------------------
+   CLOSE FULLSCREEN IMAGE
+   ----------------------------------------- */
+
+function closeFullscreenImage() {
+
+    if (!fullscreenViewer) {
+        return;
+    }
+
+
+    fullscreenViewer.classList.remove(
+        "show"
+    );
+
+    fullscreenViewer.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.classList.remove(
+        "project-fullscreen-open"
+    );
+
+
+    if (fullscreenImage) {
+
+        fullscreenImage.removeAttribute(
+            "src"
+        );
+
+    }
+
+}
 function renderViewer() {
 
     if (!currentProject) {
@@ -737,7 +2325,7 @@ function renderViewer() {
         document.getElementById(
             "modalMainImage"
         );
-
+createImageMagnifier();
     const thumbnails =
         document.getElementById(
             "modalThumbnails"
@@ -753,21 +2341,130 @@ function renderViewer() {
         return;
     }
 
+/* =========================================================
+   IMAGE MAGNIFIER BUTTON
+   ========================================================= */
 
+function createImageMagnifier() {
+
+    const wrapper =
+        document.querySelector(
+            "#projectModal .modal-image-wrapper"
+        );
+
+
+    if (!wrapper) {
+        return;
+    }
+
+
+    /* Don't create it twice */
+
+    if (
+        wrapper.querySelector(
+            ".project-image-magnifier"
+        )
+    ) {
+        return;
+    }
+
+
+    /*
+     * Make sure the wrapper can contain
+     * the absolutely positioned button.
+     */
+
+    const computed =
+        window.getComputedStyle(
+            wrapper
+        );
+
+
+    if (
+        computed.position ===
+            "static"
+    ) {
+
+        wrapper.style.position =
+            "relative";
+
+    }
+
+
+    const button =
+        document.createElement(
+            "button"
+        );
+
+
+    button.type =
+        "button";
+
+    button.className =
+        "project-image-magnifier";
+
+    button.setAttribute(
+        "aria-label",
+        "View image fullscreen"
+    );
+
+    button.setAttribute(
+        "title",
+        "View fullscreen"
+    );
+
+
+    button.innerHTML = `
+        <i class="fas fa-search-plus"></i>
+    `;
+
+
+    button.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            openFullscreenImage();
+
+        }
+    );
+
+
+    wrapper.appendChild(
+        button
+    );
+
+}
     const data =
-        viewerSets(currentProject);
+    viewerSets(currentProject);
 
-    const contextIndex =
-        Number(currentViewerContext) || 0;
+const contextIndex =
+    Number(currentViewerContext) || 0;
 
-    const activeSet =
+let activeSet;
+
+if (
+    currentViewerMode ===
+    "individual"
+) {
+
+    activeSet =
+        currentViewerImages;
+
+} else {
+
+    activeSet =
         data.sets[contextIndex] ||
         data.sets[0] ||
         [];
 
-
     currentViewerImages =
         activeSet;
+
+}
 
 
     if (
@@ -788,7 +2485,23 @@ function renderViewer() {
        GALLERY TABS
        ----------------------------------------- */
 
-    if (galleryTabs) {
+    /* -----------------------------------------
+   GALLERY TABS
+   ----------------------------------------- */
+
+if (galleryTabs) {
+
+    if (
+        currentViewerMode ===
+        "individual"
+    ) {
+
+        galleryTabs.innerHTML = "";
+        galleryTabs.hidden = true;
+
+    } else {
+
+        galleryTabs.hidden = false;
 
         galleryTabs.innerHTML =
             data.tabs
@@ -835,6 +2548,8 @@ function renderViewer() {
 
     }
 
+}
+createImageMagnifier();
 
     /* -----------------------------------------
        NO IMAGES
@@ -878,7 +2593,51 @@ function renderViewer() {
             currentImageIndex + 1
         }`;
 
+/* -----------------------------------------
+   SINGLE IMAGE VIEWER CONTROLS
+   ----------------------------------------- */
 
+const prevImageBtn =
+    document.getElementById(
+        "prevImageBtn"
+    );
+
+const nextImageBtn =
+    document.getElementById(
+        "nextImageBtn"
+    );
+
+
+const hasMultipleImages =
+    activeSet.length > 1;
+
+
+if (prevImageBtn) {
+
+    prevImageBtn.style.display =
+        hasMultipleImages
+            ? ""
+            : "none";
+
+}
+
+
+if (nextImageBtn) {
+
+    nextImageBtn.style.display =
+        hasMultipleImages
+            ? ""
+            : "none";
+
+}
+if (thumbnails) {
+
+    thumbnails.style.display =
+        hasMultipleImages
+            ? ""
+            : "none";
+
+}
     /* -----------------------------------------
        THUMBNAILS
        ----------------------------------------- */
@@ -905,10 +2664,12 @@ function renderViewer() {
                         "
                     >
 
-                        <img
-                            src="${esc(image.url)}"
-                            alt=""
-                        >
+                       <img
+    src="${esc(image.thumbnailUrl || image.url)}"
+    alt=""
+    loading="lazy"
+    decoding="async"
+>
 
                     </button>
                 `
@@ -1102,13 +2863,55 @@ function openProjectModal(
         return;
     }
 
+currentProject =
+    project;
 
-    currentProject =
-        project;
+
+/* -----------------------------------------
+   DETERMINE VIEWER MODE
+   ----------------------------------------- */
+
+const activeTab =
+    $(".portfolio-main-tabs .active")
+        ?.dataset.tab || "all";
+
+
+if (
+    activeTab === "individual"
+) {
+
+    currentViewerMode =
+        "individual";
+
+} else {
+
+    currentViewerMode =
+        "project";
+
+}
+
+
+/* -----------------------------------------
+   INITIAL VIEWER TAB
+   ----------------------------------------- */
+
+if (
+    project.category ===
+    "Design + Build"
+) {
+
+    currentViewerContext =
+        activeDesignBuildFilter ===
+        "site-photos"
+            ? 1
+            : 0;
+
+} else {
 
     currentViewerContext =
         0;
 
+}
 
     ensureProjectInfoFields();
 
@@ -1190,10 +2993,242 @@ function openProjectModal(
         requestedImage?.url ||
         null;
 
+/* -----------------------------------------
+   INDIVIDUAL DECOR — SINGLE IMAGE
+   ----------------------------------------- */
+
+/* -----------------------------------------
+   INDIVIDUAL DECOR — SINGLE IMAGE
+   ----------------------------------------- */
+
+if (
+    currentViewerMode ===
+    "individual"
+) {
+
+    /* -----------------------------------------
+       SINGLE IMAGE ONLY
+       ----------------------------------------- */
+
+    currentViewerImages =
+        requestedImage?.url
+            ? [requestedImage]
+            : [];
+
+    currentViewerContext = 0;
+    currentImageIndex = 0;
+
+
+    /* -----------------------------------------
+       SHOW IMAGE TAGS INSTEAD OF PROJECT INFO
+       ----------------------------------------- */
+
+    const imageTags =
+        getImageTags(
+            requestedImage
+        );
+
+    const tagLabels = [];
+
+    imageTags.forEach(tag => {
+
+        if (
+            !tag?.category ||
+            INDIVIDUAL_DECOR_EXCLUDED_CATEGORIES.includes(
+                tag.category
+            )
+        ) {
+            return;
+        }
+
+
+        /* Image category */
+
+        tagLabels.push(
+            prettyImageTag(
+                tag.category
+            )
+        );
+
+
+        /* All subcategories */
+
+        (
+            tag.subcategories || []
+        ).forEach(subcategory => {
+
+            tagLabels.push(
+                prettyImageTag(
+                    subcategory
+                )
+            );
+
+        });
+
+    });
+
+
+    const tagsText =
+        tagLabels
+            .filter(Boolean)
+            .join(" · ");
+
+
+    /*
+     * Replace project title with
+     * the image's complete tag list.
+     */
+
+    setText(
+        "modalTitle",
+        tagsText || "Individual Decor"
+    );
+
+
+    /*
+     * Clear project-specific values.
+     */
+
+    setText(
+        "modalDescription",
+        ""
+    );
+
+    setText(
+        "modalWorkType",
+        ""
+    );
+
+    setText(
+        "modalLocation",
+        ""
+    );
+
+    setText(
+        "modalArea",
+        ""
+    );
+
+    setText(
+        "modalYear",
+        ""
+    );
+
+    setText(
+        "modalStatus",
+        ""
+    );
+
+
+    /*
+     * Hide project-detail rows.
+     */
+
+    const detailIds = [
+        "modalDescription",
+        "modalWorkType",
+        "modalLocation",
+        "modalArea",
+        "modalYear",
+        "modalStatus"
+    ];
+
+
+    detailIds.forEach(id => {
+
+        const element =
+            document.getElementById(id);
+
+        const row =
+            element?.closest("p");
+
+        if (row) {
+
+            row.style.display =
+                "none";
+
+        }
+
+    });
+
+} else {
+
+    /* -----------------------------------------
+       NORMAL PROJECT VIEWER
+       ----------------------------------------- */
+/* -----------------------------------------
+   RESTORE PROJECT DETAIL ROWS
+   ----------------------------------------- */
+
+const detailIds = [
+    "modalDescription",
+    "modalWorkType",
+    "modalLocation",
+    "modalArea",
+    "modalYear",
+    "modalStatus"
+];
+
+
+detailIds.forEach(id => {
+
+    const element =
+        document.getElementById(id);
+
+    const row =
+        element?.closest("p");
+
+    if (row) {
+        row.style.display = "";
+    }
+
+});
+    setText(
+        "modalTitle",
+        project.title
+    );
+
+    setText(
+        "modalDescription",
+        project.description
+    );
+
+    setText(
+        "modalWorkType",
+        project.workType
+    );
+
+    setText(
+        "modalLocation",
+        project.location
+    );
+
+    setText(
+        "modalArea",
+        project.area
+    );
+
+    setText(
+        "modalYear",
+        project.year
+    );
+
+    setText(
+        "modalStatus",
+        project.status
+    );
+
+}
+   if (
+    currentViewerMode !==
+    "individual"
+) {
 
     const firstSet =
         viewerSets(project)
-            .sets[0] || [];
+            .sets[
+                currentViewerContext
+            ] || [];
 
 
     const matchingIndex =
@@ -1212,6 +3247,8 @@ function openProjectModal(
         matchingIndex >= 0
             ? matchingIndex
             : 0;
+
+}
 
 
     renderViewer();
@@ -1515,60 +3552,119 @@ document.addEventListener(
    KEYBOARD CARD SUPPORT
    ========================================================= */
 
+/* =========================================================
+   KEYBOARD NAVIGATION
+   ========================================================= */
+
 document.addEventListener(
     "keydown",
     event => {
 
-        const target =
-            event.target instanceof Element
-                ? event.target
-                : null;
+        /* -----------------------------------------
+           FULLSCREEN IMAGE VIEWER
+           ----------------------------------------- */
+
+        if (
+            fullscreenViewer?.classList.contains(
+                "show"
+            )
+        ) {
+
+            if (
+                event.key === "ArrowLeft"
+            ) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                moveFullscreenImage(-1);
+
+                return;
+            }
 
 
-        if (!target) {
+            if (
+                event.key === "ArrowRight"
+            ) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                moveFullscreenImage(1);
+
+                return;
+            }
+
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                closeFullscreenImage();
+
+                return;
+            }
+
+
             return;
         }
 
 
-        const card =
-            target.closest(
-                ".portfolio-card"
+        /* -----------------------------------------
+           NORMAL PROJECT VIEWER
+           ----------------------------------------- */
+
+        const modal =
+            document.getElementById(
+                "projectModal"
             );
 
 
-        if (!card) {
-            return;
-        }
-
-
         if (
-            event.key !== "Enter" &&
-            event.key !== " "
+            !modal?.classList.contains(
+                "show"
+            )
         ) {
             return;
         }
 
 
-        event.preventDefault();
+        if (
+            event.key === "ArrowLeft"
+        ) {
+
+            event.preventDefault();
+
+            moveImage(-1);
+
+            return;
+        }
 
 
-        const projectId =
-            card.getAttribute(
-                "data-project-id"
-            );
+        if (
+            event.key === "ArrowRight"
+        ) {
+
+            event.preventDefault();
+
+            moveImage(1);
+
+            return;
+        }
 
 
-        if (projectId) {
+        if (
+            event.key === "Escape"
+        ) {
 
-            openProjectModal(
-                projectId,
-                Number(
-                    card.getAttribute(
-                        "data-image-index"
-                    )
-                ) || 0
-            );
+            event.preventDefault();
 
+            closeModal();
+
+            return;
         }
 
     }
@@ -1581,8 +3677,61 @@ document.addEventListener(
 
 async function loadPortfolio() {
 
-    showSkeleton();
+    /*
+     * -----------------------------------------------------
+     * 1. TRY CACHE FIRST
+     * -----------------------------------------------------
+     */
 
+    const cachedProjects =
+        readPortfolioCache();
+
+    let sharedProjectOpened =
+        false;
+
+
+    /*
+     * -----------------------------------------------------
+     * 2. SHOW CACHED CONTENT IMMEDIATELY
+     * -----------------------------------------------------
+     */
+
+    if (
+        Array.isArray(
+            cachedProjects
+        ) &&
+        cachedProjects.length
+    ) {
+
+        allProjects =
+            cachedProjects;
+
+        renderLoadedPortfolio();
+
+        sharedProjectOpened =
+            tryOpenSharedProject();
+
+    } else {
+
+        /*
+         * No cache:
+         * show the normal skeleton while
+         * Firebase loads for the first time.
+         */
+
+        showSkeleton();
+
+    }
+
+
+    /*
+     * -----------------------------------------------------
+     * 3. REFRESH FROM FIREBASE
+     * -----------------------------------------------------
+     *
+     * This runs even when cached data was
+     * displayed, so the site does not stay stale.
+     */
 
     try {
 
@@ -1595,80 +3744,92 @@ async function loadPortfolio() {
             );
 
 
-        allProjects =
+        const freshProjects =
             snapshot.docs.map(
                 documentSnapshot => ({
-
                     id:
                         documentSnapshot.id,
 
                     ...documentSnapshot.data()
-
                 })
             );
 
 
-        /* -----------------------------------------
-           RENDER
-           ----------------------------------------- */
+        /*
+         * -------------------------------------------------
+         * 4. UPDATE MEMORY + CACHE
+         * -------------------------------------------------
+         */
+
+        allProjects =
+            freshProjects;
+
+        writePortfolioCache(
+            freshProjects
+        );
+
+
+        /*
+         * -------------------------------------------------
+         * 5. REFRESH THE GRID
+         * -------------------------------------------------
+         */
+
+        renderLoadedPortfolio();
+
+
+        /*
+         * -------------------------------------------------
+         * 6. OPEN SHARED PROJECT URL
+         * -------------------------------------------------
+         */
 
         if (
-            isPortfolioPage()
+            !sharedProjectOpened
         ) {
 
-            renderPortfolioMain();
-
-        } else {
-
-            renderFeatured();
+            tryOpenSharedProject();
 
         }
-
-
-        /* -----------------------------------------
-           OPEN PROJECT FROM SHARED URL
-           ----------------------------------------- */
-
-        const projectId =
-            new URLSearchParams(
-                window.location.search
-            ).get("project");
-
-
-        if (projectId) {
-
-            setTimeout(
-                () => {
-
-                    openProjectModal(
-                        projectId,
-                        0
-                    );
-
-                },
-                0
-            );
-
-        }
-
 
     } catch (error) {
 
         console.error(
-            "Portfolio loading error:",
+            "Error loading portfolio:",
             error
         );
+
+
+        /*
+         * If cached data already exists,
+         * keep showing it instead of replacing
+         * the page with an error.
+         */
+
+        if (
+            Array.isArray(
+                cachedProjects
+            ) &&
+            cachedProjects.length
+        ) {
+
+            console.warn(
+                "Using cached portfolio because Firebase refresh failed."
+            );
+
+            return;
+        }
 
 
         const grid =
             getPortfolioGrid();
 
-
         if (grid) {
 
             grid.innerHTML = `
-                <p class="portfolio-error">
-                    Unable to load projects right now.
+                <p class="portfolio-empty">
+                    Unable to load portfolio.
+                    Please try again.
                 </p>
             `;
 
@@ -1762,57 +3923,76 @@ function initialise() {
        KEYBOARD NAVIGATION
        ----------------------------------------- */
 
-    document.addEventListener(
-        "keydown",
-        event => {
+//     document.addEventListener(
+//         "keydown",
+//         event => {
 
-            if (
-                event.key ===
-                "Escape"
-            ) {
+//            if (
+//     event.key ===
+//     "Escape"
+// ) {
 
-                closeModal();
+//     /*
+//      * If fullscreen image is open,
+//      * ESC first returns to the normal
+//      * project image container.
+//      */
 
-                return;
-            }
+//     if (
+//         fullscreenViewer?.classList.contains(
+//             "show"
+//         )
+//     ) {
 
+//         closeFullscreenImage();
 
-            const modal =
-                document.getElementById(
-                    "projectModal"
-                );
+//         return;
 
-
-            if (
-                !modal?.classList.contains(
-                    "show"
-                )
-            ) {
-                return;
-            }
+//     }
 
 
-            if (
-                event.key ===
-                "ArrowLeft"
-            ) {
+//     closeModal();
 
-                moveImage(-1);
-
-            }
+//     return;
+// }
 
 
-            if (
-                event.key ===
-                "ArrowRight"
-            ) {
+//             const modal =
+//                 document.getElementById(
+//                     "projectModal"
+//                 );
 
-                moveImage(1);
 
-            }
+//             if (
+//                 !modal?.classList.contains(
+//                     "show"
+//                 )
+//             ) {
+//                 return;
+//             }
 
-        }
-    );
+
+//             if (
+//                 event.key ===
+//                 "ArrowLeft"
+//             ) {
+
+//                 moveImage(-1);
+
+//             }
+
+
+//             if (
+//                 event.key ===
+//                 "ArrowRight"
+//             ) {
+
+//                 moveImage(1);
+
+//             }
+
+//         }
+//     );
 
 
     /* -----------------------------------------

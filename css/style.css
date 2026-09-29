@@ -5786,14 +5786,16 @@ body.loading #site-content {
     background-repeat: no-repeat;
 
     opacity: 0;
+    
 
+animation: heroSlideShow 20s infinite;
     transform: scale(1);
 
-    animation:
+    /* animation:
         heroSlideShow 20s infinite,
         heroSlideZoom 20s infinite;
 
-    will-change: opacity, transform;
+    will-change: opacity, transform; */
 }
 
 
@@ -5807,7 +5809,7 @@ body.loading #site-content {
 }
 
 .hero-slide-2 {
-    background-image: url("../assets/images/hero2.webp");
+    background-image: url("../assets/images/12.webp");
     animation-delay: 5s;
 }
 
@@ -5817,7 +5819,7 @@ body.loading #site-content {
 }
 
 .hero-slide-4 {
-    background-image: url("../assets/images/hero4.webp");
+    background-image: url("../assets/images/exterior-1.webp");
     animation-delay: 15s;
 }
 
@@ -5855,7 +5857,7 @@ body.loading #site-content {
    CINEMATIC ZOOM
 ========================================================= */
 
-@keyframes heroSlideZoom {
+/* @keyframes heroSlideZoom {
 
     0% {
         transform: scale(1);
@@ -5869,7 +5871,7 @@ body.loading #site-content {
         transform: scale(1.1);
     }
 
-}
+} */
 /* Desktop Admin Login */
 @media (min-width: 769px) {
     #adminLoginBtn {

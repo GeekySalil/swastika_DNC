@@ -39,6 +39,9 @@
 .modal-gallery-tabs{display:flex;gap:8px;overflow-x:auto;margin:15px 0 12px;}
 .modal-gallery-tabs button{border:1px solid rgba(0,0,0,.12);background:transparent;padding:9px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;}
 .modal-gallery-tabs button.active{background:#111;color:#fff;border-color:#111;}
+#modalGalleryTabs[hidden] {
+    display: none !important;
+}
 .modal-thumbnails{display:flex;gap:9px;overflow-x:auto;padding-bottom:8px;}
 .modal-thumb{border:2px solid transparent;padding:0;background:none;border-radius:8px;overflow:hidden;flex:0 0 82px;cursor:pointer;}
 .modal-thumb.active{border-color:#111;}.modal-thumb img{width:82px;height:62px;object-fit:cover;display:block;}
@@ -100,7 +103,7 @@ body.project-modal-open{overflow:hidden;}
     margin: auto !important;
 }
 /* Space below navbar before PORTFOLIO heading */
-.portfolio-section {
+.portfolio-page .portfolio-section {
     padding-top: 7rem;
 }
 /* =========================================
@@ -109,4 +112,3352 @@ body.project-modal-open{overflow:hidden;}
 
 .portfolio-main-tabs {
     margin-bottom: 40px !important;
+}
+/* =========================================
+   PROJECT VIEWER — FIXED IMAGE CONTAINER
+   ========================================= */
+
+#projectModal .modal-image-wrapper {
+    width: 100% !important;
+
+    /* Fixed responsive height */
+    height: 65vh !important;
+    min-height: 400px !important;
+    max-height: 700px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    background: #111 !important;
+
+    padding: 20px !important;
+    box-sizing: border-box !important;
+
+    overflow: hidden !important;
+}
+
+
+/* =========================================
+   MAIN PROJECT IMAGE
+   ========================================= */
+
+#projectModal #modalMainImage {
+    display: block !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    /*
+     * Never exceed the container.
+     * The image keeps its original aspect ratio.
+     */
+    max-width: 100% !important;
+    max-height: 100% !important;
+
+    object-fit: contain !important;
+    object-position: center center !important;
+
+    margin: 0 auto !important;
+}
+
+
+/* =========================================
+   DESKTOP
+   ========================================= */
+
+@media (min-width: 1200px) {
+
+    #projectModal .modal-image-wrapper {
+        height: 65vh !important;
+        max-height: 700px !important;
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (min-width: 601px) and (max-width: 1199px) {
+
+    #projectModal .modal-image-wrapper {
+        height: 60vh !important;
+        min-height: 350px !important;
+        max-height: 600px !important;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    #projectModal .modal-image-wrapper {
+        height: 55vh !important;
+        min-height: 280px !important;
+        max-height: 500px !important;
+
+        padding: 12px !important;
+    }
+
+    #projectModal #modalMainImage {
+        max-width: 100% !important;
+        max-height: 100% !important;
+    }
+
+}
+/* =========================================
+   PORTFOLIO GRID — 4 PROJECTS PER ROW
+   ========================================= */
+
+.portfolio-main-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 28px !important;
+    width: 100% !important;
+}
+
+
+/* =========================================
+   PROJECT CARD IMAGE — SHOW FULL IMAGE
+   ========================================= */
+
+.portfolio-main-grid .portfolio-image-wrap {
+    width: 100% !important;
+    height: 380px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    overflow: hidden !important;
+    background: #111 !important;
+
+    box-sizing: border-box !important;
+}
+
+
+.portfolio-main-grid .portfolio-image-wrap img {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    display: block !important;
+}
+
+
+/* =========================================
+   TABLET — 2 PROJECTS PER ROW
+   ========================================= */
+
+@media (max-width: 1100px) {
+
+    .portfolio-main-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE — 1 PROJECT PER ROW
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid {
+        grid-template-columns: 1fr !important;
+        gap: 22px !important;
+    }
+
+    .portfolio-main-grid .portfolio-image-wrap {
+        height: 360px !important;
+    }
+
+}
+
+/* =========================================
+   DESKTOP IMAGE MAGNIFIER
+   ========================================= */
+
+.project-image-magnifier {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.project-image-magnifier:hover {
+    transform: scale(1.08);
+    background: rgba(0, 0, 0, 0.95);
+}
+
+
+/* =========================================
+   FULLSCREEN IMAGE VIEWER
+   ========================================= */
+
+.project-fullscreen-viewer {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #000000;
+
+    z-index: 999999;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+}
+
+.project-fullscreen-viewer.show {
+    display: flex;
+}
+
+
+/* Fullscreen image */
+
+.project-fullscreen-image {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+
+    margin: auto;
+}
+
+
+/* =========================================
+   FULLSCREEN CLOSE / ZOOM OUT BUTTON
+   ========================================= */
+
+.project-fullscreen-close {
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    color: #ffffff;
+
+    font-size: 28px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.project-fullscreen-close:hover {
+    transform: scale(1.08);
+    background: rgba(0, 0, 0, 0.95);
+}
+
+
+/* =========================================
+   DESKTOP ONLY
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .project-image-magnifier {
+        display: none !important;
+    }
+
+    .project-fullscreen-viewer {
+        display: none !important;
+    }
+
+}
+/* =========================================
+   FULLSCREEN LEFT / RIGHT NAVIGATION
+   ========================================= */
+
+.project-fullscreen-nav {
+    position: absolute;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.project-fullscreen-nav:hover {
+    transform: translateY(-50%) scale(1.08);
+    background: rgba(0, 0, 0, 0.95);
+}
+
+.project-fullscreen-prev {
+    left: 20px;
+}
+
+.project-fullscreen-next {
+    right: 20px;
+}
+
+
+/* =========================================
+   HIDE FULLSCREEN NAVIGATION ON MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .project-fullscreen-nav {
+        display: none !important;
+    }
+
+}
+
+/* =========================================================
+   FINAL — SQUARE PORTFOLIO CARDS
+   LANDSCAPE IMAGE + PROJECT DETAILS INSIDE CARD
+========================================================= */
+
+.portfolio-main-grid .portfolio-card {
+
+    width: 100% !important;
+
+    aspect-ratio: 1 / 1 !important;
+
+    height: auto !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    overflow: hidden !important;
+
+    border-radius: 18px !important;
+
+    box-sizing: border-box !important;
+
+}
+
+
+/* =========================================================
+   LANDSCAPE IMAGE
+========================================================= */
+
+.portfolio-main-grid .portfolio-card .portfolio-image-wrap {
+
+    width: 100% !important;
+
+    height: auto !important;
+
+    aspect-ratio: 4 / 3 !important;
+
+    flex: 0 0 auto !important;
+
+    overflow: hidden !important;
+
+    background: #111 !important;
+
+    box-sizing: border-box !important;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-image-wrap img {
+
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    aspect-ratio: 4 / 3 !important;
+
+    object-fit: cover !important;
+
+    object-position: center center !important;
+
+}
+
+
+/* =========================================================
+   PROJECT DETAILS
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info {
+
+    width: 100% !important;
+
+    flex: 1 1 auto !important;
+
+    min-height: 0 !important;
+
+    height: auto !important;
+
+    padding: 12px 15px !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    justify-content: center !important;
+
+    box-sizing: border-box !important;
+
+    overflow: hidden !important;
+
+    background: #ffffff;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info h3 {
+
+    margin: 0 0 5px !important;
+
+    font-size: 1rem !important;
+
+    line-height: 1.25 !important;
+
+    font-weight: 600 !important;
+
+    color: #111 !important;
+
+    overflow: hidden !important;
+
+    text-overflow: ellipsis !important;
+
+    white-space: nowrap !important;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-category {
+
+    margin: 0 0 4px !important;
+
+    font-size: .78rem !important;
+
+    line-height: 1.3 !important;
+
+    color: #666 !important;
+
+    overflow: hidden !important;
+
+    text-overflow: ellipsis !important;
+
+    white-space: nowrap !important;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location {
+
+    margin: 0 !important;
+
+    font-size: .74rem !important;
+
+    line-height: 1.3 !important;
+
+    color: #888 !important;
+
+    overflow: hidden !important;
+
+    text-overflow: ellipsis !important;
+
+    white-space: nowrap !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid
+    .portfolio-card {
+
+        aspect-ratio: 1 / 1 !important;
+
+        height: auto !important;
+
+        border-radius: 15px !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-image-wrap {
+
+        height: auto !important;
+
+        aspect-ratio: 4 / 3 !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info {
+
+        padding:
+            9px 12px !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info h3 {
+
+        font-size: .9rem !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .project-card-category {
+
+        font-size: .7rem !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .project-card-location {
+
+        font-size: .68rem !important;
+
+    }
+
+}
+
+/* =========================================================
+   PREMIUM PROJECT CARD INFORMATION
+   Swastika Design & Constructions
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info {
+
+    position: relative;
+
+    flex: 1 1 auto !important;
+
+    min-height: 0 !important;
+
+    padding: 15px 17px 14px !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    justify-content: center !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #faf9f6 100%
+        ) !important;
+
+    border-top:
+        1px solid
+        rgba(0, 0, 0, 0.055);
+
+    box-sizing: border-box !important;
+
+    overflow: hidden !important;
+
+}
+
+
+/* =========================================================
+   SUBTLE GOLD ACCENT
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 15px;
+
+    left: 17px;
+
+    width: 24px;
+
+    height: 2px;
+
+    background: #b08a4a;
+
+    border-radius: 10px;
+
+}
+
+
+/* =========================================================
+   PROJECT TITLE
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info h3 {
+
+    margin:
+        8px 0 6px !important;
+
+    color: #171717 !important;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif !important;
+
+    font-size:
+        1.08rem !important;
+
+    font-weight:
+        600 !important;
+
+    line-height:
+        1.2 !important;
+
+    letter-spacing:
+        -0.01em !important;
+
+    overflow:
+        hidden !important;
+
+    text-overflow:
+        ellipsis !important;
+
+    white-space:
+        nowrap !important;
+
+}
+
+
+/* =========================================================
+   CATEGORY / SUBCATEGORY
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-category {
+
+    display: block !important;
+
+    margin:
+        0 0 5px !important;
+
+    color:
+        #9a763d !important;
+
+    font-size:
+        .67rem !important;
+
+    font-weight:
+        700 !important;
+
+    line-height:
+        1.35 !important;
+
+    letter-spacing:
+        .105em !important;
+
+    text-transform:
+        uppercase !important;
+
+    overflow:
+        hidden !important;
+
+    text-overflow:
+        ellipsis !important;
+
+    white-space:
+        nowrap !important;
+
+}
+
+
+/* Existing separator dot */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-category
+.project-dot {
+
+    color:
+        #c6a15c !important;
+
+    font-size:
+        1.25em !important;
+
+    margin:
+        0 .28em !important;
+
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location {
+
+    display:
+        flex !important;
+
+    align-items:
+        center !important;
+
+    gap:
+        6px !important;
+
+    margin:
+        0 !important;
+
+    color:
+        #777777 !important;
+
+    font-family:
+        "Manrope",
+        "Montserrat",
+        Arial,
+        sans-serif !important;
+
+    font-size:
+        .68rem !important;
+
+    font-weight:
+        500 !important;
+
+    line-height:
+        1.35 !important;
+
+    letter-spacing:
+        .025em !important;
+
+    overflow:
+        hidden !important;
+
+    text-overflow:
+        ellipsis !important;
+
+    white-space:
+        nowrap !important;
+
+}
+
+
+/* Location marker */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location::before {
+
+    content:
+        "•";
+
+    flex:
+        0 0 auto;
+
+    color:
+        #b08a4a;
+
+    font-size:
+        1.35em;
+
+    line-height:
+        1;
+
+}
+
+
+/* =========================================================
+   PREMIUM CARD HOVER
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card {
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 18px 45px
+        rgba(0, 0, 0, .10);
+
+}
+
+
+/* Image becomes slightly calmer on hover */
+
+.portfolio-main-grid
+.portfolio-card:hover
+.portfolio-image-wrap img {
+
+    transform:
+        scale(1.025) !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info {
+
+        padding:
+            12px 13px 11px !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info::before {
+
+        top: 12px;
+
+        left: 13px;
+
+        width: 20px;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info h3 {
+
+        margin:
+            7px 0 4px !important;
+
+        font-size:
+            .95rem !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .project-card-category {
+
+        font-size:
+            .61rem !important;
+
+        letter-spacing:
+            .085em !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .project-card-location {
+
+        font-size:
+            .63rem !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card:hover {
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 12px 30px
+            rgba(0, 0, 0, .08);
+
+    }
+
+}
+/* =========================================================
+   FINAL CARD PROPORTION FIX
+   Square card + wider landscape image
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-image-wrap {
+
+    aspect-ratio: 3 / 2 !important;
+
+    height: auto !important;
+
+    flex: 0 0 auto !important;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-image-wrap img {
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    object-fit: cover !important;
+
+}
+
+
+/* =========================================================
+   PROJECT INFORMATION — MORE BREATHING ROOM
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info {
+
+    flex: 1 1 auto !important;
+
+    min-height: 0 !important;
+
+    padding:
+        13px 16px 13px !important;
+
+    justify-content: center !important;
+
+}
+
+
+/* Gold accent */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info::before {
+
+    top: 12px;
+
+    left: 16px;
+
+    width: 24px;
+
+}
+
+
+/* Project title */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info h3 {
+
+    margin:
+        7px 0 5px !important;
+
+    font-size:
+        1.05rem !important;
+
+    line-height:
+        1.25 !important;
+
+}
+
+
+/* Category */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-category {
+
+    margin:
+        0 0 5px !important;
+
+    font-size:
+        .66rem !important;
+
+    line-height:
+        1.4 !important;
+
+    letter-spacing:
+        .09em !important;
+
+}
+
+
+/* Location */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location {
+
+    margin:
+        0 !important;
+
+    font-size:
+        .68rem !important;
+
+    line-height:
+        1.4 !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-image-wrap {
+
+        aspect-ratio:
+            3 / 2 !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info {
+
+        padding:
+            11px 13px 11px !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info h3 {
+
+        margin:
+            6px 0 4px !important;
+
+        font-size:
+            .92rem !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .project-card-category {
+
+        font-size:
+            .60rem !important;
+
+        letter-spacing:
+            .075em !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .project-card-location {
+
+        font-size:
+            .63rem !important;
+
+    }
+
+}
+/* =========================================================
+   FINAL PROJECT CARD INFO — CLEAN PREMIUM VERSION
+========================================================= */
+
+/* Remove the horizontal gold line */
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info::before {
+
+    display: none !important;
+
+}
+
+
+/* Project information area */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info {
+
+    padding:
+        16px 17px 15px !important;
+
+    justify-content:
+        center !important;
+
+    gap: 0 !important;
+
+}
+
+
+/* =========================================================
+   PROJECT TITLE
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info h3 {
+
+    margin:
+        0 0 8px !important;
+
+    color:
+        #171717 !important;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif !important;
+
+    font-size:
+        1.08rem !important;
+
+    font-weight:
+        600 !important;
+
+    line-height:
+        1.25 !important;
+
+    letter-spacing:
+        -0.01em !important;
+
+    overflow:
+        hidden !important;
+
+    text-overflow:
+        ellipsis !important;
+
+    white-space:
+        nowrap !important;
+
+}
+
+
+/* =========================================================
+   PROJECT CATEGORY
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-category {
+
+    margin:
+        0 0 7px !important;
+
+    color:
+        #9a763d !important;
+
+    font-size:
+        .66rem !important;
+
+    font-weight:
+        700 !important;
+
+    line-height:
+        1.4 !important;
+
+    letter-spacing:
+        .095em !important;
+
+    text-transform:
+        uppercase !important;
+
+    overflow:
+        hidden !important;
+
+    text-overflow:
+        ellipsis !important;
+
+    white-space:
+        nowrap !important;
+
+}
+
+
+/* Category separator */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-category
+.project-dot {
+
+    color:
+        #b08a4a !important;
+
+    margin:
+        0 .3em !important;
+
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location {
+
+    display:
+        flex !important;
+
+    align-items:
+        center !important;
+
+    gap:
+        7px !important;
+
+    margin:
+        0 !important;
+
+    color:
+        #777777 !important;
+
+    font-family:
+        "Manrope",
+        "Montserrat",
+        Arial,
+        sans-serif !important;
+
+    font-size:
+        .68rem !important;
+
+    font-weight:
+        500 !important;
+
+    line-height:
+        1.4 !important;
+
+    letter-spacing:
+        .025em !important;
+
+    overflow:
+        hidden !important;
+
+    text-overflow:
+        ellipsis !important;
+
+    white-space:
+        nowrap !important;
+
+}
+
+
+/* Small location marker */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location::before {
+
+    content:
+        "•";
+
+    flex:
+        0 0 auto;
+
+    color:
+        #b08a4a;
+
+    font-size:
+        1.3em;
+
+    line-height:
+        1;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info {
+
+        padding:
+            13px 13px 12px !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info h3 {
+
+        margin:
+            0 0 6px !important;
+
+        font-size:
+            .94rem !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .project-card-category {
+
+        margin:
+            0 0 5px !important;
+
+        font-size:
+            .60rem !important;
+
+        letter-spacing:
+            .075em !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .project-card-location {
+
+        font-size:
+            .63rem !important;
+
+    }
+
+}
+/* =========================================================
+   PREMIUM DARK PROJECT INFO PANEL
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info {
+
+    background:
+        linear-gradient(
+            145deg,
+            #1c1c1b 0%,
+            #111211 100%
+        ) !important;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.08) !important;
+
+    padding:
+        16px 17px 15px !important;
+
+}
+
+
+/* =========================================================
+   PROJECT TITLE
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info h3 {
+
+    color:
+        #f5f1e8 !important;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif !important;
+
+    font-size:
+        1.08rem !important;
+
+    font-weight:
+        600 !important;
+
+    line-height:
+        1.25 !important;
+
+    margin:
+        0 0 8px !important;
+
+}
+
+
+/* =========================================================
+   CATEGORY / SUBCATEGORY
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-category {
+
+    color:
+        #c7a66a !important;
+
+    font-size:
+        .66rem !important;
+
+    font-weight:
+        700 !important;
+
+    letter-spacing:
+        .095em !important;
+
+    line-height:
+        1.4 !important;
+
+    text-transform:
+        uppercase !important;
+
+    margin:
+        0 0 7px !important;
+
+}
+
+
+/* Category separator */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-category
+.project-dot {
+
+    color:
+        #e0c58a !important;
+
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location {
+
+    color:
+        rgba(245,241,232,0.62) !important;
+
+    font-family:
+        "Manrope",
+        "Montserrat",
+        Arial,
+        sans-serif !important;
+
+    font-size:
+        .68rem !important;
+
+    font-weight:
+        500 !important;
+
+    line-height:
+        1.4 !important;
+
+    letter-spacing:
+        .025em !important;
+
+    margin:
+        0 !important;
+
+}
+
+
+/* Location dot */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location::before {
+
+    color:
+        #c7a66a !important;
+
+}
+
+
+/* =========================================================
+   CARD BORDER
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card {
+
+    border:
+        1px solid
+        rgba(0,0,0,0.10) !important;
+
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card:hover {
+
+    box-shadow:
+        0 20px 45px
+        rgba(0,0,0,0.16) !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info {
+
+        padding:
+            13px 13px 12px !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info h3 {
+
+        font-size:
+            .94rem !important;
+
+        margin:
+            0 0 6px !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .project-card-category {
+
+        font-size:
+            .60rem !important;
+
+        margin:
+            0 0 5px !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .project-card-location {
+
+        font-size:
+            .63rem !important;
+
+    }
+
+}
+/* =========================================================
+   COMPACT INFO PANEL — HUG CONTENT
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info {
+
+    flex: 0 0 auto !important;
+
+    height: auto !important;
+
+    min-height: 0 !important;
+
+    padding:
+        12px 16px 12px !important;
+
+    justify-content:
+        flex-start !important;
+
+    box-sizing: border-box !important;
+
+}
+
+
+/* Keep title / category / location exactly as they are */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info h3 {
+
+    margin:
+        0 0 7px !important;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-category {
+
+    margin:
+        0 0 6px !important;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location {
+
+    margin:
+        0 !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info {
+
+        flex: 0 0 auto !important;
+
+        height: auto !important;
+
+        min-height: 0 !important;
+
+        padding:
+            10px 13px 10px !important;
+
+        justify-content:
+            flex-start !important;
+
+    }
+
+}
+/* =========================================================
+   EXTRA COMPACT INFO PANEL
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info {
+
+    padding:
+        9px 16px 8px !important;
+
+}
+
+
+/* Keep the text spacing balanced */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info h3 {
+
+    margin:
+        0 0 6px !important;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-category {
+
+    margin:
+        0 0 5px !important;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location {
+
+    margin:
+        0 !important;
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info {
+
+        padding:
+            8px 13px 7px !important;
+
+    }
+
+}
+/* =========================================================
+   FINAL SQUARE CARD — NO WHITE SPACE BELOW INFO
+========================================================= */
+
+.portfolio-main-grid .portfolio-card {
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    aspect-ratio: 1 / 1 !important;
+
+    height: auto !important;
+
+    overflow: hidden !important;
+
+}
+
+
+/* Let the image consume all remaining square-card space */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-image-wrap {
+
+    flex: 1 1 auto !important;
+
+    min-height: 0 !important;
+
+    height: auto !important;
+
+    aspect-ratio: auto !important;
+
+    overflow: hidden !important;
+
+}
+
+
+/* Image fills the enlarged image area */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-image-wrap img {
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    object-fit: cover !important;
+
+    object-position: center center !important;
+
+}
+
+
+/* Information panel stays compact */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info {
+
+    flex: 0 0 auto !important;
+
+    height: auto !important;
+
+    min-height: 0 !important;
+
+    padding:
+        9px 16px 8px !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid
+    .portfolio-card {
+
+        aspect-ratio: 1 / 1 !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-image-wrap {
+
+        flex: 1 1 auto !important;
+
+        min-height: 0 !important;
+
+    }
+
+
+    .portfolio-main-grid
+    .portfolio-card
+    .portfolio-card-info {
+
+        flex: 0 0 auto !important;
+
+        padding:
+            8px 13px 7px !important;
+
+    }
+
+}
+/* =========================================================
+   PROJECT LOCATION + YEAR
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location {
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 0 !important;
+
+    white-space: nowrap !important;
+
+}
+
+
+.project-card-location-text {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+
+.project-card-year-dot {
+
+    margin:
+        0 9px !important;
+
+    color:
+        #c7a66a !important;
+
+    font-size:
+        1.15em !important;
+
+    line-height:
+        1 !important;
+
+}
+
+
+.project-card-year {
+
+    flex:
+        0 0 auto;
+
+    color:
+        rgba(245,241,232,0.62) !important;
+
+}
+
+
+/* Keep the existing location bullet */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location::before {
+
+    flex:
+        0 0 auto;
+
+}
+/* =========================================================
+   CONSISTENT LOCATION / YEAR DOTS
+========================================================= */
+
+/* Remove the old location bullet styling */
+.portfolio-main-grid
+.portfolio-card
+.project-card-location::before {
+
+    content: "•" !important;
+
+    flex: 0 0 auto;
+
+    color: #c7a66a !important;
+
+    font-size: 1.15em !important;
+
+    line-height: 1 !important;
+
+    margin-right: 7px !important;
+
+}
+
+
+/* Dot between location and year */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-year-dot {
+
+    display: inline-flex !important;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin:
+        0 9px !important;
+
+    color:
+        #c7a66a !important;
+
+    font-size:
+        1em !important;
+
+    font-weight:
+        500 !important;
+
+    line-height:
+        1 !important;
+
+}
+/* =========================================================
+   PROJECT INFO DOTS — IDENTICAL SIZE
+========================================================= */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location::before {
+
+    content: none !important;
+
+}
+
+
+/* Both separators use the exact same styling */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-info-dot {
+
+    display: inline-flex !important;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    width: 7px;
+
+    height: 7px;
+
+    color: #c7a66a !important;
+
+    font-size: 0 !important;
+
+    line-height: 1;
+
+    position: relative;
+
+}
+
+
+/* Actual dot */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-info-dot::after {
+
+    content: "";
+
+    display: block;
+
+    width: 5px;
+
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #c7a66a;
+
+}
+
+
+/* Space between location and year */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-year-dot {
+
+    margin-left: 9px;
+
+    margin-right: 9px;
+
+}
+
+
+/* Location text */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-location-text {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
+
+
+/* Year */
+
+.portfolio-main-grid
+.portfolio-card
+.project-card-year {
+
+    flex: 0 0 auto;
+
+}
+/* =========================================================
+   FINAL UNIVERSAL PORTFOLIO CARD SIZE
+   Applies to PROJECT + INDIVIDUAL DECOR cards
+========================================================= */
+
+/* ---------------------------------------------------------
+   PROJECT CARDS
+--------------------------------------------------------- */
+
+.portfolio-main-grid .portfolio-card {
+
+    width: 100% !important;
+
+    aspect-ratio: 1 / 1 !important;
+
+    height: auto !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    overflow: hidden !important;
+
+    box-sizing: border-box !important;
+
+}
+
+
+/* Image consumes all available space */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-image-wrap {
+
+    flex: 1 1 auto !important;
+
+    width: 100% !important;
+
+    min-height: 0 !important;
+
+    height: auto !important;
+
+    aspect-ratio: auto !important;
+
+    overflow: hidden !important;
+
+}
+
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-image-wrap img {
+
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    object-fit: cover !important;
+
+    object-position: center !important;
+
+}
+
+
+/* ---------------------------------------------------------
+   PROJECT INFORMATION
+--------------------------------------------------------- */
+
+.portfolio-main-grid
+.portfolio-card
+.portfolio-card-info {
+
+    flex: 0 0 auto !important;
+
+    width: 100% !important;
+
+    height: auto !important;
+
+    min-height: 0 !important;
+
+    box-sizing: border-box !important;
+
+}
+
+
+/* ---------------------------------------------------------
+   INDIVIDUAL DECOR CARDS
+--------------------------------------------------------- */
+
+/*
+ * Apply the same square geometry to individual-image cards.
+ * This covers common Individual Decor card structures.
+ */
+
+.portfolio-main-grid
+.individual-decor-card {
+
+    width: 100% !important;
+
+    aspect-ratio: 1 / 1 !important;
+
+    height: auto !important;
+
+    overflow: hidden !important;
+
+    box-sizing: border-box !important;
+
+}
+
+
+.portfolio-main-grid
+.individual-decor-card img {
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    object-fit: cover !important;
+
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVE — KEEP THE SAME PROPORTION
+--------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+    .portfolio-main-grid .portfolio-card,
+    .portfolio-main-grid .individual-decor-card {
+
+        aspect-ratio: 1 / 1 !important;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid .portfolio-card,
+    .portfolio-main-grid .individual-decor-card {
+
+        aspect-ratio: 1 / 1 !important;
+
+        border-radius: 15px !important;
+
+    }
+
+}
+/* =========================================================
+   INDIVIDUAL DECOR — IMAGE ONLY
+========================================================= */
+
+/* Hide all card information for Individual Decor */
+
+.portfolio-main-grid
+.individual-decor-card
+.portfolio-card-info,
+
+.portfolio-main-grid
+.individual-decor-card
+.project-card-info,
+
+.portfolio-main-grid
+.individual-decor-card
+.project-card-details,
+
+.portfolio-main-grid
+.individual-decor-card
+.project-info {
+
+    display: none !important;
+
+}
+
+
+/* Make the Individual Decor card entirely image */
+
+.portfolio-main-grid
+.individual-decor-card {
+
+    width: 100% !important;
+
+    aspect-ratio: 1 / 1 !important;
+
+    height: auto !important;
+
+    overflow: hidden !important;
+
+    box-sizing: border-box !important;
+
+}
+
+
+.portfolio-main-grid
+.individual-decor-card img {
+
+    display: block !important;
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    object-fit: cover !important;
+
+    object-position: center !important;
+
+}
+
+
+/* Remove any spacing reserved for information */
+
+.portfolio-main-grid
+.individual-decor-card {
+
+    padding: 0 !important;
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .portfolio-main-grid
+    .individual-decor-card {
+
+        aspect-ratio: 1 / 1 !important;
+
+        padding: 0 !important;
+
+    }
+
+}
+/* =========================================================
+   PORTFOLIO INTRO — PREMIUM ARCHITECTURAL REDESIGN
+========================================================= */
+
+.portfolio-page .portfolio-section {
+    padding-top: 6.5rem !important;
+}
+
+
+/* ---------------------------------------------------------
+   INTRO CONTAINER
+--------------------------------------------------------- */
+
+.portfolio-page .portfolio-section .section-heading.center {
+
+    position: relative;
+
+    max-width: 900px;
+
+    margin:
+        0 auto 48px !important;
+
+    padding:
+        38px 30px 36px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.96),
+            rgba(248,247,244,0.92)
+        );
+
+   border: 4px solid rgba(204, 141, 31, 0.718) !important;
+    box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.045),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.45) !important;
+    overflow: hidden;
+
+}
+
+
+/* Subtle architectural corner detail */
+
+.portfolio-page .portfolio-section
+.section-heading.center::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 90px;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #a67c32,
+            transparent
+        );
+
+}
+
+
+/* Subtle side details */
+
+
+
+
+/* ---------------------------------------------------------
+   PORTFOLIO LABEL
+--------------------------------------------------------- */
+
+.portfolio-page .portfolio-section
+.section-heading
+.section-tag {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin:
+        0 0 13px !important;
+
+    color:
+        #a67c32 !important;
+
+    font-size:
+        11px !important;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        3px;
+
+    line-height:
+        1;
+
+}
+
+
+/* Small decorative lines around PORTFOLIO */
+
+.portfolio-page .portfolio-section
+.section-heading
+.section-tag::before,
+.portfolio-page .portfolio-section
+.section-heading .section-tag::after {
+
+    content: "";
+
+    display: block;
+
+    width: 25px;
+
+    height: 1px;
+
+    background:
+        rgba(166,124,50,0.55);
+
+}
+
+
+/* ---------------------------------------------------------
+   MAIN HEADING
+--------------------------------------------------------- */
+
+.portfolio-page .portfolio-section
+.section-heading
+h1 {
+
+    margin:
+        0 0 12px !important;
+
+    color:
+        #111111 !important;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif !important;
+
+    font-size:
+        clamp(
+            2rem,
+            3.2vw,
+            3rem
+        ) !important;
+
+    font-weight:
+        600 !important;
+
+    line-height:
+        1.12 !important;
+
+    letter-spacing:
+        -0.025em;
+
+}
+
+
+/* ---------------------------------------------------------
+   INTRO DESCRIPTION
+--------------------------------------------------------- */
+
+.portfolio-page .portfolio-section
+.section-heading
+p {
+
+    max-width:
+        650px;
+
+    margin:
+        0 auto !important;
+
+    color:
+        #777777 !important;
+
+    font-family:
+        "Manrope",
+        "Montserrat",
+        Arial,
+        sans-serif;
+
+    font-size:
+        14px !important;
+
+    font-weight:
+        400;
+
+    line-height:
+        1.7;
+
+    letter-spacing:
+        .015em;
+
+}
+
+
+/* =========================================================
+   CATEGORY NAVIGATION
+   Keep categories exactly the same,
+   only reduce their typography by 25%
+========================================================= */
+
+.portfolio-main-tabs {
+
+    margin-top:
+        0 !important;
+
+    margin-bottom:
+        40px !important;
+
+    gap:
+        10px !important;
+
+}
+
+
+/* 25% smaller typography */
+
+.portfolio-main-tabs button {
+
+    font-size:
+        12px !important;
+
+    padding:
+        10px 17px !important;
+
+    letter-spacing:
+        .01em;
+
+}
+
+
+/* Keep active state unchanged */
+
+.portfolio-main-tabs button.active {
+
+    background:
+        #111111 !important;
+
+    color:
+        #ffffff !important;
+
+    border-color:
+        #111111 !important;
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .portfolio-page .portfolio-section
+    .section-heading.center {
+
+        max-width:
+            760px;
+
+        padding:
+            32px 24px 30px;
+
+        margin-bottom:
+            38px !important;
+
+    }
+
+
+    .portfolio-page .portfolio-section
+    .section-heading
+    h1 {
+
+        font-size:
+            2.2rem !important;
+
+    }
+
+
+    .portfolio-page .portfolio-section
+    .section-heading
+    p {
+
+        font-size:
+            12.5px !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .portfolio-page .portfolio-section {
+
+        padding-top:
+            5.5rem !important;
+
+    }
+
+
+    .portfolio-page .portfolio-section
+    .section-heading.center {
+
+        margin:
+            0 0 30px !important;
+
+        padding:
+            28px 18px 27px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .portfolio-page .portfolio-section
+    .section-heading.center::after {
+
+        right:
+            15px;
+
+        bottom:
+            13px;
+
+        font-size:
+            8px;
+
+    }
+
+
+    .portfolio-page .portfolio-section
+    .section-heading
+    .section-tag {
+
+        margin-bottom:
+            11px !important;
+
+        font-size:
+            9px !important;
+
+        letter-spacing:
+            2.4px;
+
+    }
+
+
+    .portfolio-page .portfolio-section
+    .section-heading
+    .section-tag::before,
+    .portfolio-page .portfolio-section
+    .section-heading .section-tag::after {
+
+        width:
+            18px;
+
+    }
+
+
+    .portfolio-page .portfolio-section
+    .section-heading
+    h1 {
+
+        font-size:
+            1.85rem !important;
+
+        line-height:
+            1.15 !important;
+
+        margin-bottom:
+            10px !important;
+
+    }
+
+
+    .portfolio-page .portfolio-section
+    .section-heading
+    p {
+
+        font-size:
+            11.5px !important;
+
+        line-height:
+            1.65;
+
+    }
+
+
+    /*
+     * Category buttons remain the same categories.
+     * Only typography is reduced.
+     */
+
+    .portfolio-main-tabs {
+
+        gap:
+            8px !important;
+
+        margin-bottom:
+            30px !important;
+
+    }
+
+
+    .portfolio-main-tabs button {
+
+        font-size:
+            10px !important;
+
+        padding:
+            9px 14px !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .portfolio-page .portfolio-section
+    .section-heading.center {
+
+        padding:
+            24px 15px 24px;
+
+    }
+
+
+    .portfolio-page .portfolio-section
+    .section-heading
+    h1 {
+
+        font-size:
+            1.65rem !important;
+
+    }
+
+
+    .portfolio-main-tabs button {
+
+        font-size:
+            9.5px !important;
+
+        padding:
+            8px 12px !important;
+
+    }
+
+}
+/* =========================================================
+   HOMEPAGE FEATURED PROJECTS
+   BLACK INFORMATION PANEL
+   ========================================================= */
+
+.featured-project-grid .portfolio-card-info {
+    background: #111111 !important;
+    color: #ffffff !important;
+}
+
+
+/* Project title */
+
+.featured-project-grid .portfolio-card-info h3 {
+    color: #ffffff !important;
+}
+
+
+/* Category + subcategory */
+
+.featured-project-grid .portfolio-card-info p {
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+
+
+/* Category/subcategory separator */
+
+.featured-project-grid .portfolio-card-info .project-dot {
+    color: rgba(255, 255, 255, 0.45) !important;
+}
+
+
+/* Location */
+
+.featured-project-grid .portfolio-card-info .project-card-location {
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+
+
+/* Keep the exact portfolio spacing */
+
+.featured-project-grid .portfolio-card-info {
+    padding: 14px 4px 4px !important;
+}
+
+
+/* Keep the same title spacing */
+
+.featured-project-grid .portfolio-card-info h3 {
+    margin: 0 0 5px !important;
+}
+
+
+/* Keep the same paragraph typography */
+
+.featured-project-grid .portfolio-card-info p {
+    margin: 0 !important;
+    font-size: .82rem !important;
+    letter-spacing: .02em !important;
+}
+/* =========================================================
+   HOMEPAGE FEATURED PROJECTS
+   MATCH PORTFOLIO CARD — BLACK INFO PANEL
+========================================================= */
+
+.featured-project-grid .portfolio-card-info {
+
+    background: #111111 !important;
+
+    /* proper premium spacing */
+    padding: 18px 24px 16px !important;
+
+    box-sizing: border-box !important;
+
+}
+
+
+/* =========================================================
+   PROJECT TITLE
+========================================================= */
+
+.featured-project-grid
+.portfolio-card-info
+h3 {
+
+    margin: 0 0 7px !important;
+
+    color: #f5f1e8 !important;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif !important;
+
+    font-size: 1rem !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.2 !important;
+
+}
+
+
+/* =========================================================
+   CATEGORY + SUBCATEGORY
+========================================================= */
+
+.featured-project-grid
+.portfolio-card-info
+.project-card-category {
+
+    margin: 0 0 6px !important;
+
+    color: #c7a66a !important;
+
+    font-family:
+        "Manrope",
+        "Montserrat",
+        Arial,
+        sans-serif !important;
+
+    font-size: .82rem !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.3 !important;
+
+    letter-spacing: .02em !important;
+
+}
+
+
+/* =========================================================
+   LOCATION + YEAR
+========================================================= */
+
+.featured-project-grid
+.portfolio-card-info
+.project-card-location {
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    margin: 0 !important;
+
+    color:
+        rgba(245,241,232,0.70) !important;
+
+    font-family:
+        "Manrope",
+        "Montserrat",
+        Arial,
+        sans-serif !important;
+
+    font-size: .82rem !important;
+
+    font-weight: 500 !important;
+
+    line-height: 1.3 !important;
+
+    letter-spacing: .02em !important;
+
+}
+
+
+/* =========================================================
+   DOT BEFORE YEAR
+========================================================= */
+
+.featured-project-grid
+.project-card-info-dot {
+
+    display: inline-flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    width: 7px !important;
+
+    height: 7px !important;
+
+    flex: 0 0 auto !important;
+
+    margin:
+        0 10px !important;
+
+    font-size: 0 !important;
+
+}
+
+
+/* Actual dot */
+
+.featured-project-grid
+.project-card-info-dot::after {
+
+    content: "";
+
+    display: block;
+
+    width: 5px;
+
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #c7a66a;
+
+}
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+.featured-project-grid
+.project-card-year {
+
+    flex: 0 0 auto;
+
+    color:
+        rgba(245,241,232,0.70) !important;
+
+}
+
+
+/* =========================================================
+   CARD CORNERS
+========================================================= */
+
+.featured-project-grid
+.portfolio-card {
+
+    overflow: hidden !important;
+
+    border-radius: 22px !important;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .featured-project-grid
+    .portfolio-card-info {
+
+        padding:
+            15px 18px 14px !important;
+
+    }
+
+}
+/* =========================================================
+   FEATURED PROJECTS — MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    /* -----------------------------------------
+       CARD
+    ----------------------------------------- */
+
+    .featured-project-grid
+    .portfolio-card {
+
+        width:
+            calc(100vw - 32px) !important;
+
+        max-width:
+            420px !important;
+
+        margin-left:
+            auto !important;
+
+        margin-right:
+            auto !important;
+
+        aspect-ratio:
+            1 / 1 !important;
+
+        height:
+            auto !important;
+
+        display:
+            flex !important;
+
+        flex-direction:
+            column !important;
+
+        overflow:
+            hidden !important;
+
+        border-radius:
+            18px !important;
+
+    }
+
+
+    /* -----------------------------------------
+       IMAGE
+    ----------------------------------------- */
+
+    .featured-project-grid
+    .portfolio-card
+    .portfolio-image-wrap {
+
+        flex:
+            1 1 auto !important;
+
+        width:
+            100% !important;
+
+        min-height:
+            0 !important;
+
+        height:
+            auto !important;
+
+        aspect-ratio:
+            auto !important;
+
+        overflow:
+            hidden !important;
+
+    }
+
+
+    .featured-project-grid
+    .portfolio-card
+    .portfolio-image-wrap img {
+
+        width:
+            100% !important;
+
+        height:
+            100% !important;
+
+        object-fit:
+            cover !important;
+
+        object-position:
+            center !important;
+
+    }
+
+
+    /* -----------------------------------------
+       BLACK INFO PANEL
+    ----------------------------------------- */
+
+    .featured-project-grid
+    .portfolio-card
+    .portfolio-card-info {
+
+        flex:
+            0 0 auto !important;
+
+        width:
+            100% !important;
+
+        height:
+            auto !important;
+
+        min-height:
+            0 !important;
+
+        padding:
+            14px 18px 13px !important;
+
+        box-sizing:
+            border-box !important;
+
+    }
+
+
+    /* -----------------------------------------
+       TITLE
+    ----------------------------------------- */
+
+    .featured-project-grid
+    .portfolio-card
+    .portfolio-card-info h3 {
+
+        margin:
+            0 0 6px !important;
+
+        font-size:
+            1rem !important;
+
+        line-height:
+            1.2 !important;
+
+    }
+
+
+    /* -----------------------------------------
+       CATEGORY
+    ----------------------------------------- */
+
+    .featured-project-grid
+    .portfolio-card
+    .project-card-category {
+
+        margin:
+            0 0 5px !important;
+
+        font-size:
+            .72rem !important;
+
+        line-height:
+            1.3 !important;
+
+    }
+
+
+    /* -----------------------------------------
+       LOCATION + YEAR
+    ----------------------------------------- */
+
+    .featured-project-grid
+    .portfolio-card
+    .project-card-location {
+
+        font-size:
+            .70rem !important;
+
+        line-height:
+            1.3 !important;
+
+        white-space:
+            nowrap !important;
+
+    }
+
+
+    /* -----------------------------------------
+       YEAR DOT
+    ----------------------------------------- */
+
+    .featured-project-grid
+    .project-card-info-dot {
+
+        margin:
+            0 8px !important;
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .featured-project-grid
+    .portfolio-card {
+
+        width:
+            calc(100vw - 24px) !important;
+
+        border-radius:
+            16px !important;
+
+    }
+
+
+    .featured-project-grid
+    .portfolio-card
+    .portfolio-card-info {
+
+        padding:
+            12px 15px 11px !important;
+
+    }
+
+
+    .featured-project-grid
+    .portfolio-card
+    .portfolio-card-info h3 {
+
+        font-size:
+            .95rem !important;
+
+    }
+
+
+    .featured-project-grid
+    .portfolio-card
+    .project-card-category {
+
+        font-size:
+            .67rem !important;
+
+    }
+
+
+    .featured-project-grid
+    .portfolio-card
+    .project-card-location {
+
+        font-size:
+            .65rem !important;
+
+    }
+
+}
+
+/* Bold portfolio category buttons */
+.portfolio-main-tabs button {
+    font-weight: 600 !important;
 }

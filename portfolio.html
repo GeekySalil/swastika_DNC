@@ -15,8 +15,8 @@
 <link rel="stylesheet" href="css/portfolio.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
-<header class="navbar"><div class="container nav-container">
+<body class="portfolio-page">
+    <header class="navbar"><div class="container nav-container">
 <div class="logo-wrapper"><img src="assets/logos/logo-round.webp" alt="Swastika Design & Constructions" class="logo-round"><img src="assets/logos/swastika-wordmark.png" alt="Swastika Design & Constructions" class="logo-wordmark"></div>
 <nav class="nav-links" id="navLinks"><a href="index.html#home">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="portfolio.html" class="active-nav">Portfolio</a><a href="blog.html">Blog</a><a href="index.html#contact">Contact</a><a href="socials.html">Follow Us</a><a href="admin-login.html" class="admin-btn" target="_blank" rel="noopener"><i class="fa-solid fa-lock"></i></a></nav>
 <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
@@ -24,11 +24,60 @@
 <main>
 <section class="portfolio-section" id="portfolio">
 <div class="container">
-<div class="section-heading center"><span class="section-tag">Portfolio</span><h1>Our Projects</h1><p>Explore our work across design, interiors, elevation and individual decor.</p></div>
+<div class="section-heading center"><span class="section-tag">Portfolio</span><h1>Our Projects</h1><p>Explore our work across Design, Interiors, Elevation and Individual Decor.</p></div>
 <div class="portfolio-page-tabs portfolio-main-tabs">
-<button class="active" data-tab="all">All Projects</button><button data-tab="Design + Build">Design + Build</button><button data-tab="Interiors">Interiors</button><button data-tab="Elevation">Elevation</button><button data-tab="individual">Individual Decor</button>
+
+    <button
+        type="button"
+        class="active"
+        data-tab="all"
+    >
+        All Projects
+    </button>
+
+    <button
+        type="button"
+        data-tab="Design + Build"
+    >
+        Design + Build
+    </button>
+
+    <button
+        type="button"
+        data-tab="Interiors"
+    >
+        Interiors
+    </button>
+
+    <button
+        type="button"
+        data-tab="Elevation"
+    >
+        Elevation
+    </button>
+
+    <button
+        type="button"
+        data-tab="individual"
+    >
+        Individual Decor
+    </button>
+
 </div>
-<div id="individualSubtabsWrap" hidden><div class="individual-subtabs"><button class="active" data-subcategory="all">All Rooms</button><button data-subcategory="Bedroom TV Unit">Bedroom TV Unit</button><button data-subcategory="Bedroom">Bedroom</button><button data-subcategory="Ceiling">Ceiling</button><button data-subcategory="Corridor">Corridor</button><button data-subcategory="Lounge">Lounge</button><button data-subcategory="Reception">Reception</button><button data-subcategory="DP Shop">DP Shop</button><button data-subcategory="Drawing">Drawing</button><button data-subcategory="Wardrobe">Wardrobe</button><button data-subcategory="Kitchen">Kitchen</button><button data-subcategory="Living">Living</button><button data-subcategory="Living-Dining">Living-Dining</button><button data-subcategory="Living-Pooja">Living-Pooja</button><button data-subcategory="Living-TV Unit">Living-TV Unit</button><button data-subcategory="Living-Vanity">Living-Vanity</button><button data-subcategory="Living Room">Living Room</button><button data-subcategory="Main Door">Main Door</button><button data-subcategory="Office">Office</button><button data-subcategory="Office Ceiling">Office Ceiling</button><button data-subcategory="Office Chair">Office Chair</button><button data-subcategory="Office Toilet">Office Toilet</button><button data-subcategory="Porch Ceiling">Porch Ceiling</button><button data-subcategory="Temple">Temple</button><button data-subcategory="Bathroom">Bathroom</button><button data-subcategory="TV Unit">TV Unit</button><button data-subcategory="Lift Lobby">Lift Lobby</button><button data-subcategory="PG Room">PG Room</button><button data-subcategory="Double Height Living">Double Height Living</button><button data-subcategory="Living Ceiling">Living Ceiling</button><button data-subcategory="Reception Pooja">Reception Pooja</button><button data-subcategory="Staircase">Staircase</button></div></div>
+
+
+<div
+    id="individualSubtabsWrap"
+    hidden
+>
+    <div
+        class="individual-subtabs"
+        id="individualSubtabs"
+    ></div>
+</div>
+
+
+
 <div id="portfolioMainGrid" class="portfolio-grid portfolio-main-grid"></div>
 <div id="portfolioPagination" class="portfolio-pagination" aria-label="Portfolio pages"></div>
 </div></section>

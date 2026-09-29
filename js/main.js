@@ -1126,8 +1126,9 @@ const offerExpiry =
     || "Offer Valid Till: 31 Dec 2026.";
 
 
-const shareUrl = `${window.location.origin}${window.location.pathname}#offer`;
-   const shareMessage =
+const shareUrl =
+    `${window.location.origin}${window.location.pathname}?offer=1`;
+       const shareMessage =
     `${offerTitle},\n\n` +
     `${offerExpiry}.\n\n` +
     `View this offer and claim it here:\n${shareUrl}`;

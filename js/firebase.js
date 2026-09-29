@@ -43,16 +43,16 @@ const firebaseConfig = {
 };
 
 const app =
-initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
 
 const db =
-getFirestore(app);
+    getFirestore(app);
 
 const auth =
-getAuth(app);
+    getAuth(app);
 
 const storage =
-getStorage(app);
+    getStorage(app);
 
 export {
     db,
